@@ -1,3 +1,0 @@
-verilog work "counter.v"
-verilog work "counter_TB.v"
-verilog work "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"
