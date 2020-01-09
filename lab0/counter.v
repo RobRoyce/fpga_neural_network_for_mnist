@@ -18,13 +18,21 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module counter(input wire clk, input wire reset);
-	reg [3:0] a;
+module counter(input wire clk, input wire reset, output reg led);
+	reg [26:0] a;
 	
 	always @(posedge clk)
-	if(reset)
-		a <= 4'b0000;
-	else
-		a <= a + 1'b1;
+	begin
+		if(reset)
+			a <= 27'b0;
+		else
+			a <= a + 1'b1;
+		
+		if(a == 27'd100_000_000)
+			begin
+				led <= ~led;
+				a <= 27'b0;
+			end
+		end
 
 endmodule

@@ -1,0 +1,14 @@
+## This file is a general .ucf for Nexys3 rev B board
+## To use it in a project:
+## - remove or comment the lines corresponding to unused pins
+## - rename the used signals according to the project
+
+## Leds
+NET "led"         LOC = "U16" | IOSTANDARD = "LVCMOS33";   #Bank = 2, Pin name = IO_L2P_CMPCLK,                     Sch name = LD0
+
+## Switches
+NET "sw<0>"          LOC = "T10" | IOSTANDARD = "LVCMOS33";   #Bank = 2, Pin name = IO_L29N_GCLK2,                     Sch name = SW0
+NET "sw<1>"          LOC = "T9"  | IOSTANDARD = "LVCMOS33";   #Bank = 2, Pin name = IO_L32P_GCLK29,                    Sch name = SW1
+NET "sw<2>"          LOC = "V9"  | IOSTANDARD = "LVCMOS33";   #Bank = 2, Pin name = IO_L32N_GCLK28,                    Sch name = SW2
+NET "sw<3>"          LOC = "M8"  | IOSTANDARD = "LVCMOS33";   #Bank = 2, Pin name = IO_L40P,                           Sch name = SW3
+NET "sw<4>"          LOC = "N8"  | IOSTANDARD = "LVCMOS33";   #Bank = 2, Pin name = IO_L40N,                           Sch name = SW4
