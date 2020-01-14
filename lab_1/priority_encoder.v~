@@ -1,0 +1,34 @@
+`timescale 1ns / 1ps
+`default_nettype none
+//////////////////////////////////////////////////////////////////////////////////
+// Robert Royce Ristine
+// CSM152A - Winter 2020
+// Lab 1
+// Module Name:    priority_encoder 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module priority_encoder(input wire signed [11:0] D, output reg [2:0] Q);
+   parameter integer SIGN_BIT = 11;
+ 
+   
+   always @(D)
+     begin
+	// if(D[SIGN_BIT] == 1'b1)
+	//   sign_check <= ~D;
+	// else
+	//   sign_check <= D;
+	$monitor("D: %b (%d)", D, D);
+	case(D)
+	  12'b01xx_xxxx_xxxx : Q <= 3'b111;
+	  12'b001x_xxxx_xxxx : Q <= 3'b110;
+	  12'b0001_xxxx_xxxx : Q <= 3'b101;
+	  12'b0000_1xxx_xxxx : Q <= 3'b100;
+	  12'b0000_01xx_xxxx : Q <= 3'b011;
+	  12'b0000_001x_xxxx : Q <= 3'b010;
+	  12'b0000_0001_xxxx : Q <= 3'b001;
+	  12'b0000_0000_xxxx : Q <= 3'b000;
+	  default: Q <= 3'b001;
+	endcase // case (D)	
+     end // always @ (D)
+   
+endmodule
