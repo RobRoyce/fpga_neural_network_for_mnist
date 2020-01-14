@@ -1,0 +1,30 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    11:05:40 01/14/2020 
+// Design Name: 
+// Module Name:    rounding 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module rounding(
+    input [2:0] exponent,
+    input [3:0] significand,
+    input fifth_bit,
+    output [2:0] E,
+    output [3:0] F
+    );
+
+
+endmodule
