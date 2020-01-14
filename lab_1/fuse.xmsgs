@@ -5,8 +5,5 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompiler" num="485" delta="unknown" >"/home/parallels/ucla/csm152a/labs/lab_1/priority_encoder_TB.v" Line 31: Illegal format specifier <arg fmt="%c" index="1">)</arg> for <arg fmt="%s" index="2">monitor</arg>
-</msg>
-
 </messages>
 

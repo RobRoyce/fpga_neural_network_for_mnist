@@ -1,5 +1,5 @@
 ISim log file
-Running: /home/parallels/ucla/csm152a/labs/lab_1/priority_encoder_TB_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/parallels/ucla/csm152a/labs/lab_1/priority_encoder_TB_isim_beh.wdb 
+Running: /home/parallels/ucla/csm152a/labs/csm152a/lab_1/priority_encoder_TB_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/parallels/ucla/csm152a/labs/csm152a/lab_1/priority_encoder_TB_isim_beh.wdb 
 ISim P.20131013 (signature 0xfbc00daa)
 WARNING: A WEBPACK license was found.
 WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
@@ -10,41 +10,69 @@ Time resolution is 1 ps
 # wave add /
 # run 2000 ns
 Simulator is doing circuit initialization process.
+D: 000000000000
 Finished circuit initialization process.
-D: 000000000000 (    0)
-Q assigned: 111 ( 7ome/parallels/ucla/csm152a/labs/lab_1/priority_encoder_TB.v
-D: 001111111111 ( 1023)
-D: 000111111111 (  511)
-D: 000011111111 (  255)
-D: 000001111111 (  127)
-D: 000000111111 (   63)
-D: 000000011111 (   31)
-D: 000000001111 (   15)
-D: 000000000011 (    3)
-D: 000000000001 (    1)
-D: 000000000000 (    0)
-D: 011111111111 ( 2047)
-D: 001111111111 ( 1023)
-D: 000111111111 (  511)
-D: 000011111111 (  255)
-D: 000001111111 (  127)
-D: 000000111111 (   63)
-D: 000000011111 (   31)
-D: 000000001111 (   15)
-D: 000000000011 (    3)
-D: 000000000001 (    1)
-D: 000000000000 (    0)
-D: 011111111111 ( 2047)
-D: 001111111111 ( 1023)
-D: 000111111111 (  511)
-D: 000011111111 (  255)
-D: 000001111111 (  127)
-D: 000000111111 (   63)
-D: 000000011111 (   31)
-D: 000000001111 (   15)
-D: 000000000011 (    3)
-D: 000000000001 (    1)
-D: 000000000000 (    0)
-D: 011111111111 ( 2047)
-D: 001111111111 ( 1023)
-D: 000111111111 (  511)
+exponent: 0
+D: 011111111111
+exponent: 7
+D: 001111111111
+exponent: 6
+D: 000111111111
+exponent: 5
+D: 000011111111
+exponent: 4
+D: 000001111111
+exponent: 3
+D: 000000111111
+exponent: 2
+D: 000000011111
+exponent: 1
+D: 000000001111
+exponent: 0
+D: 000000000011
+D: 000000000001
+D: 000000000000
+D: 011111111111
+exponent: 7
+D: 001111111111
+exponent: 6
+D: 000111111111
+exponent: 5
+D: 000011111111
+exponent: 4
+D: 000001111111
+exponent: 3
+D: 000000111111
+exponent: 2
+D: 000000011111
+exponent: 1
+D: 000000001111
+exponent: 0
+D: 000000000011
+D: 000000000001
+D: 000000000000
+D: 011111111111
+exponent: 7
+D: 001111111111
+exponent: 6
+D: 000111111111
+exponent: 5
+D: 000011111111
+exponent: 4
+D: 000001111111
+exponent: 3
+D: 000000111111
+exponent: 2
+D: 000000011111
+exponent: 1
+D: 000000001111
+exponent: 0
+D: 000000000011
+D: 000000000001
+D: 000000000000
+D: 011111111111
+exponent: 7
+D: 001111111111
+exponent: 6
+D: 000111111111
+exponent: 5

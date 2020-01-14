@@ -2,9 +2,9 @@ Command line:
    priority_encoder_TB_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  41609
+     -socket  48017
 
-Tue Jan 14 10:12:19 2020
+Tue Jan 14 10:59:03 2020
 
 
  Elaboration Time: 0.02 sec

@@ -12,23 +12,21 @@ module priority_encoder_TB;
 	reg signed [11:0] D;
 
 	// Outputs
-	wire [2:0] Q;
+	wire [2:0] exponent;
 
 	// Instantiate the Unit Under Test (UUT)
 	priority_encoder uut (
 		.D(D), 
-		.Q(Q)
+		.exponent(exponent)
 	);
 
 	initial begin
 	   // Initialize Inputs
 	   D = 0;
-
 	   // Wait 100 ns for global reset to finish
 	   #100;
            
 	   // Add stimulus here
-	   $monitor("Q assigned: %b (%2)", Q, Q);
 	end
 
    always 
@@ -46,11 +44,6 @@ module priority_encoder_TB;
 	#550 D <= 12'b0000_0000_0001;
 	#600 D <= 12'b0000_0000_0000;
      join	  
-   
-      
+   always @(exponent)
+	$display("exponent: %d", exponent);
 endmodule
-
-000111111111 >> 4
-  = 000000011111
-
-    12-3-5
