@@ -7,11 +7,11 @@
 // Module Name:    priority_encoder 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module priority_encoder(input wire signed [11:0] D, output reg [2:0] exponent);
-   always @(D)
+module priority_encoder(input wire [11:0] SM, output reg [2:0] exponent);
+   // 
+   always @(SM)
      begin
-	$display("D: %b", D);
-	casex(D)
+	casex(SM)
 	  12'b01XX_XXXX_XXXX : exponent <= 3'b111;
 	  12'b001X_XXXX_XXXX : exponent <= 3'b110;
 	  12'b0001_XXXX_XXXX : exponent <= 3'b101;
@@ -20,12 +20,9 @@ module priority_encoder(input wire signed [11:0] D, output reg [2:0] exponent);
 	  12'b0000_001X_XXXX : exponent <= 3'b010;
 	  12'b0000_0001_XXXX : exponent <= 3'b001;
 	  12'b0000_0000_XXXX : exponent <= 3'b000;
-	  default: begin
-	     exponent <= 3'b001;
-	  end
-	  
-	endcase // case (D)
-     end // always @ (D)
+	  default: exponent <= 3'b000;
+	endcase // case (SM)
+     end // always @ (SM)
    
 endmodule   
 

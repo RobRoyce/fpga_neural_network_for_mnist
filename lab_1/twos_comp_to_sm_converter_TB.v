@@ -36,7 +36,7 @@ module twos_comp_to_sm_converter_TB;
 	  end // initial begin
 
    always
-     fork
+     fork // Use fork so that delays are absolute (not relative to each other)
 	#100 D <= 12'b0000_0000_0000;
 	#110 $display("Setting D <= %b (%d), sign bit: %b, SM: %b (%d)", D, D, D[11], SM, SM);
 	#110 if(SM == 12'b0000_0000_0000) $display("Test 1 SUCCESS"); else $display("Test 1 FAILURE");
