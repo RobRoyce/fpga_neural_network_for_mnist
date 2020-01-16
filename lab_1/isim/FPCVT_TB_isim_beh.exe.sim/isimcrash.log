@@ -1,7 +1,0 @@
-Exception at PC 0x0000000000401C9B
-Attemped to read address 0xFFFFFFFFA1E95070
-Printing stacktrace...
-
-[0]  [0x0x0000000000401c9b]
-[1]  [0x0x0000000000401c9b]
-Done

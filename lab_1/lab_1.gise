@@ -22,88 +22,11 @@
   <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="lab_1.xise"/>
 
   <files xmlns="http://www.xilinx.com/XMLSchema">
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="FPCVT_TB_isim_beh.exe"/>
-    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="FPCVT_beh.prj"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="FPCVT_isim_beh.exe"/>
-    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="FPCVT_isim_beh.wdb"/>
-    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="FPCVT_stx_beh.prj"/>
-    <file xil_pn:fileType="FILE_LOG" xil_pn:name="fuse.log"/>
-    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_LOG" xil_pn:name="isim.log"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="priority_encoder_TB_isim_beh.exe"/>
-    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="priority_encoder_TB_isim_beh.wdb"/>
-    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="priority_encoder_TB_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="priority_encoder_guide.ncd" xil_pn:origination="imported"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="rounding_guide.ncd" xil_pn:origination="imported"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="twos_comp_to_sm_converter_TB_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="twos_comp_to_sm_converter_guide.ncd" xil_pn:origination="imported"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="twos_comp_to_sm_converter_isim_beh.exe"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_INI" xil_pn:name="xilinxsim.ini"/>
   </files>
 
-  <transforms xmlns="http://www.xilinx.com/XMLSchema">
-    <transform xil_pn:end_ts="1579190784" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1579190784">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1579199220" xil_pn:in_ck="5210636854206866271" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1579199220">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="FPCVT.v"/>
-      <outfile xil_pn:name="FPCVT_TB.v"/>
-      <outfile xil_pn:name="priority_encoder.v"/>
-      <outfile xil_pn:name="priority_encoder_TB.v"/>
-      <outfile xil_pn:name="rounding.v"/>
-      <outfile xil_pn:name="rounding_TB.v"/>
-      <outfile xil_pn:name="significand_extractor.v"/>
-      <outfile xil_pn:name="significand_extractor_TB.v"/>
-      <outfile xil_pn:name="twos_comp_to_sm_converter.v"/>
-      <outfile xil_pn:name="twos_comp_to_sm_converter_TB.v"/>
-    </transform>
-    <transform xil_pn:end_ts="1579199220" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-7953257888386695910" xil_pn:start_ts="1579199220">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1579199220" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="974699235810756824" xil_pn:start_ts="1579199220">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1579190784" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-6727299253461342395" xil_pn:start_ts="1579190784">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1579199220" xil_pn:in_ck="5210636854206866271" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1579199220">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="FPCVT.v"/>
-      <outfile xil_pn:name="FPCVT_TB.v"/>
-      <outfile xil_pn:name="priority_encoder.v"/>
-      <outfile xil_pn:name="priority_encoder_TB.v"/>
-      <outfile xil_pn:name="rounding.v"/>
-      <outfile xil_pn:name="rounding_TB.v"/>
-      <outfile xil_pn:name="significand_extractor.v"/>
-      <outfile xil_pn:name="significand_extractor_TB.v"/>
-      <outfile xil_pn:name="twos_comp_to_sm_converter.v"/>
-      <outfile xil_pn:name="twos_comp_to_sm_converter_TB.v"/>
-    </transform>
-    <transform xil_pn:end_ts="1579199223" xil_pn:in_ck="5210636854206866271" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="6495765620563642099" xil_pn:start_ts="1579199220">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="FPCVT_beh.prj"/>
-      <outfile xil_pn:name="FPCVT_isim_beh.exe"/>
-      <outfile xil_pn:name="fuse.log"/>
-      <outfile xil_pn:name="isim"/>
-      <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="xilinxsim.ini"/>
-    </transform>
-    <transform xil_pn:end_ts="1579199224" xil_pn:in_ck="-3355699644482006729" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-4804952613649076649" xil_pn:start_ts="1579199223">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="FPCVT_isim_beh.wdb"/>
-      <outfile xil_pn:name="isim.cmd"/>
-      <outfile xil_pn:name="isim.log"/>
-    </transform>
-  </transforms>
+  <transforms xmlns="http://www.xilinx.com/XMLSchema"/>
 
 </generated_project>

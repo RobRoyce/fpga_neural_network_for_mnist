@@ -21,19 +21,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 module FPCVT(
     input wire [11:0] D,
-    output reg [3:0]  F,
-    output reg [2:0]  E,
-    output reg        S
+    output wire [3:0]  F,
+    output wire [2:0]  E,
+    output wire        S
     );
-    
-    initial
-    begin
-    
-        //F = 0;
-        //E = 0;
-        //S = 0;
-    
-    end
+
     
     wire [11:0] SM;
     wire [2:0] exponent;
@@ -46,7 +38,7 @@ module FPCVT(
 		.SM(SM)
 	);
 
-   /*priority_encoder encoder (
+   priority_encoder encoder (
 			 .SM(SM), 
 			 .exponent(exponent)
 			 );
@@ -64,6 +56,6 @@ module FPCVT(
 		 .fifth_bit(fifth_bit), 
 		 .E(E), 
 		 .F(F)
-		 );*/
+		 );
 
 endmodule

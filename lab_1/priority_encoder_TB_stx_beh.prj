@@ -1,3 +1,0 @@
-verilog isim_temp "priority_encoder.v"
-verilog isim_temp "priority_encoder_TB.v"
-verilog isim_temp "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

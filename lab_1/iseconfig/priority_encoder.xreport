@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2020-01-16T09:48:46</DateModified>
+  <DateModified>2020-01-16T11:14:44</DateModified>
   <ModuleName>priority_encoder</ModuleName>
   <SummaryTimeStamp>2020-01-15T21:47:51</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/152/Desktop/csm152a/lab_1/iseconfig/priority_encoder.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/152/Desktop/csm152a/lab_1\</ImplementationReportsDirectory>
+  <SavedFilePath>/home/parallels/ucla/m152acs/labs/csm152a/lab_1/iseconfig/priority_encoder.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/parallels/ucla/m152acs/labs/csm152a/lab_1/</ImplementationReportsDirectory>
   <DateInitialized>2020-01-15T20:48:47</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
