@@ -2,8 +2,9 @@
 *.wdb
 *.lso
 *.cmd_log
-*.*~
+*~
 *.gise
 *.xise
 *.cmd
 *.xmsgs
+*.twx
