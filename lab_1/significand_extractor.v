@@ -31,13 +31,9 @@ module significand_extractor(
 	always @(*)
 	begin
 		if(exponent == 0)
-		begin
-			D_norm <= D << 12'b0000_0000_0001;
-		end
+			D_norm = D << 12'b0000_0000_0001;
 		else
-		begin
-			D_norm <= D >> (exponent - 4'b0001);
-		end
+			D_norm = D >> (exponent - 4'b0001);
 	end
 	
 	assign significand = D_norm[4:1];
