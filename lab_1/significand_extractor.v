@@ -20,10 +20,10 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module significand_extractor(
-	input wire  [11:0] D,           // Two's complement encoded input
+	input wire  [11:0] D,           // Sign-Magnitude input
 	input wire  [2:0]  exponent,    // Exponent of the input
 	output wire [3:0]  significand, // Significand extracted from D
-	output wire fifth_bit		     // Rounding bit
+	output wire fifth_bit		    // Rounding bit
     );
 
 	reg [11:0] D_norm;

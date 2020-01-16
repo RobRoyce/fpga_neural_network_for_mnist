@@ -1,0 +1,28 @@
+Command line:
+   twos_comp_to_sm_converter_TB_isim_beh.exe
+     -simmode  gui
+     -simrunnum  1
+     -socket  52350
+
+Thu Jan 16 10:21:20 2020
+
+
+ Elaboration Time: 0.0468 sec
+
+ Current Memory Usage: 825.156 Meg
+
+ Total Signals          : 16
+ Total Nets             : 38
+ Total Signal Drivers   : 8
+ Total Blocks           : 3
+ Total Primitive Blocks : 2
+ Total Processes        : 49
+ Total Traceable Variables  : 22
+ Total Scalar Nets and Variables : 175
+
+ Total Simulation Time: 0.0468 sec
+
+ Current Memory Usage: 825.156 Meg
+
+Thu Jan 16 10:21:27 2020
+

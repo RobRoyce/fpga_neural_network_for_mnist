@@ -13,7 +13,7 @@
 module twos_comp_to_sm_converter_TB;
 
 	// Inputs
-	reg signed [11:0] D;
+	reg [11:0] D;
 
 	// Outputs
 	wire S;

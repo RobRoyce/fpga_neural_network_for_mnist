@@ -1,22 +1,20 @@
-Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -relaunch -intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/priority_encoder_TB_isim_beh.exe" -prj "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/priority_encoder_TB_beh.prj" "work.priority_encoder_TB" "work.glbl" 
-ISim P.20131013 (signature 0xfbc00daa)
-Number of CPUs detected in this system: 4
-Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Running: C:\Xilinx\14.6\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o C:/Users/152/Desktop/csm152a/lab_1/FPCVT_isim_beh.exe -prj C:/Users/152/Desktop/csm152a/lab_1/FPCVT_beh.prj work.FPCVT work.glbl 
+ISim P.68d (signature 0x7708f090)
+Number of CPUs detected in this system: 8
+Turning on mult-threading, number of parallel sub-compilation jobs: 16 
 Determining compilation order of HDL files
-Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/priority_encoder.v" into library work
-Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/priority_encoder_TB.v" into library work
-Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Analyzing Verilog file "C:/Users/152/Desktop/csm152a/lab_1/twos_comp_to_sm_converter.v" into library work
+Analyzing Verilog file "C:/Users/152/Desktop/csm152a/lab_1/FPCVT.v" into library work
+Analyzing Verilog file "C:/Xilinx/14.6/ISE_DS/ISE//verilog/src/glbl.v" into library work
 Starting static elaboration
+WARNING:HDLCompiler:329 - "C:/Users/152/Desktop/csm152a/lab_1/FPCVT.v" Line 46: Target <int_S> of concurrent assignment or output port connection should be a net type.
 Completed static elaboration
-Fuse Memory Usage: 97460 KB
-Fuse CPU Usage: 890 ms
-Compiling module priority_encoder
-Compiling module priority_encoder_TB
+Compiling module twos_comp_to_sm_converter
+Compiling module FPCVT
 Compiling module glbl
 Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
 Compiled 3 Verilog Units
-Built simulation executable /home/parallels/ucla/m152acs/labs/csm152a/lab_1/priority_encoder_TB_isim_beh.exe
-Fuse Memory Usage: 657648 KB
-Fuse CPU Usage: 900 ms
-GCC CPU Usage: 110 ms
+Built simulation executable C:/Users/152/Desktop/csm152a/lab_1/FPCVT_isim_beh.exe
+Fuse Memory Usage: 28372 KB
+Fuse CPU Usage: 467 ms

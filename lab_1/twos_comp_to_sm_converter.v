@@ -10,7 +10,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-module twos_comp_to_sm_converter(input wire signed [11:0] D, output reg S, output reg signed [11:0] SM);
+module twos_comp_to_sm_converter(input wire [11:0] D, output reg S, output reg signed [11:0] SM);
    // D is the two's complement input
    // S is the sign bit, taken from the MSB of D
    // SM is the sign-magnitude representation of D
