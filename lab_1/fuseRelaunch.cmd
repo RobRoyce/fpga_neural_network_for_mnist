@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/priority_encoder_TB_isim_beh.exe" -prj "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/priority_encoder_TB_beh.prj" "work.priority_encoder_TB" "work.glbl" 
