@@ -33,6 +33,13 @@ module rounding_TB;
    wire [2:0] E;
    wire [3:0] F;
 
+   // Test Variables
+   integer i;
+   integer j;
+   integer k;
+   wire [24:0] float;
+   assign float = F*(2'd2**E);
+   
    // Instantiate the Unit Under Test (UUT)
    rounding uut (
 		 .exponent(exponent), 
@@ -41,8 +48,6 @@ module rounding_TB;
 		 .E(E), 
 		 .F(F)
 		 );
-   integer    i;
-   integer    j;
    
    initial begin
       // Initialize Inputs
@@ -51,29 +56,32 @@ module rounding_TB;
       fifth_bit = 0;
       i <= 0;
       j <= 0;
+      k <= 0;
+      $timeformat(-9, 2, "ns", 10);
       // Wait 100 ns for global reset to finish
       #100;
       
       // Add stimulus here
-      
-   end
-   
-   
-   always
-     begin
-	for(i = 0; i <= 4'b1111; i = i + 1)
+      for(i=0; i<=4'b1111; i=i+1)
+	begin
+	   significand <= i;
+	for(j=0; j<=3'b111; j=j+1)
 	  begin
-	     #10 significand <= i;
+	     exponent <= j;
+	  for(k=0; k<=1'b1; k=k+1)
+	    begin
+	       #4;
+	       fifth_bit <= k;
+	       #1 $display("%t | Sig: %b, Exp: %b, 5th: %b | F: %b, E: %b | Float: %f", $time, significand, exponent, fifth_bit, F, E, float);
+	    end
 	  end
-	for(j = 0; j <= 4'b1111; j = j + 1)
-	  begin
-	     #10 exponent <= exponent + 1'b1;
-	  end
-	
-     end // always
-   
-   
+	end
+   end // initial begin
 
+   always @(*)
+     if( significand == 4'b1111 && fifth_bit == 1'b1)
+       $display("%t | exp: %b, F: %b, E: %b", $time, exponent, F, E);
+   
    
 endmodule
 

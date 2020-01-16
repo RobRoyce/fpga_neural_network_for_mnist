@@ -8,9 +8,6 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module priority_encoder(input wire signed [11:0] D, output reg [2:0] exponent);
-   parameter integer SIGN_BIT = 11;
-   reg [11:0] sign_check;  
-   
    always @(D)
      begin
 	$display("D: %b", D);
@@ -24,11 +21,11 @@ module priority_encoder(input wire signed [11:0] D, output reg [2:0] exponent);
 	  12'b0000_0001_XXXX : exponent <= 3'b001;
 	  12'b0000_0000_XXXX : exponent <= 3'b000;
 	  default: begin
-	     $display("case(D) hit default");
 	     exponent <= 3'b001;
 	  end
 	  
 	endcase // case (D)
      end // always @ (D)
    
-endmodule
+endmodule   
+

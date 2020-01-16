@@ -26,32 +26,38 @@ module rounding(
     output reg [2:0] E,
     output reg [3:0] F
     );
-   reg 		     overflow;
    
    initial
      begin
 	E <= 3'b000;
 	F <= 4'b0000;
-	overflow <= 1'b0;
      end
    
    always @(*)
      begin
-	if(significand == 4'b1111 && fifth_bit == 1'b1)
-	   overflow <= 1;
-
-	if((exponent + overflow) >= 4'd8) begin
-	   E <= 3'b111;
-	   F <= 4'b1111;
-	end
-	else begin
-	   if(fifth_bit == 1'b1)
-	     F <= significand + 1'b1;
-	   else
+	if(fifth_bit == 1'b0)
+	  begin
 	     F <= significand;
-	   
-	end
-	
+	     E <= exponent;
+	  end
+	else if(significand != 4'b1111)
+	  begin
+	     F <= significand + 1'b1;
+	     E <= exponent;
+	  end
+	else
+	  begin
+	     if(exponent != 3'b111)
+	       begin
+		  F <= 4'b1000;
+		  E <= exponent + 1'b1;		 
+	       end
+	     else
+	       begin
+		  F <= 4'b1111;
+		  E <= 3'b111;
+	       end	     
+	  end
      end
    
    

@@ -1,0 +1,1 @@
+vhdtdtfi -lang verilog -prj lab_1 -o /home/parallels/ucla/m152acs/labs/csm152a/lab_1/significand_extractor.tfi -lib work /home/parallels/ucla/m152acs/labs/csm152a/lab_1//significand_extractor.v -module significand_extractor -template /opt/Xilinx/14.7/ISE_DS/ISE//data/tfi.tft -deleteonerror 
