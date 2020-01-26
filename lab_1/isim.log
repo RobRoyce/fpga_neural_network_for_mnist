@@ -1,0 +1,81 @@
+ISim log file
+Running: /home/parallels/ucla/m152acs/labs/csm152a/lab_1/FPCVT_TB_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/parallels/ucla/m152acs/labs/csm152a/lab_1/FPCVT_TB_isim_beh.wdb 
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 2000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Begin provided test cases
+111.000ns | D: 0111_0100_0000 | SEF: 0_111_1111 | Expected: 0_111_1111
+122.000ns | D: 0111_1111_1111 | SEF: 0_111_1111 | Expected: 0_111_1111
+133.000ns | D: 1000_0000_0010 | SEF: 1_111_1111 | Expected: 1_111_1111
+144.000ns | D: 1000_1000_1010 | SEF: 1_111_1111 | Expected: 1_111_1111
+155.000ns | D: 1001_1100_1111 | SEF: 1_111_1100 | Expected: 1_111_1100
+166.000ns | D: 1111_1010_0101 | SEF: 1_011_1011 | Expected: 1_011_1011
+Begin test cases derived from the lab handout
+177.000ns | D: 422 | SEF:0_101_1101 | In Float:        416 | Expected: 416
+188.000ns | D: -422 | SEF:1_101_1101 | In Float:        416 | Expected: 416
+199.000ns | D: 0000_0010_1100 | SEF:0_010_1011 | Expected: 0_010_1011
+210.000ns | D: 0000_0010_1101 | SEF:0_010_1011 | Expected: 0_010_1011
+221.000ns | D: 0000_0010_1110 | SEF:0_010_1100 | Expected: 0_010_1100
+232.000ns | D: 0000_0010_1111 | SEF:0_010_1100 | Expected: 0_010_1100
+243.000ns | D: 0000_0111_1111 | SEF:0_100_1000 | Expected: 0_100_1000
+Begin custom test cases
+254.000ns | D: 0 | SEF: 0_000_0000 | Float: +         0
+265.000ns | D: -1 | SEF: 1_000_0001 | Float: -         1
+276.000ns | D: 1 | SEF: 0_000_0001 | Float: +         1
+287.000ns | D: -2048 | SEF: 1_111_1111 | Float: -      1920
+298.000ns | D: -2047 | SEF: 1_111_1111 | Float: -      1920
+309.000ns | D: 2047 | SEF: 0_111_1111 | Float: +      1920
+320.000ns | D: 422 | SEF: 0_101_1101 | Float: +       416
+331.000ns | D: -422 | SEF: 1_101_1101 | Float: -       416
+Stopped at time : 331 ns : File "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/FPCVT_TB.v" Line 82
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+# run 2000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Begin provided test cases
+111.000ns | D: 0111_0100_0000 | SEF: 0_111_1111 | Expected: 0_111_1111
+122.000ns | D: 0111_1111_1111 | SEF: 0_111_1111 | Expected: 0_111_1111
+133.000ns | D: 1000_0000_0010 | SEF: 1_111_1111 | Expected: 1_111_1111
+144.000ns | D: 1000_1000_1010 | SEF: 1_111_1111 | Expected: 1_111_1111
+155.000ns | D: 1001_1100_1111 | SEF: 1_111_1100 | Expected: 1_111_1100
+166.000ns | D: 1111_1010_0101 | SEF: 1_011_1011 | Expected: 1_011_1011
+Begin test cases derived from the lab handout
+177.000ns | D: 422 | SEF:0_101_1101 | In Float:        416 | Expected: 416
+188.000ns | D: -422 | SEF:1_101_1101 | In Float:        416 | Expected: 416
+199.000ns | D: 0000_0010_1100 | SEF:0_010_1011 | Expected: 0_010_1011
+210.000ns | D: 0000_0010_1101 | SEF:0_010_1011 | Expected: 0_010_1011
+221.000ns | D: 0000_0010_1110 | SEF:0_010_1100 | Expected: 0_010_1100
+232.000ns | D: 0000_0010_1111 | SEF:0_010_1100 | Expected: 0_010_1100
+243.000ns | D: 0000_0111_1111 | SEF:0_100_1000 | Expected: 0_100_1000
+Begin custom test cases
+254.000ns | D: 0 | SEF: 0_000_0000 | Float: +         0
+265.000ns | D: -1 | SEF: 1_000_0001 | Float: -         1
+276.000ns | D: 1 | SEF: 0_000_0001 | Float: +         1
+287.000ns | D: -2048 | SEF: 1_111_1111 | Float: -      1920
+298.000ns | D: -2047 | SEF: 1_111_1111 | Float: -      1920
+309.000ns | D: 2047 | SEF: 0_111_1111 | Float: +      1920
+320.000ns | D: 422 | SEF: 0_101_1101 | Float: +       416
+331.000ns | D: -422 | SEF: 1_101_1101 | Float: -       416
+Stopped at time : 341 ns : File "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/FPCVT_TB.v" Line 82
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+# run 2000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Stopped at time : 200 ns : File "/home/parallels/ucla/m152acs/labs/csm152a/lab_1/FPCVT_TB.v" Line 92
+# exit 0

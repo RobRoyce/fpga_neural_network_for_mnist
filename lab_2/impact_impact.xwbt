@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=/home/parallels/ucla/m152acs/labs/csm152a/lab_2/impact.xsl
+OUTFILE=/home/parallels/ucla/m152acs/labs/csm152a/lab_2/impact.xsl
+FAMILY=None
+PART=None
+WORKINGDIR=/home/parallels/ucla/m152acs/labs/csm152a/lab_2
+LICENSE=iMPACT
+USER_INFO=iMPACT
