@@ -21,6 +21,7 @@
 
   <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="lab_2.xise"/>
 
+<<<<<<< HEAD
   <files xmlns="http://www.xilinx.com/XMLSchema">
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="_ngo"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/bitgen.xmsgs"/>
@@ -190,5 +191,10 @@
       <outfile xil_pn:name="nexys3.twx"/>
     </transform>
   </transforms>
+=======
+  <files xmlns="http://www.xilinx.com/XMLSchema"/>
+
+  <transforms xmlns="http://www.xilinx.com/XMLSchema"/>
+>>>>>>> d4b62bc4a5f82caa7d1139ea9b28a9e43f378e8c
 
 </generated_project>
