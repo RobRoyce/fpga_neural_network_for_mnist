@@ -37,6 +37,6 @@ module significand_extractor(
 	end
 	
 	assign significand = D_norm[4:1];
-	assign fifth_bit = D_norm[0] & (exponent != 4'b0000);
+	assign fifth_bit = D_norm[0];
 
 endmodule
