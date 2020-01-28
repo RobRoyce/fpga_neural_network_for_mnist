@@ -2,7 +2,7 @@ module nexys3 (/*AUTOARG*/
    // Outputs
    RsTx, led,
    // Inputs
-   RsRx, sw, btnS, btnR, clk
+   RsRx, sw, btnS, btnG, btnR, clk
    );
 
 `include "seq_definitions.v"
@@ -15,6 +15,7 @@ module nexys3 (/*AUTOARG*/
    input  [7:0] sw;
    output [7:0] led;
    input        btnS;                 // single-step instruction
+	input        btnG;                 // "Go" button. Sends data through UART
    input        btnR;                 // arst
    
    // Logic
@@ -41,6 +42,8 @@ module nexys3 (/*AUTOARG*/
    reg [7:0]   inst_wd;
    reg         inst_vld;
    reg [2:0]   step_d;
+	
+	reg [2:0]   go_d;
 
    reg [7:0]   inst_cnt;
    
@@ -86,21 +89,27 @@ module nexys3 (/*AUTOARG*/
        begin
           inst_wd[7:0] <= 0;
           step_d[2:0]  <= 0;
+			 go_d[2:0]    <= 0;
        end
      else if (clk_en) // Down sampling
        begin
-          inst_wd[7:0] <= sw[7:0];
+          inst_wd[7:0] <= {sw[7] | is_btnG_posedge, sw[6] & (~is_btnG_posedge), sw[5:0]};
           step_d[2:0]  <= {btnS, step_d[2:1]};
+			 go_d[2:0]    <= {btnG, go_d[2:1]};
        end
 	   
-	// Detecting posedge of btnS
+	// Detecting posedge of btnS and btnG
    wire is_btnS_posedge;
    assign is_btnS_posedge = ~ step_d[0] & step_d[1];
+	
+   wire is_btnG_posedge;
+   assign is_btnG_posedge = ~ go_d[0] & go_d[1];
+	
    always @ (posedge clk)
      if (rst)
        inst_vld <= 1'b0;
      else if (clk_en_d)
-       inst_vld <= is_btnS_posedge;
+       inst_vld <= is_btnS_posedge | is_btnG_posedge;
 	  else
 	    inst_vld <= 0;
 

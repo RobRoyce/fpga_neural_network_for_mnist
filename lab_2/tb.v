@@ -5,6 +5,7 @@ module tb;
    reg [7:0] sw;
    reg       clk;
    reg       btnS;
+	reg       btnG;
    reg       btnR;
    
    integer   i;
@@ -24,6 +25,7 @@ module tb;
         clk = 0;
         btnR = 1;
         btnS = 0;
+		  btnG = 0;
         #1000 btnR = 0;
         #1500000;
         
@@ -61,6 +63,7 @@ module tb;
                 .RsRx                   (RsRx),
                 .sw                     (sw[7:0]),
                 .btnS                   (btnS),
+					 .btnG                   (btnG),
                 .btnR                   (btnR),
                 .clk                    (clk));
 
@@ -90,6 +93,10 @@ module tb;
       begin
          inst = {2'b11, ra[1:0], 4'h0};
          tskRunInst(inst);
+			$display ("%d ... Sending with data: %08b", $stime, inst);
+         sw = inst;
+         #1500000 btnG = 1;
+         #3000000 btnG = 0;
       end
    endtask //
 
