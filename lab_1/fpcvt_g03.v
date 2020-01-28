@@ -26,7 +26,7 @@ module fpcvt(
 			 .exponent(exponent)
 			 );
 	significand_extractor leading_extractor (
-		.D(SM), 
+		.SM(SM), 
 		.exponent(exponent), 
 		.significand(significand), 
 		.fifth_bit(fifth_bit)
@@ -88,21 +88,21 @@ endmodule // priority_encoder
 
 
 module significand_extractor(
-	input wire  [11:0] D,           // Sign-Magnitude input
+	input wire  [11:0] SM,           // Sign-Magnitude input
 	input wire  [2:0]  exponent,    // Exponent of the input
-	output wire [3:0]  significand, // Significand extracted from D
+	output wire [3:0]  significand, // Significand extracted from SM
 	output wire fifth_bit		    // Rounding bit
     );
-	reg [11:0] D_norm;
+	reg [11:0] SM_norm;
 	always @(*)
 	begin
 		if(exponent == 0)
-			D_norm = D << 12'b0000_0000_0001;
+			SM_norm = SM << 12'b0000_0000_0001;
 		else
-			D_norm = D >> (exponent - 4'b0001);
+			SM_norm = SM >> (exponent - 4'b0001);
 	end
-	assign significand = D_norm[4:1];
-	assign fifth_bit = D_norm[0];
+	assign significand = SM_norm[4:1];
+	assign fifth_bit = SM_norm[0];
 endmodule // significand_extractor
 
 
