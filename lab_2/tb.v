@@ -91,7 +91,7 @@ module tb;
       input [1:0] ra;
       reg [7:0]   inst;
       begin
-         inst = {2'b11, ra[1:0], 4'h0};
+         inst = {2'b00, ra[1:0], 4'h0};
 			$display ("%d ... Sending with data: %08b", $stime, inst);
          sw = inst;
          #1500000 btnG = 1;

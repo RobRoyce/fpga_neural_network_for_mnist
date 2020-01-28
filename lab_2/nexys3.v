@@ -15,7 +15,7 @@ module nexys3 (/*AUTOARG*/
    input  [7:0] sw;
    output [7:0] led;
    input        btnS;                 // single-step instruction
-	input        btnG;                 // "Go" button. Sends data through UART
+   input        btnG;                 // "Go" button. Sends data through UART
    input        btnR;                 // arst
    
    // Logic
@@ -79,6 +79,35 @@ module nexys3 (/*AUTOARG*/
           clk_en   <= clk_dv_inc[17];
           clk_en_d <= clk_en;
        end
+	   
+	// Detecting posedge of btnS and btnG
+   wire is_btnS_posedge;
+   assign is_btnS_posedge = ~ step_d[0] & step_d[1];
+	
+   wire is_btnG_posedge;
+   assign is_btnG_posedge = ~ go_d[0] & go_d[1];
+	
+   always @ (posedge clk)
+     if (rst)
+       inst_vld <= 1'b0;
+     else if (clk_en_d)
+       inst_vld <= is_btnS_posedge;
+     else if (clk_en)
+       /////////////////////////////////////
+       // Note: must be synched to clk_en.
+       // Using clk_en_d does not work.
+       inst_vld <= is_btnG_posedge;
+       /////////////////////////////////////
+	  else
+	    inst_vld <= 0;
+
+   always @ (posedge clk)
+     if (rst)
+       inst_cnt <= 0;
+     else if (inst_vld)
+       inst_cnt <= inst_cnt + 1;
+
+   assign led[7:0] = inst_cnt[7:0];
    
    // ===========================================================================
    // Instruction Stepping Control / Debouncing
@@ -93,33 +122,13 @@ module nexys3 (/*AUTOARG*/
        end
      else if (clk_en) // Down sampling
        begin
-          inst_wd[7:0] <= {sw[7] | is_btnG_posedge, sw[6] & (~is_btnG_posedge), sw[5:0]};
+          // OR'ing sw[7] and sw[6] with is_btnG_posedge will
+          // force those bits to 11 in the event that the SEND
+          // button is pushed. Note that 11 is the send opcode.
+          inst_wd[7:0] <= {sw[7] | is_btnG_posedge, sw[6] | is_btnG_posedge, sw[5:0]};
           step_d[2:0]  <= {btnS, step_d[2:1]};
-			 go_d[2:0]    <= {btnG, go_d[2:1]};
+		  go_d[2:0]    <= {btnG, go_d[2:1]};
        end
-	   
-	// Detecting posedge of btnS and btnG
-   wire is_btnS_posedge;
-   assign is_btnS_posedge = ~ step_d[0] & step_d[1];
-	
-   wire is_btnG_posedge;
-   assign is_btnG_posedge = ~ go_d[0] & go_d[1];
-	
-   always @ (posedge clk)
-     if (rst)
-       inst_vld <= 1'b0;
-     else if (clk_en_d)
-       inst_vld <= is_btnS_posedge | is_btnG_posedge;
-	  else
-	    inst_vld <= 0;
-
-   always @ (posedge clk)
-     if (rst)
-       inst_cnt <= 0;
-     else if (inst_vld)
-       inst_cnt <= inst_cnt + 1;
-
-   assign led[7:0] = inst_cnt[7:0];
    
    // ===========================================================================
    // Sequencer
