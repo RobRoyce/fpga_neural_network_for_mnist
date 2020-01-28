@@ -92,7 +92,6 @@ module tb;
       reg [7:0]   inst;
       begin
          inst = {2'b11, ra[1:0], 4'h0};
-         tskRunInst(inst);
 			$display ("%d ... Sending with data: %08b", $stime, inst);
          sw = inst;
          #1500000 btnG = 1;
