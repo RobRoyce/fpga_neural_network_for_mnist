@@ -16,28 +16,28 @@ module fpcvt(
     wire [2:0] exponent;
     wire [3:0] significand;
     wire fifth_bit;
-	twos_comp_to_sm_converter twos_comp_converter (
-		.D(D), 
-		.S(S), 
-		.SM(SM)
-	);
+   twos_comp_to_sm_converter twos_comp_converter (
+						  .D(D), 
+						  .S(S), 
+						  .SM(SM)
+						  );
    priority_encoder encoder (
-			 .SM(SM), 
-			 .exponent(exponent)
-			 );
-	significand_extractor leading_extractor (
-		.SM(SM), 
-		.exponent(exponent), 
-		.significand(significand), 
-		.fifth_bit(fifth_bit)
-	);
+			     .SM(SM), 
+			     .exponent(exponent)
+			     );
+   significand_extractor leading_extractor (
+					    .SM(SM), 
+					    .exponent(exponent), 
+					    .significand(significand), 
+					    .fifth_bit(fifth_bit)
+					    );
    rounding rounder (
-		 .exponent(exponent), 
-		 .significand(significand), 
-		 .fifth_bit(fifth_bit), 
-		 .E(E), 
-		 .F(F)
-		 );
+		     .exponent(exponent), 
+		     .significand(significand), 
+		     .fifth_bit(fifth_bit), 
+		     .E(E), 
+		     .F(F)
+		     );
 endmodule // fpcvt
 
 

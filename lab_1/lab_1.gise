@@ -23,12 +23,69 @@
 
   <files xmlns="http://www.xilinx.com/XMLSchema">
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="FPCVT_guide.ncd" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="fpcvt.cmd_log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="fpcvt.lso"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="fpcvt.ngc"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="fpcvt.ngr"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="fpcvt.prj"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="fpcvt.stx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="fpcvt.syr"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="fpcvt.xst"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="fpcvt_guide.ncd" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="fpcvt_summary.html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="fpcvt_xst.xrpt"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="priority_encoder_guide.ncd" xil_pn:origination="imported"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="rounding_guide.ncd" xil_pn:origination="imported"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="twos_comp_to_sm_converter_guide.ncd" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
   </files>
 
-  <transforms xmlns="http://www.xilinx.com/XMLSchema"/>
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1580175219" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1580175219" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="5200193490568168568" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1580175219" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="6856639295645649383" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1580175219" xil_pn:name="TRAN_SubProjectAbstractToPreProxy" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1580175219" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="-7906333797074364998" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1580175219" xil_pn:name="TRAN_SubProjectPreToStructuralProxy" xil_pn:prop_ck="1106364426758808884" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1580175219" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="-808532700753317071" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1580175224" xil_pn:in_ck="161563559831548432" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="-4227877704324619306" xil_pn:start_ts="1580175219">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
+      <outfile xil_pn:name="fpcvt.lso"/>
+      <outfile xil_pn:name="fpcvt.ngc"/>
+      <outfile xil_pn:name="fpcvt.ngr"/>
+      <outfile xil_pn:name="fpcvt.prj"/>
+      <outfile xil_pn:name="fpcvt.stx"/>
+      <outfile xil_pn:name="fpcvt.syr"/>
+      <outfile xil_pn:name="fpcvt.xst"/>
+      <outfile xil_pn:name="fpcvt_xst.xrpt"/>
+      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <outfile xil_pn:name="xst"/>
+    </transform>
+  </transforms>
 
 </generated_project>

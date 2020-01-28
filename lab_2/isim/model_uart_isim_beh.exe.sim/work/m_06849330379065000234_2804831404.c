@@ -189,7 +189,7 @@ LAB9:    xsi_set_current_line(59, ng0);
     xsi_set_current_line(60, ng0);
     t4 = (t2 + 56U);
     t6 = *((char **)t4);
-    xsi_process_wait(t6, 1000000LL);
+    xsi_process_wait(t6, 8680000LL);
     *((char **)t3) = &&LAB10;
     t0 = 1;
     goto LAB1;
@@ -269,7 +269,7 @@ LAB5:    xsi_set_current_line(31, ng0);
     xsi_vlogvar_assign_value(t5, t4, 0, 0, 8);
     xsi_set_current_line(32, ng0);
     t2 = (t0 + 4488);
-    xsi_process_wait(t2, 500000LL);
+    xsi_process_wait(t2, 4340000LL);
     *((char **)t1) = &&LAB6;
     goto LAB1;
 
@@ -308,7 +308,7 @@ LAB8:    xsi_set_current_line(34, ng0);
 
 LAB10:    xsi_set_current_line(35, ng0);
     t10 = (t0 + 4488);
-    xsi_process_wait(t10, 1000000LL);
+    xsi_process_wait(t10, 8680000LL);
     *((char **)t1) = &&LAB11;
     goto LAB1;
 
@@ -345,11 +345,11 @@ LAB11:    xsi_set_current_line(35, ng0);
 }
 
 
-extern void work_m_06849330379065000234_1746683258_init()
+extern void work_m_06849330379065000234_2804831404_init()
 {
 	static char *pe[] = {(void *)Initial_24_0,(void *)Always_29_1};
 	static char *se[] = {(void *)sp_tskRxData,(void *)sp_tskTxData};
-	xsi_register_didat("work_m_06849330379065000234_1746683258", "isim/tb_isim_beh.exe.sim/work/m_06849330379065000234_1746683258.didat");
+	xsi_register_didat("work_m_06849330379065000234_2804831404", "isim/model_uart_isim_beh.exe.sim/work/m_06849330379065000234_2804831404.didat");
 	xsi_register_executes(pe);
 	xsi_register_subprogram_executes(se);
 }
