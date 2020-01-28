@@ -1,0 +1,80 @@
+ISim log file
+Running: /home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb_isim_beh.wdb 
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+# run all
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+         5 ... led output changed to        00000000
+   1501000 ... Running instruction        00000100
+   5243925 ... instruction        00000100 executed
+   5243925 ... led output changed to        00000001
+   6001000 ... Running instruction        00000000
+   9176085 ... instruction        00000000 executed
+   9176085 ... led output changed to        00000010
+  10501000 ... Running instruction        00010011
+  14418965 ... instruction        00010011 executed
+  14418965 ... led output changed to        00000011
+  15001000 ... Running instruction        10000110
+  18351125 ... instruction        10000110 executed
+  18351125 ... led output changed to        00000100
+  19501000 ... Running instruction        01100011
+  23594005 ... instruction        01100011 executed
+  23594005 ... led output changed to        00000101
+  24001000 ... Running instruction        11000000
+  27526165 ... instruction        11000000 executed
+  27526165 ... led output changed to        00000110
+  27534695 UART0 Received byte 30 (0)
+  27545715 UART0 Received byte 30 (0)
+  27556735 UART0 Received byte 34 (4)
+  27567755 UART0 Received byte 30 (0)
+  27578775 UART0 Received byte 0a (
+)
+  27589795 UART0 Received byte 0d (
+)
+  28501000 ... Running instruction        11010000
+  31458325 ... instruction        11010000 executed
+  31458325 ... led output changed to        00000111
+  31466855 UART0 Received byte 30 (0)
+  31477875 UART0 Received byte 30 (0)
+  31488895 UART0 Received byte 30 (0)
+  31499915 UART0 Received byte 33 (3)
+  31510935 UART0 Received byte 0a (
+)
+  31521955 UART0 Received byte 0d (
+)
+  33001000 ... Running instruction        11100000
+  36701205 ... instruction        11100000 executed
+  36701205 ... led output changed to        00001000
+  36709735 UART0 Received byte 30 (0)
+  36720755 UART0 Received byte 30 (0)
+  36731775 UART0 Received byte 43 (C)
+  36742795 UART0 Received byte 30 (0)
+  36753815 UART0 Received byte 0a (
+)
+  36764835 UART0 Received byte 0d (
+)
+  37501000 ... Running instruction        11110000
+  40633365 ... instruction        11110000 executed
+  40633365 ... led output changed to        00001001
+  40641895 UART0 Received byte 30 (0)
+  40652915 UART0 Received byte 31 (1)
+  40663935 UART0 Received byte 30 (0)
+  40674955 UART0 Received byte 30 (0)
+  40685975 UART0 Received byte 0a (
+)
+  40696995 UART0 Received byte 0d (
+)
+Stopped at time : 42002 us : File "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb.v" Line 41
+# exit 0

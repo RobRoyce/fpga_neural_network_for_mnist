@@ -1,14 +1,11 @@
 `timescale 1ns / 1ps
 `default_nettype none
 ////////////////////////////////////////////////////////////////////////////////
-// Robert Royce Ristine
+// Hackett, Tyler
+// Ristine, Rob
 // CSM152A - Winter 2020
 // Lab 1
-//
-// Design Name:   twos_comp_to_sm_converter
-// Module Name:   /home/parallels/ucla/csm152a/labs/lab_1/twos_comp_to_sm_converter_TB.v
-// Verilog Test Fixture created by ISE for module: twos_comp_to_sm_converter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 module twos_comp_to_sm_converter_TB;
 
@@ -51,7 +48,7 @@ module twos_comp_to_sm_converter_TB;
 
 	#350 D <= 12'b1000_0000_0000;
 	#360 $display("Setting D <= %b (%d), sign bit: %b, SM: %b (%d)", D, D, D[11], SM, SM);
-	#360 if(SM == 12'b0000_0000_0000) $display("Test 4 SUCCESS"); else $display("Test 4 FAILURE");
+	#360 if(SM == 12'b0111_1111_1111) $display("Test 4 SUCCESS"); else $display("Test 4 FAILURE");
 	
 	#420 D <= 12'b1111_1111_1111;
 	#430 $display("Setting D <= %b (%d), sign bit: %b, SM: %b (%d)", D, D, D[11], SM, SM);
@@ -71,11 +68,11 @@ module twos_comp_to_sm_converter_TB;
 
 	#710 D <= -12'd2048;
 	#720 $display("Setting D <= %b (%d), sign bit: %b, SM: %b (%d)", D, D, D[11], SM, SM);
-	#720 if(SM == 12'd0) $display("Test 9 SUCCESS"); else $display("Test 9 FAILURE");
+	#720 if(SM == 12'd2047) $display("Test 9 SUCCESS"); else $display("Test 9 FAILURE");
 
 	#800 D <= 12'd2048;
 	#810 $display("Setting D <= %b (%d), sign bit: %b, SM: %b (%d)", D, D, D[11], SM, SM);
-	#810 if(SM == 12'd0) $display("Test 10 SUCCESS"); else $display("Test 10 FAILURE");
+	#810 if(SM == 12'd2047) $display("Test 10 SUCCESS"); else $display("Test 10 FAILURE");
 
 	#900 D <= 12'd250;
 	#910 $display("Setting D <= %b (%d), sign bit: %b, SM: %b (%d)", D, D, D[11], SM, SM);

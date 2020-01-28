@@ -1,0 +1,39 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -relaunch -intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -o "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb_isim_beh.exe" -prj "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb_beh.prj" "work.tb" "work.glbl" 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/seq_mult.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/seq_add.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/uart_fifo.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/uart.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/seq_rf.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/seq_alu.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/uart_top.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/seq.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/nexys3.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/model_uart.v" into library work
+Analyzing Verilog file "/home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 97992 KB
+Fuse CPU Usage: 760 ms
+Compiling module model_uart(baud=1000000,name="UA...
+Compiling module seq_rf_default
+Compiling module seq_add_default
+Compiling module seq_mult_default
+Compiling module seq_alu_default
+Compiling module seq_default
+Compiling module uart_fifo
+Compiling module uart
+Compiling module uart_top_default
+Compiling module nexys3_default
+Compiling module tb
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Compiled 12 Verilog Units
+Built simulation executable /home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb_isim_beh.exe
+Fuse Memory Usage: 658232 KB
+Fuse CPU Usage: 790 ms
+GCC CPU Usage: 100 ms

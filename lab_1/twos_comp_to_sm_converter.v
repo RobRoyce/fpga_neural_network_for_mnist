@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 `default_nettype none
 ////////////////////////////////////////////////////////////////////////////////
-// Robert Royce Ristine
+// Hackett, Tyler
+// Ristine, Rob
 // CSM152A - Winter 2020
 // Lab 1
 //
 // Design Name:   twos_comp_to_sm_converter
-// Module Name:   /home/parallels/ucla/csm152a/labs/lab_1/twos_comp_to_sm_converter.v
+// Module Name:   /lab_1/twos_comp_to_sm_converter.v
 ////////////////////////////////////////////////////////////////////////////////
 
 

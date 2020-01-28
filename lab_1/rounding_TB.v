@@ -1,27 +1,10 @@
 `timescale 1ns / 1ps
-
 ////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer:
-//
-// Create Date:   11:14:32 01/14/2020
-// Design Name:   rounding
-// Module Name:   /home/parallels/ucla/csm152a/labs/csm152a/lab_1/rounding_TB.v
-// Project Name:  lab_1
-// Target Device:  
-// Tool versions:  
-// Description: 
-//
-// Verilog Test Fixture created by ISE for module: rounding
-//
-// Dependencies:
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Hackett, Tyler
+// Ristine, Rob
+// CSM152A - Winter 2020
+// Lab 1
 ////////////////////////////////////////////////////////////////////////////////
-
 module rounding_TB;
 
    // Inputs
@@ -72,7 +55,8 @@ module rounding_TB;
 	    begin
 	       #4;
 	       fifth_bit <= k;
-	       #1 $display("%t | Sig: %b, Exp: %b, 5th: %b | F: %b, E: %b | Float: %f", $time, significand, exponent, fifth_bit, F, E, float);
+	       #1 $display("%t | Sig: %b, Exp: %b, 5th: %b | F: %b, E: %b | Float: %f", 
+			   $time, significand, exponent, fifth_bit, F, E, float);
 	    end
 	  end
 	end

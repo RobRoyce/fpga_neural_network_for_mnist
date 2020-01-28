@@ -1,23 +1,10 @@
 `timescale 1ns / 1ps
 `default_nettype none
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    13:59:00 01/14/2020 
-// Design Name: 
-// Module Name:    significand_extractor 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
+////////////////////////////////////////////////////////////////////////////////
+// Hackett, Tyler
+// Ristine, Rob
+// CSM152A - Winter 2020
+// Lab 1
 //////////////////////////////////////////////////////////////////////////////////
 module significand_extractor(
 	input wire  [11:0] D,           // Sign-Magnitude input

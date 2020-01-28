@@ -19,24 +19,19 @@ Reading design: nexys3.prj
 
 TABLE OF CONTENTS
   1) Synthesis Options Summary
-  2) HDL Parsing
-  3) HDL Elaboration
-  4) HDL Synthesis
-       4.1) HDL Synthesis Report
-  5) Advanced HDL Synthesis
-       5.1) Advanced HDL Synthesis Report
-  6) Low Level Synthesis
-  7) Partition Report
-  8) Design Summary
-       8.1) Primitive and Black Box Usage
-       8.2) Device utilization summary
-       8.3) Partition Resource Summary
-       8.4) Timing Report
-            8.4.1) Clock Information
-            8.4.2) Asynchronous Control Signals Information
-            8.4.3) Timing Summary
-            8.4.4) Timing Details
-            8.4.5) Cross Clock Domains Report
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
 
 
 =========================================================================
@@ -44,12 +39,13 @@ TABLE OF CONTENTS
 =========================================================================
 ---- Source Parameters
 Input File Name                    : "nexys3.prj"
+Input Format                       : mixed
 Ignore Synthesis Constraint File   : NO
 
 ---- Target Parameters
 Output File Name                   : "nexys3"
 Output Format                      : NGC
-Target Device                      : xc6slx16-3-csg324
+Target Device                      : xc3sd1800a-4-fg676
 
 ---- Source Options
 Top Module Name                    : nexys3
@@ -60,32 +56,35 @@ FSM Style                          : LUT
 RAM Extraction                     : Yes
 RAM Style                          : Auto
 ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
 Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
 ROM Style                          : Auto
+Mux Extraction                     : Yes
 Resource Sharing                   : YES
 Asynchronous To Synchronous        : NO
-Shift Register Minimum Size        : 2
 Use DSP Block                      : Auto
 Automatic Register Balancing       : No
 
 ---- Target Options
-LUT Combining                      : Auto
-Reduce Control Sets                : Auto
 Add IO Buffers                     : YES
 Global Maximum Fanout              : 100000
-Add Generic Clock Buffer(BUFG)     : 16
+Add Generic Clock Buffer(BUFG)     : 24
 Register Duplication               : YES
+Slice Packing                      : YES
 Optimize Instantiated Primitives   : NO
-Use Clock Enable                   : Auto
-Use Synchronous Set                : Auto
-Use Synchronous Reset              : Auto
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
 Pack IO Registers into IOBs        : Auto
 Equivalent register Removal        : YES
 
 ---- General Options
 Optimization Goal                  : Speed
 Optimization Effort                : 1
-Power Reduction                    : NO
 Keep Hierarchy                     : No
 Netlist Hierarchy                  : As_Optimized
 RTL Output                         : Yes
@@ -99,6 +98,7 @@ Case Specifier                     : Maintain
 Slice Utilization Ratio            : 100
 BRAM Utilization Ratio             : 100
 DSP48 Utilization Ratio            : 100
+Verilog 2001                       : YES
 Auto BRAM Packing                  : NO
 Slice Utilization Ratio Delta      : 5
 
@@ -106,327 +106,477 @@ Slice Utilization Ratio Delta      : 5
 
 
 =========================================================================
-*                          HDL Parsing                                  *
+*                          HDL Compilation                              *
 =========================================================================
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_add.v" into library work
-Parsing module <seq_add>.
-Parsing verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_definitions.v" included at line 8.
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/uart_fifo.v" into library work
-Parsing module <uart_fifo>.
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/uart.v" into library work
-Parsing module <uart>.
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_rf.v" into library work
-Parsing module <seq_rf>.
-Parsing verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_definitions.v" included at line 8.
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_alu.v" into library work
-Parsing module <seq_alu>.
-Parsing verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_definitions.v" included at line 7.
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/uart_top.v" into library work
-Parsing module <uart_top>.
-Parsing verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_definitions.v" included at line 8.
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq.v" into library work
-Parsing module <seq>.
-Parsing verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_definitions.v" included at line 8.
-Analyzing Verilog file "/home/parallels/Downloads/lab_2 src/rtl/nexys3.v" into library work
-Parsing module <nexys3>.
-Parsing verilog file "/home/parallels/Downloads/lab_2 src/rtl/seq_definitions.v" included at line 8.
+Compiling verilog file "seq_mult.v" in library work
+Compiling verilog include file "seq_definitions.v"
+Compiling verilog file "seq_add.v" in library work
+Module <seq_mult> compiled
+Compiling verilog include file "seq_definitions.v"
+Compiling verilog file "uart_fifo.v" in library work
+Module <seq_add> compiled
+Compiling verilog file "uart.v" in library work
+Module <uart_fifo> compiled
+Compiling verilog file "seq_rf.v" in library work
+Module <uart> compiled
+Compiling verilog include file "seq_definitions.v"
+Compiling verilog file "seq_alu.v" in library work
+Module <seq_rf> compiled
+Compiling verilog include file "seq_definitions.v"
+Compiling verilog file "uart_top.v" in library work
+Module <seq_alu> compiled
+Compiling verilog include file "seq_definitions.v"
+Compiling verilog file "seq.v" in library work
+Module <uart_top> compiled
+Compiling verilog include file "seq_definitions.v"
+Compiling verilog file "nexys3.v" in library work
+Module <seq> compiled
+Compiling verilog include file "seq_definitions.v"
+Module <nexys3> compiled
+No errors in compilation
+Analysis of file <"nexys3.prj"> succeeded.
+ 
 
 =========================================================================
-*                            HDL Elaboration                            *
+*                     Design Hierarchy Analysis                         *
 =========================================================================
+Analyzing hierarchy for module <nexys3> in library <work> with parameters.
+	alu_width = "00000000000000000000000000010000"
+	seq_dp_width = "00000000000000000000000000010000"
+	seq_im_width = "00000000000000000000000000000100"
+	seq_in_width = "00000000000000000000000000001000"
+	seq_num_regs = "00000000000000000000000000000100"
+	seq_op_add = "01"
+	seq_op_mult = "10"
+	seq_op_push = "00"
+	seq_op_send = "11"
+	seq_op_width = "00000000000000000000000000000010"
+	seq_rf_width = "00000000000000000000000000010000"
+	seq_rn_width = "00000000000000000000000000000010"
+	uart_num_nib = "00000000000000000000000000000100"
 
-Elaborating module <nexys3>.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/nexys3.v" Line 111: Result of 9-bit expression is truncated to fit in 8-bit target.
+Analyzing hierarchy for module <seq> in library <work> with parameters.
+	alu_width = "00000000000000000000000000010000"
+	seq_dp_width = "00000000000000000000000000010000"
+	seq_im_width = "00000000000000000000000000000100"
+	seq_in_width = "00000000000000000000000000001000"
+	seq_num_regs = "00000000000000000000000000000100"
+	seq_op_add = "01"
+	seq_op_mult = "10"
+	seq_op_push = "00"
+	seq_op_send = "11"
+	seq_op_width = "00000000000000000000000000000010"
+	seq_rf_width = "00000000000000000000000000010000"
+	seq_rn_width = "00000000000000000000000000000010"
+	uart_num_nib = "00000000000000000000000000000100"
 
-Elaborating module <seq>.
+Analyzing hierarchy for module <uart_top> in library <work> with parameters.
+	alu_width = "00000000000000000000000000010000"
+	seq_dp_width = "00000000000000000000000000010000"
+	seq_im_width = "00000000000000000000000000000100"
+	seq_in_width = "00000000000000000000000000001000"
+	seq_num_regs = "00000000000000000000000000000100"
+	seq_op_add = "01"
+	seq_op_mult = "10"
+	seq_op_push = "00"
+	seq_op_send = "11"
+	seq_op_width = "00000000000000000000000000000010"
+	seq_rf_width = "00000000000000000000000000010000"
+	seq_rn_width = "00000000000000000000000000000010"
+	stCR = "00000000000000000000000000000110"
+	stIdle = "00000000000000000000000000000000"
+	stNL = "00000000000000000000000000000101"
+	stNib1 = "00000000000000000000000000000001"
+	uart_num_nib = "00000000000000000000000000000100"
 
-Elaborating module <seq_rf>.
+Analyzing hierarchy for module <seq_rf> in library <work> with parameters.
+	alu_width = "00000000000000000000000000010000"
+	seq_dp_width = "00000000000000000000000000010000"
+	seq_im_width = "00000000000000000000000000000100"
+	seq_in_width = "00000000000000000000000000001000"
+	seq_num_regs = "00000000000000000000000000000100"
+	seq_op_add = "01"
+	seq_op_mult = "10"
+	seq_op_push = "00"
+	seq_op_send = "11"
+	seq_op_width = "00000000000000000000000000000010"
+	seq_rf_width = "00000000000000000000000000010000"
+	seq_rn_width = "00000000000000000000000000000010"
+	uart_num_nib = "00000000000000000000000000000100"
 
-Elaborating module <seq_alu>.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/seq_alu.v" Line 29: Result of 20-bit expression is truncated to fit in 16-bit target.
+Analyzing hierarchy for module <seq_alu> in library <work> with parameters.
+	alu_width = "00000000000000000000000000010000"
+	seq_dp_width = "00000000000000000000000000010000"
+	seq_im_width = "00000000000000000000000000000100"
+	seq_in_width = "00000000000000000000000000001000"
+	seq_num_regs = "00000000000000000000000000000100"
+	seq_op_add = "01"
+	seq_op_mult = "10"
+	seq_op_push = "00"
+	seq_op_send = "11"
+	seq_op_width = "00000000000000000000000000000010"
+	seq_rf_width = "00000000000000000000000000010000"
+	seq_rn_width = "00000000000000000000000000000010"
+	uart_num_nib = "00000000000000000000000000000100"
 
-Elaborating module <seq_add>.
+Analyzing hierarchy for module <uart_fifo> in library <work> with parameters.
+	size = "00000000000000000000010000000000"
+	sizew = "00000000000000000000000000001010"
 
-Elaborating module <uart_top>.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart_top.v" Line 60: Result of 4-bit expression is truncated to fit in 3-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart_top.v" Line 61: Result of 20-bit expression is truncated to fit in 16-bit target.
+Analyzing hierarchy for module <uart> in library <work> with parameters.
+	CLOCK_DIVIDE = "00000000000000000000000000011001"
+	RX_CHECK_START = "00000000000000000000000000000001"
+	RX_CHECK_STOP = "00000000000000000000000000000011"
+	RX_DELAY_RESTART = "00000000000000000000000000000100"
+	RX_ERROR = "00000000000000000000000000000101"
+	RX_IDLE = "00000000000000000000000000000000"
+	RX_READ_BITS = "00000000000000000000000000000010"
+	RX_RECEIVED = "00000000000000000000000000000110"
+	TX_DELAY_RESTART = "00000000000000000000000000000010"
+	TX_IDLE = "00000000000000000000000000000000"
+	TX_SENDING = "00000000000000000000000000000001"
 
-Elaborating module <uart_fifo>.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart_fifo.v" Line 55: Result of 11-bit expression is truncated to fit in 10-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart_fifo.v" Line 61: Result of 32-bit expression is truncated to fit in 10-bit target.
+Analyzing hierarchy for module <seq_add> in library <work> with parameters.
+	alu_width = "00000000000000000000000000010000"
+	seq_dp_width = "00000000000000000000000000010000"
+	seq_im_width = "00000000000000000000000000000100"
+	seq_in_width = "00000000000000000000000000001000"
+	seq_num_regs = "00000000000000000000000000000100"
+	seq_op_add = "01"
+	seq_op_mult = "10"
+	seq_op_push = "00"
+	seq_op_send = "11"
+	seq_op_width = "00000000000000000000000000000010"
+	seq_rf_width = "00000000000000000000000000010000"
+	seq_rn_width = "00000000000000000000000000000010"
+	uart_num_nib = "00000000000000000000000000000100"
 
-Elaborating module <uart>.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 90: Result of 32-bit expression is truncated to fit in 11-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 93: Result of 32-bit expression is truncated to fit in 6-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 95: Result of 32-bit expression is truncated to fit in 11-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 98: Result of 32-bit expression is truncated to fit in 6-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 138: Result of 32-bit expression is truncated to fit in 4-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 139: Result of 32-bit expression is truncated to fit in 3-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 147: Result of 32-bit expression is truncated to fit in 3-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 153: Result of 32-bit expression is truncated to fit in 3-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 192: Result of 32-bit expression is truncated to fit in 4-bit target.
-WARNING:HDLCompiler:413 - "/home/parallels/Downloads/lab_2 src/rtl/uart.v" Line 209: Result of 32-bit expression is truncated to fit in 2-bit target.
-WARNING:HDLCompiler:1127 - "/home/parallels/Downloads/lab_2 src/rtl/nexys3.v" Line 138: Assignment to uart_rx_data ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/parallels/Downloads/lab_2 src/rtl/nexys3.v" Line 139: Assignment to uart_rx_valid ignored, since the identifier is never used
+Analyzing hierarchy for module <seq_mult> in library <work> with parameters.
+	alu_width = "00000000000000000000000000010000"
+	seq_dp_width = "00000000000000000000000000010000"
+	seq_im_width = "00000000000000000000000000000100"
+	seq_in_width = "00000000000000000000000000001000"
+	seq_num_regs = "00000000000000000000000000000100"
+	seq_op_add = "01"
+	seq_op_mult = "10"
+	seq_op_push = "00"
+	seq_op_send = "11"
+	seq_op_width = "00000000000000000000000000000010"
+	seq_rf_width = "00000000000000000000000000010000"
+	seq_rn_width = "00000000000000000000000000000010"
+	uart_num_nib = "00000000000000000000000000000100"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <nexys3>.
+	alu_width = 32'sb00000000000000000000000000010000
+	seq_dp_width = 32'sb00000000000000000000000000010000
+	seq_im_width = 32'sb00000000000000000000000000000100
+	seq_in_width = 32'sb00000000000000000000000000001000
+	seq_num_regs = 32'sb00000000000000000000000000000100
+	seq_op_add = 2'b01
+	seq_op_mult = 2'b10
+	seq_op_push = 2'b00
+	seq_op_send = 2'b11
+	seq_op_width = 32'sb00000000000000000000000000000010
+	seq_rf_width = 32'sb00000000000000000000000000010000
+	seq_rn_width = 32'sb00000000000000000000000000000010
+	uart_num_nib = 32'sb00000000000000000000000000000100
+Module <nexys3> is correct for synthesis.
+ 
+Analyzing module <seq> in library <work>.
+	alu_width = 32'sb00000000000000000000000000010000
+	seq_dp_width = 32'sb00000000000000000000000000010000
+	seq_im_width = 32'sb00000000000000000000000000000100
+	seq_in_width = 32'sb00000000000000000000000000001000
+	seq_num_regs = 32'sb00000000000000000000000000000100
+	seq_op_add = 2'b01
+	seq_op_mult = 2'b10
+	seq_op_push = 2'b00
+	seq_op_send = 2'b11
+	seq_op_width = 32'sb00000000000000000000000000000010
+	seq_rf_width = 32'sb00000000000000000000000000010000
+	seq_rn_width = 32'sb00000000000000000000000000000010
+	uart_num_nib = 32'sb00000000000000000000000000000100
+Module <seq> is correct for synthesis.
+ 
+Analyzing module <seq_rf> in library <work>.
+	alu_width = 32'sb00000000000000000000000000010000
+	seq_dp_width = 32'sb00000000000000000000000000010000
+	seq_im_width = 32'sb00000000000000000000000000000100
+	seq_in_width = 32'sb00000000000000000000000000001000
+	seq_num_regs = 32'sb00000000000000000000000000000100
+	seq_op_add = 2'b01
+	seq_op_mult = 2'b10
+	seq_op_push = 2'b00
+	seq_op_send = 2'b11
+	seq_op_width = 32'sb00000000000000000000000000000010
+	seq_rf_width = 32'sb00000000000000000000000000010000
+	seq_rn_width = 32'sb00000000000000000000000000000010
+	uart_num_nib = 32'sb00000000000000000000000000000100
+Module <seq_rf> is correct for synthesis.
+ 
+Analyzing module <seq_alu> in library <work>.
+	alu_width = 32'sb00000000000000000000000000010000
+	seq_dp_width = 32'sb00000000000000000000000000010000
+	seq_im_width = 32'sb00000000000000000000000000000100
+	seq_in_width = 32'sb00000000000000000000000000001000
+	seq_num_regs = 32'sb00000000000000000000000000000100
+	seq_op_add = 2'b01
+	seq_op_mult = 2'b10
+	seq_op_push = 2'b00
+	seq_op_send = 2'b11
+	seq_op_width = 32'sb00000000000000000000000000000010
+	seq_rf_width = 32'sb00000000000000000000000000010000
+	seq_rn_width = 32'sb00000000000000000000000000000010
+	uart_num_nib = 32'sb00000000000000000000000000000100
+Module <seq_alu> is correct for synthesis.
+ 
+Analyzing module <seq_add> in library <work>.
+	alu_width = 32'sb00000000000000000000000000010000
+	seq_dp_width = 32'sb00000000000000000000000000010000
+	seq_im_width = 32'sb00000000000000000000000000000100
+	seq_in_width = 32'sb00000000000000000000000000001000
+	seq_num_regs = 32'sb00000000000000000000000000000100
+	seq_op_add = 2'b01
+	seq_op_mult = 2'b10
+	seq_op_push = 2'b00
+	seq_op_send = 2'b11
+	seq_op_width = 32'sb00000000000000000000000000000010
+	seq_rf_width = 32'sb00000000000000000000000000010000
+	seq_rn_width = 32'sb00000000000000000000000000000010
+	uart_num_nib = 32'sb00000000000000000000000000000100
+Module <seq_add> is correct for synthesis.
+ 
+Analyzing module <seq_mult> in library <work>.
+	alu_width = 32'sb00000000000000000000000000010000
+	seq_dp_width = 32'sb00000000000000000000000000010000
+	seq_im_width = 32'sb00000000000000000000000000000100
+	seq_in_width = 32'sb00000000000000000000000000001000
+	seq_num_regs = 32'sb00000000000000000000000000000100
+	seq_op_add = 2'b01
+	seq_op_mult = 2'b10
+	seq_op_push = 2'b00
+	seq_op_send = 2'b11
+	seq_op_width = 32'sb00000000000000000000000000000010
+	seq_rf_width = 32'sb00000000000000000000000000010000
+	seq_rn_width = 32'sb00000000000000000000000000000010
+	uart_num_nib = 32'sb00000000000000000000000000000100
+Module <seq_mult> is correct for synthesis.
+ 
+Analyzing module <uart_top> in library <work>.
+	alu_width = 32'sb00000000000000000000000000010000
+	seq_dp_width = 32'sb00000000000000000000000000010000
+	seq_im_width = 32'sb00000000000000000000000000000100
+	seq_in_width = 32'sb00000000000000000000000000001000
+	seq_num_regs = 32'sb00000000000000000000000000000100
+	seq_op_add = 2'b01
+	seq_op_mult = 2'b10
+	seq_op_push = 2'b00
+	seq_op_send = 2'b11
+	seq_op_width = 32'sb00000000000000000000000000000010
+	seq_rf_width = 32'sb00000000000000000000000000010000
+	seq_rn_width = 32'sb00000000000000000000000000000010
+	stCR = 32'sb00000000000000000000000000000110
+	stIdle = 32'sb00000000000000000000000000000000
+	stNL = 32'sb00000000000000000000000000000101
+	stNib1 = 32'sb00000000000000000000000000000001
+	uart_num_nib = 32'sb00000000000000000000000000000100
+	Calling function <fnNib2ASCII>.
+Module <uart_top> is correct for synthesis.
+ 
+Analyzing module <uart_fifo> in library <work>.
+	size = 32'sb00000000000000000000010000000000
+	sizew = 32'sb00000000000000000000000000001010
+Module <uart_fifo> is correct for synthesis.
+ 
+    Set property "ram_style = block" for signal <mem>.
+Analyzing module <uart> in library <work>.
+	CLOCK_DIVIDE = 32'sb00000000000000000000000000011001
+	RX_CHECK_START = 32'sb00000000000000000000000000000001
+	RX_CHECK_STOP = 32'sb00000000000000000000000000000011
+	RX_DELAY_RESTART = 32'sb00000000000000000000000000000100
+	RX_ERROR = 32'sb00000000000000000000000000000101
+	RX_IDLE = 32'sb00000000000000000000000000000000
+	RX_READ_BITS = 32'sb00000000000000000000000000000010
+	RX_RECEIVED = 32'sb00000000000000000000000000000110
+	TX_DELAY_RESTART = 32'sb00000000000000000000000000000010
+	TX_IDLE = 32'sb00000000000000000000000000000000
+	TX_SENDING = 32'sb00000000000000000000000000000001
+Module <uart> is correct for synthesis.
+ 
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
-Synthesizing Unit <nexys3>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/nexys3.v".
-        seq_in_width = 8
-        seq_op_width = 2
-        seq_rn_width = 2
-        seq_num_regs = 4
-        seq_im_width = 4
-        seq_op_push = 2'b00
-        seq_op_add = 2'b01
-        seq_op_mult = 2'b10
-        seq_op_send = 2'b11
-        seq_dp_width = 16
-        seq_rf_width = 16
-        alu_width = 16
-        uart_num_nib = 4
-INFO:Xst:3210 - "/home/parallels/Downloads/lab_2 src/rtl/nexys3.v" line 135: Output port <o_rx_data> of the instance <uart_top_> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/parallels/Downloads/lab_2 src/rtl/nexys3.v" line 135: Output port <o_rx_valid> of the instance <uart_top_> is unconnected or connected to loadless signal.
-    Found 2-bit register for signal <arst_ff>.
-    Found 17-bit register for signal <clk_dv>.
-    Found 1-bit register for signal <clk_en>.
-    Found 1-bit register for signal <clk_en_d>.
-    Found 8-bit register for signal <inst_wd>.
-    Found 3-bit register for signal <step_d>.
-    Found 1-bit register for signal <inst_vld>.
-    Found 8-bit register for signal <led>.
-    Found 18-bit adder for signal <n0047> created at line 64.
-    Found 8-bit adder for signal <inst_cnt[7]_GND_1_o_add_14_OUT> created at line 111.
-    Summary:
-	inferred   2 Adder/Subtractor(s).
-	inferred  41 D-type flip-flop(s).
-Unit <nexys3> synthesized.
-
-Synthesizing Unit <seq>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/seq.v".
-        seq_in_width = 8
-        seq_op_width = 2
-        seq_rn_width = 2
-        seq_num_regs = 4
-        seq_im_width = 4
-        seq_op_push = 2'b00
-        seq_op_add = 2'b01
-        seq_op_mult = 2'b10
-        seq_op_send = 2'b11
-        seq_dp_width = 16
-        seq_rf_width = 16
-        alu_width = 16
-        uart_num_nib = 4
-    Summary:
-	inferred   1 Multiplexer(s).
-Unit <seq> synthesized.
+Performing bidirectional port resolution...
+INFO:Xst:2679 - Register <i> in unit <seq_rf> has a constant value of 100 during circuit operation. The register is replaced by logic.
 
 Synthesizing Unit <seq_rf>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/seq_rf.v".
-        seq_in_width = 8
-        seq_op_width = 2
-        seq_rn_width = 2
-        seq_num_regs = 4
-        seq_im_width = 4
-        seq_op_push = 2'b00
-        seq_op_add = 2'b01
-        seq_op_mult = 2'b10
-        seq_op_send = 2'b11
-        seq_dp_width = 16
-        seq_rf_width = 16
-        alu_width = 16
-        uart_num_nib = 4
-    Found 64-bit register for signal <n0016[63:0]>.
-    Found 16-bit 4-to-1 multiplexer for signal <o_data_a> created at line 35.
-    Found 16-bit 4-to-1 multiplexer for signal <o_data_b> created at line 36.
+    Related source file is "seq_rf.v".
+    Found 16-bit 4-to-1 multiplexer for signal <o_data_a>.
+    Found 16-bit 4-to-1 multiplexer for signal <o_data_b>.
+    Found 64-bit register for signal <rf>.
     Summary:
 	inferred  64 D-type flip-flop(s).
-	inferred   6 Multiplexer(s).
+	inferred  32 Multiplexer(s).
 Unit <seq_rf> synthesized.
 
-Synthesizing Unit <seq_alu>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/seq_alu.v".
-        seq_in_width = 8
-        seq_op_width = 2
-        seq_rn_width = 2
-        seq_num_regs = 4
-        seq_im_width = 4
-        seq_op_push = 2'b00
-        seq_op_add = 2'b01
-        seq_op_mult = 2'b10
-        seq_op_send = 2'b11
-        seq_dp_width = 16
-        seq_rf_width = 16
-        alu_width = 16
-        uart_num_nib = 4
-    Summary:
-	inferred   1 Multiplexer(s).
-Unit <seq_alu> synthesized.
 
 Synthesizing Unit <seq_add>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/seq_add.v".
-        seq_in_width = 8
-        seq_op_width = 2
-        seq_rn_width = 2
-        seq_num_regs = 4
-        seq_im_width = 4
-        seq_op_push = 2'b00
-        seq_op_add = 2'b01
-        seq_op_mult = 2'b10
-        seq_op_send = 2'b11
-        seq_dp_width = 16
-        seq_rf_width = 16
-        alu_width = 16
-        uart_num_nib = 4
+    Related source file is "seq_add.v".
 WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 16-bit adder for signal <o_data> created at line 21.
+    Found 16-bit adder for signal <o_data>.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 Unit <seq_add> synthesized.
 
-Synthesizing Unit <uart_top>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/uart_top.v".
-        seq_in_width = 8
-        seq_op_width = 2
-        seq_rn_width = 2
-        seq_num_regs = 4
-        seq_im_width = 4
-        seq_op_push = 2'b00
-        seq_op_add = 2'b01
-        seq_op_mult = 2'b10
-        seq_op_send = 2'b11
-        seq_dp_width = 16
-        seq_rf_width = 16
-        alu_width = 16
-        uart_num_nib = 4
-        stIdle = 0
-        stNib1 = 1
-        stNL = 5
-        stCR = 6
-INFO:Xst:3210 - "/home/parallels/Downloads/lab_2 src/rtl/uart_top.v" line 100: Output port <fifo_cnt> of the instance <tfifo_> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/parallels/Downloads/lab_2 src/rtl/uart_top.v" line 120: Output port <is_receiving> of the instance <uart_> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/parallels/Downloads/lab_2 src/rtl/uart_top.v" line 120: Output port <recv_error> of the instance <uart_> is unconnected or connected to loadless signal.
-    Found 16-bit register for signal <tx_data>.
-    Found 1-bit register for signal <tfifo_rd_z>.
-    Found 3-bit register for signal <state>.
-    Found 3-bit adder for signal <state[2]_GND_6_o_add_5_OUT> created at line 60.
-    Found 16x8-bit Read Only RAM for signal <tx_data[15]_GND_6_o_wide_mux_17_OUT>
+
+Synthesizing Unit <seq_mult>.
+    Related source file is "seq_mult.v".
+WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:643 - "seq_mult.v" line 21: The result of a 16x16-bit multiplication is partially used. Only the 16 least significant bits are used. If you are doing this on purpose, you may safely ignore this warning. Otherwise, make sure you are not losing information, leading to unexpected circuit behavior.
+    Found 16x16-bit multiplier for signal <o_data$mult0001> created at line 21.
     Summary:
-	inferred   1 RAM(s).
-	inferred   1 Adder/Subtractor(s).
-	inferred  20 D-type flip-flop(s).
-	inferred   5 Multiplexer(s).
-Unit <uart_top> synthesized.
+	inferred   1 Multiplier(s).
+Unit <seq_mult> synthesized.
+
 
 Synthesizing Unit <uart_fifo>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/uart_fifo.v".
-        size = 1024
-        sizew = 10
-    Set property "ram_style = block" for signal <mem>.
+    Related source file is "uart_fifo.v".
     Found 1024x8-bit dual-port RAM <Mram_mem> for signal <mem>.
-    Found 10-bit register for signal <rp>.
-    Found 10-bit register for signal <fifo_cnt>.
-    Found 1-bit register for signal <fifo_full>.
-    Found 1-bit register for signal <fifo_empty>.
     Found 8-bit register for signal <fifo_out>.
-    Found 10-bit register for signal <wp>.
-    Found 10-bit adder for signal <wp[9]_GND_7_o_add_1_OUT> created at line 50.
-    Found 10-bit adder for signal <rp[9]_GND_7_o_add_2_OUT> created at line 51.
-    Found 10-bit adder for signal <fifo_cnt[9]_GND_7_o_add_3_OUT> created at line 55.
-    Found 10-bit subtractor for signal <GND_7_o_GND_7_o_sub_6_OUT<9:0>> created at line 61.
+    Found 10-bit register for signal <fifo_cnt>.
+    Found 1-bit register for signal <fifo_empty>.
+    Found 1-bit register for signal <fifo_full>.
+    Found 10-bit addsub for signal <fifo_cnt$addsub0000>.
+    Found 1-bit 4-to-1 multiplexer for signal <fifo_empty$mux0000> created at line 52.
+    Found 1-bit 4-to-1 multiplexer for signal <fifo_full$mux0000> created at line 52.
+    Found 10-bit up counter for signal <rp>.
+    Found 10-bit up counter for signal <wp>.
     Summary:
 	inferred   1 RAM(s).
-	inferred   4 Adder/Subtractor(s).
-	inferred  40 D-type flip-flop(s).
+	inferred   2 Counter(s).
+	inferred  20 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   2 Multiplexer(s).
 Unit <uart_fifo> synthesized.
 
+
 Synthesizing Unit <uart>.
-    Related source file is "/home/parallels/Downloads/lab_2 src/rtl/uart.v".
-        CLOCK_DIVIDE = 25
-        RX_IDLE = 0
-        RX_CHECK_START = 1
-        RX_READ_BITS = 2
-        RX_CHECK_STOP = 3
-        RX_DELAY_RESTART = 4
-        RX_ERROR = 5
-        RX_RECEIVED = 6
-        TX_IDLE = 0
-        TX_SENDING = 1
-        TX_DELAY_RESTART = 2
-    Found 2-bit register for signal <tx_state>.
+    Related source file is "uart.v".
+    Found 4-bit subtractor for signal <old_rx_bits_remaining_11$sub0000> created at line 138.
+    Found 11-bit subtractor for signal <old_rx_clk_divider_6$sub0000> created at line 90.
+    Found 6-bit subtractor for signal <old_rx_countdown_9$sub0000> created at line 93.
+    Found 11-bit subtractor for signal <old_tx_clk_divider_7$sub0000> created at line 95.
+    Found 6-bit subtractor for signal <old_tx_countdown_17$sub0000> created at line 98.
+    Found 3-bit register for signal <recv_state>.
+    Found 4-bit register for signal <rx_bits_remaining>.
     Found 11-bit register for signal <rx_clk_divider>.
     Found 6-bit register for signal <rx_countdown>.
+    Found 8-bit register for signal <rx_data>.
+    Found 4-bit register for signal <tx_bits_remaining>.
+    Found 4-bit subtractor for signal <tx_bits_remaining$addsub0000> created at line 192.
     Found 11-bit register for signal <tx_clk_divider>.
     Found 6-bit register for signal <tx_countdown>.
-    Found 8-bit register for signal <rx_data>.
-    Found 4-bit register for signal <rx_bits_remaining>.
-    Found 4-bit register for signal <tx_bits_remaining>.
-    Found 1-bit register for signal <tx_out>.
     Found 8-bit register for signal <tx_data>.
-    Found 3-bit register for signal <recv_state>.
-    Found 11-bit subtractor for signal <GND_8_o_GND_8_o_sub_9_OUT<10:0>> created at line 90.
-    Found 6-bit subtractor for signal <GND_8_o_GND_8_o_sub_11_OUT<5:0>> created at line 93.
-    Found 11-bit subtractor for signal <GND_8_o_GND_8_o_sub_14_OUT<10:0>> created at line 95.
-    Found 6-bit subtractor for signal <GND_8_o_GND_8_o_sub_16_OUT<5:0>> created at line 98.
-    Found 4-bit subtractor for signal <GND_8_o_GND_8_o_sub_30_OUT<3:0>> created at line 138.
-    Found 4-bit subtractor for signal <GND_8_o_GND_8_o_sub_54_OUT<3:0>> created at line 192.
-    Found 3-bit 8-to-1 multiplexer for signal <recv_state[2]_recv_state[2]_wide_mux_41_OUT> created at line 102.
-    Found 6-bit 7-to-1 multiplexer for signal <recv_state[2]_rx_countdown[5]_wide_mux_42_OUT> created at line 102.
-    Found 2-bit 4-to-1 multiplexer for signal <tx_state[1]_tx_state[1]_wide_mux_64_OUT> created at line 173.
-    Found 6-bit 3-to-1 multiplexer for signal <tx_state[1]_tx_countdown[5]_wide_mux_68_OUT> created at line 173.
+    Found 1-bit register for signal <tx_out>.
+    Found 2-bit register for signal <tx_state>.
     Summary:
-	inferred   6 Adder/Subtractor(s).
 	inferred  64 D-type flip-flop(s).
-	inferred  31 Multiplexer(s).
+	inferred   6 Adder/Subtractor(s).
 Unit <uart> synthesized.
+
+
+Synthesizing Unit <uart_top>.
+    Related source file is "uart_top.v".
+    Found 16x8-bit ROM for signal <fnNib2ASCII/1/fnNib2ASCII>.
+    Found 3-bit register for signal <state>.
+    Found 3-bit adder for signal <state$addsub0000> created at line 60.
+    Found 1-bit register for signal <tfifo_rd_z>.
+    Found 16-bit register for signal <tx_data>.
+    Summary:
+	inferred   1 ROM(s).
+	inferred  20 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+Unit <uart_top> synthesized.
+
+
+Synthesizing Unit <seq_alu>.
+    Related source file is "seq_alu.v".
+    Found 1-bit 4-to-1 multiplexer for signal <o_valid>.
+    Found 16-bit 4-to-1 multiplexer for signal <o_data>.
+    Summary:
+	inferred  17 Multiplexer(s).
+Unit <seq_alu> synthesized.
+
+
+Synthesizing Unit <seq>.
+    Related source file is "seq.v".
+Unit <seq> synthesized.
+
+
+Synthesizing Unit <nexys3>.
+    Related source file is "nexys3.v".
+WARNING:Xst:646 - Signal <uart_rx_valid> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <uart_rx_data> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 2-bit register for signal <arst_ff>.
+    Found 17-bit register for signal <clk_dv>.
+    Found 17-bit adder carry out for signal <clk_dv_inc$addsub0000>.
+    Found 1-bit register for signal <clk_en>.
+    Found 1-bit register for signal <clk_en_d>.
+    Found 8-bit up counter for signal <inst_cnt>.
+    Found 1-bit register for signal <inst_vld>.
+    Found 8-bit register for signal <inst_wd>.
+    Found 3-bit register for signal <step_d>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred  33 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+Unit <nexys3> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
 
 =========================================================================
 HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 2
+# RAMs                                                 : 1
  1024x8-bit dual-port RAM                              : 1
- 16x8-bit single-port Read Only RAM                    : 1
-# Adders/Subtractors                                   : 14
- 10-bit adder                                          : 3
- 10-bit subtractor                                     : 1
+# ROMs                                                 : 1
+ 16x8-bit ROM                                          : 1
+# Multipliers                                          : 1
+ 16x16-bit multiplier                                  : 1
+# Adders/Subtractors                                   : 10
+ 10-bit addsub                                         : 1
  11-bit subtractor                                     : 2
  16-bit adder                                          : 1
- 18-bit adder                                          : 1
+ 17-bit adder carry out                                : 1
  3-bit adder                                           : 1
  4-bit subtractor                                      : 2
  6-bit subtractor                                      : 2
- 8-bit adder                                           : 1
-# Registers                                            : 28
- 1-bit register                                        : 6
- 10-bit register                                       : 3
+# Counters                                             : 3
+ 10-bit up counter                                     : 2
+ 8-bit up counter                                      : 1
+# Registers                                            : 29
+ 1-bit register                                        : 7
+ 10-bit register                                       : 1
  11-bit register                                       : 2
- 16-bit register                                       : 1
- 18-bit register                                       : 1
+ 16-bit register                                       : 5
+ 17-bit register                                       : 1
  2-bit register                                        : 2
  3-bit register                                        : 3
  4-bit register                                        : 2
  6-bit register                                        : 2
- 64-bit register                                       : 1
- 8-bit register                                        : 5
-# Multiplexers                                         : 44
- 1-bit 2-to-1 multiplexer                              : 3
- 11-bit 2-to-1 multiplexer                             : 6
- 16-bit 2-to-1 multiplexer                             : 6
- 16-bit 4-to-1 multiplexer                             : 2
- 2-bit 2-to-1 multiplexer                              : 4
- 2-bit 4-to-1 multiplexer                              : 1
- 3-bit 2-to-1 multiplexer                              : 8
- 3-bit 8-to-1 multiplexer                              : 1
- 4-bit 2-to-1 multiplexer                              : 2
- 6-bit 2-to-1 multiplexer                              : 8
- 6-bit 3-to-1 multiplexer                              : 1
- 6-bit 7-to-1 multiplexer                              : 1
- 8-bit 2-to-1 multiplexer                              : 1
+ 8-bit register                                        : 4
+# Multiplexers                                         : 6
+ 1-bit 4-to-1 multiplexer                              : 3
+ 16-bit 4-to-1 multiplexer                             : 3
 
 =========================================================================
 
@@ -435,17 +585,7 @@ Macro Statistics
 =========================================================================
 
 
-Synthesizing (advanced) Unit <nexys3>.
-The following registers are absorbed into counter <inst_cnt>: 1 register on signal <inst_cnt>.
-Unit <nexys3> synthesized (advanced).
-
-Synthesizing (advanced) Unit <uart>.
-The following registers are absorbed into counter <tx_bits_remaining>: 1 register on signal <tx_bits_remaining>.
-Unit <uart> synthesized (advanced).
-
 Synthesizing (advanced) Unit <uart_fifo>.
-The following registers are absorbed into accumulator <rp>: 1 register on signal <rp>.
-The following registers are absorbed into accumulator <wp>: 1 register on signal <wp>.
 INFO:Xst:3226 - The RAM <Mram_mem> will be implemented as a BLOCK RAM, absorbing the following register(s): <fifo_out>
     -----------------------------------------------------------------------
     | ram_type           | Block                               |          |
@@ -472,56 +612,35 @@ INFO:Xst:3226 - The RAM <Mram_mem> will be implemented as a BLOCK RAM, absorbing
 Unit <uart_fifo> synthesized (advanced).
 
 Synthesizing (advanced) Unit <uart_top>.
-INFO:Xst:3231 - The small RAM <Mram_tx_data[15]_GND_6_o_wide_mux_17_OUT> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
-    -----------------------------------------------------------------------
-    | ram_type           | Distributed                         |          |
-    -----------------------------------------------------------------------
-    | Port A                                                              |
-    |     aspect ratio   | 16-word x 8-bit                     |          |
-    |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <tx_data<15:12>> |          |
-    |     diA            | connected to signal <GND>           |          |
-    |     doA            | connected to internal node          |          |
-    -----------------------------------------------------------------------
+INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_fnNib2ASCII_1_fnNib2ASCII> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
 Unit <uart_top> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 2
+# RAMs                                                 : 1
  1024x8-bit dual-port block RAM                        : 1
- 16x8-bit single-port distributed Read Only RAM        : 1
+# ROMs                                                 : 1
+ 16x8-bit ROM                                          : 1
+# Multipliers                                          : 1
+ 16x16-bit multiplier                                  : 1
 # Adders/Subtractors                                   : 10
- 10-bit adder                                          : 1
- 10-bit subtractor                                     : 1
+ 10-bit addsub                                         : 1
  11-bit subtractor                                     : 2
  16-bit adder                                          : 1
- 18-bit adder                                          : 1
+ 17-bit adder carry out                                : 1
  3-bit adder                                           : 1
- 4-bit subtractor                                      : 1
+ 4-bit subtractor                                      : 2
  6-bit subtractor                                      : 2
-# Counters                                             : 2
- 4-bit down counter                                    : 1
+# Counters                                             : 3
+ 10-bit up counter                                     : 2
  8-bit up counter                                      : 1
-# Accumulators                                         : 2
- 10-bit up accumulator                                 : 2
-# Registers                                            : 189
- Flip-Flops                                            : 189
-# Multiplexers                                         : 52
- 1-bit 2-to-1 multiplexer                              : 14
- 11-bit 2-to-1 multiplexer                             : 6
- 16-bit 2-to-1 multiplexer                             : 6
- 16-bit 4-to-1 multiplexer                             : 2
- 2-bit 2-to-1 multiplexer                              : 4
- 2-bit 4-to-1 multiplexer                              : 1
- 3-bit 2-to-1 multiplexer                              : 8
- 3-bit 8-to-1 multiplexer                              : 1
- 4-bit 2-to-1 multiplexer                              : 1
- 6-bit 2-to-1 multiplexer                              : 6
- 6-bit 3-to-1 multiplexer                              : 1
- 6-bit 7-to-1 multiplexer                              : 1
- 8-bit 2-to-1 multiplexer                              : 1
+# Registers                                            : 193
+ Flip-Flops                                            : 193
+# Multiplexers                                         : 36
+ 1-bit 4-to-1 multiplexer                              : 35
+ 16-bit 4-to-1 multiplexer                             : 1
 
 =========================================================================
 
@@ -531,57 +650,51 @@ Macro Statistics
 
 Optimizing unit <nexys3> ...
 
-Optimizing unit <uart_top> ...
-
-Optimizing unit <uart> ...
+Optimizing unit <seq_rf> ...
 
 Optimizing unit <uart_fifo> ...
 
-Optimizing unit <seq_rf> ...
+Optimizing unit <uart> ...
 
-Optimizing unit <seq_alu> ...
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_3> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_2> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_1> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_0> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_5> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_4> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_3> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_2> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_1> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_0> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_10> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_9> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_8> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_7> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_6> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_5> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_4> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_3> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_2> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_1> of sequential type is unconnected in block <nexys3>.
+Optimizing unit <uart_top> ...
+
+Optimizing unit <seq> ...
 WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_0> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/recv_state_2> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/recv_state_1> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_1> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_2> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_3> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_4> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_5> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_6> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_7> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_8> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_9> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_clk_divider_10> of sequential type is unconnected in block <nexys3>.
 WARNING:Xst:2677 - Node <uart_top_/uart_/recv_state_0> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_7> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_6> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_5> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_4> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_3> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_2> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_1> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/recv_state_1> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/recv_state_2> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_0> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_1> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_2> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_3> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_4> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_countdown_5> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_0> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_1> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_2> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_bits_remaining_3> of sequential type is unconnected in block <nexys3>.
 WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_0> of sequential type is unconnected in block <nexys3>.
-WARNING:Xst:1293 - FF/Latch <uart_top_/uart_/tx_clk_divider_10> has a constant value of 0 in block <nexys3>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <uart_top_/uart_/tx_clk_divider_9> has a constant value of 0 in block <nexys3>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <uart_top_/uart_/tx_clk_divider_8> has a constant value of 0 in block <nexys3>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <uart_top_/uart_/tx_clk_divider_7> has a constant value of 0 in block <nexys3>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <uart_top_/uart_/tx_clk_divider_6> has a constant value of 0 in block <nexys3>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <uart_top_/uart_/tx_clk_divider_5> has a constant value of 0 in block <nexys3>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_1> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_2> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_3> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_4> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_5> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_6> of sequential type is unconnected in block <nexys3>.
+WARNING:Xst:2677 - Node <uart_top_/uart_/rx_data_7> of sequential type is unconnected in block <nexys3>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block nexys3, actual ratio is 3.
+Found area constraint ratio of 100 (+ 5) on block nexys3, actual ratio is 1.
 
 Final Macro Processing ...
 
@@ -589,8 +702,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 183
- Flip-Flops                                            : 183
+# Registers                                            : 189
+ Flip-Flops                                            : 189
 
 =========================================================================
 
@@ -606,67 +719,63 @@ Partition Implementation Status
 -------------------------------
 
 =========================================================================
-*                            Design Summary                             *
+*                            Final Report                               *
 =========================================================================
+Final Results
+RTL Top Level Output File Name     : nexys3.ngr
+Top Level Output File Name         : nexys3
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
 
-Top Level Output File Name         : nexys3.ngc
+Design Statistics
+# IOs                              : 21
 
-Primitive and Black Box Usage:
-------------------------------
-# BELS                             : 419
+Cell Usage :
+# BELS                             : 530
 #      GND                         : 1
-#      INV                         : 3
-#      LUT1                        : 23
-#      LUT2                        : 21
-#      LUT3                        : 21
-#      LUT4                        : 71
-#      LUT5                        : 26
-#      LUT6                        : 163
-#      MUXCY                       : 39
-#      MUXF7                       : 9
+#      INV                         : 15
+#      LUT1                        : 42
+#      LUT2                        : 42
+#      LUT3                        : 119
+#      LUT4                        : 85
+#      LUT4_D                      : 3
+#      LUT4_L                      : 14
+#      MUXCY                       : 76
+#      MUXF5                       : 50
 #      VCC                         : 1
-#      XORCY                       : 41
-# FlipFlops/Latches                : 183
-#      FD                          : 15
-#      FDE                         : 28
+#      XORCY                       : 82
+# FlipFlops/Latches                : 189
+#      FD                          : 18
+#      FDE                         : 16
 #      FDP                         : 2
-#      FDR                         : 54
-#      FDRE                        : 83
-#      FDS                         : 1
+#      FDR                         : 25
+#      FDRE                        : 113
+#      FDS                         : 15
 # RAMS                             : 1
-#      RAMB8BWER                   : 1
+#      RAMB16BWER                  : 1
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
 # IO Buffers                       : 19
 #      IBUF                        : 10
 #      OBUF                        : 9
+# DSPs                             : 1
+#      DSP48A                      : 1
+=========================================================================
 
 Device utilization summary:
 ---------------------------
 
-Selected Device : 6slx16csg324-3 
+Selected Device : 3sd1800afg676-4 
 
-
-Slice Logic Utilization: 
- Number of Slice Registers:             183  out of  18224     1%  
- Number of Slice LUTs:                  328  out of   9112     3%  
-    Number used as Logic:               328  out of   9112     3%  
-
-Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    339
-   Number with an unused Flip Flop:     156  out of    339    46%  
-   Number with an unused LUT:            11  out of    339     3%  
-   Number of fully used LUT-FF pairs:   172  out of    339    50%  
-   Number of unique control sets:         8
-
-IO Utilization: 
+ Number of Slices:                      190  out of  16640     1%  
+ Number of Slice Flip Flops:            189  out of  33280     0%  
+ Number of 4 input LUTs:                320  out of  33280     0%  
  Number of IOs:                          21
- Number of bonded IOBs:                  20  out of    232     8%  
-
-Specific Feature Utilization:
- Number of Block RAM/FIFO:                1  out of     32     3%  
-    Number using Block RAM only:          1
- Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+ Number of bonded IOBs:                  20  out of    519     3%  
+ Number of BRAMs:                         1  out of     84     1%  
+ Number of GCLKs:                         1  out of     24     4%  
+ Number of DSP48s:                        1  out of     84     1%  
 
 ---------------------------
 Partition Resource Summary:
@@ -678,7 +787,7 @@ Partition Resource Summary:
 
 
 =========================================================================
-Timing Report
+TIMING REPORT
 
 NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
       FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
@@ -689,74 +798,92 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 184   |
+clk                                | BUFGP                  | 190   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
 ----------------------------------------
-No asynchronous control signals found in this design
+-----------------------------------+------------------------+-------+
+Control Signal                     | Buffer(FF name)        | Load  |
+-----------------------------------+------------------------+-------+
+btnR                               | IBUF                   | 2     |
+-----------------------------------+------------------------+-------+
 
 Timing Summary:
 ---------------
-Speed Grade: -3
+Speed Grade: -4
 
-   Minimum period: 4.777ns (Maximum Frequency: 209.332MHz)
-   Minimum input arrival time before clock: 2.268ns
-   Maximum output required time after clock: 3.701ns
+   Minimum period: 13.055ns (Maximum Frequency: 76.599MHz)
+   Minimum input arrival time before clock: 1.521ns
+   Maximum output required time after clock: 5.558ns
    Maximum combinational path delay: No path found
 
-Timing Details:
----------------
+Timing Detail:
+--------------
 All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 4.777ns (frequency: 209.332MHz)
-  Total number of paths / destination ports: 13441 / 451
+  Clock period: 13.055ns (frequency: 76.599MHz)
+  Total number of paths / destination ports: 34271 / 492
 -------------------------------------------------------------------------
-Delay:               4.777ns (Levels of Logic = 3)
-  Source:            uart_top_/uart_/tx_clk_divider_4 (FF)
-  Destination:       uart_top_/uart_/tx_bits_remaining_3 (FF)
+Delay:               13.055ns (Levels of Logic = 17)
+  Source:            uart_top_/uart_/tx_clk_divider_0 (FF)
+  Destination:       uart_top_/uart_/tx_data_0 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: uart_top_/uart_/tx_clk_divider_4 to uart_top_/uart_/tx_bits_remaining_3
+  Data Path: uart_top_/uart_/tx_clk_divider_0 to uart_top_/uart_/tx_data_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q               4   0.447   1.028  uart_top_/uart_/tx_clk_divider_4 (uart_top_/uart_/tx_clk_divider_4)
-     LUT5:I0->O            5   0.203   0.715  uart_top_/uart_/GND_8_o_reduce_nor_15_o1 (uart_top_/uart_/GND_8_o_reduce_nor_15_o)
-     LUT6:I5->O            6   0.205   0.745  uart_top_/uart_/n0056 (uart_top_/uart_/n0056)
-     LUT6:I5->O           12   0.205   0.908  uart_top_/uart_/_n0231_inv1 (uart_top_/uart_/_n0231_inv)
-     FDE:CE                    0.322          uart_top_/uart_/tx_data_0
+     FDS:C->Q              1   0.591   0.563  uart_top_/uart_/tx_clk_divider_0 (uart_top_/uart_/tx_clk_divider_0)
+     LUT1:I0->O            1   0.648   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0>_rt (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0>_rt)
+     MUXCY:S->O            1   0.632   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<1> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<2> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<3> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<4> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<5> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<6> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<7> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<8> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<8>)
+     XORCY:CI->O           2   0.844   0.450  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_xor<9> (uart_top_/uart_/old_tx_clk_divider_7_sub0000<9>)
+     LUT4:I3->O            1   0.648   0.423  uart_top_/uart_/old_tx_countdown_17_cmp_eq0000115 (uart_top_/uart_/old_tx_countdown_17_cmp_eq0000115)
+     LUT4:I3->O           10   0.648   0.914  uart_top_/uart_/old_tx_countdown_17_cmp_eq0000150 (uart_top_/uart_/old_tx_countdown_17_cmp_eq0000)
+     LUT3:I2->O            3   0.648   0.534  uart_top_/uart_/_old_tx_countdown_17<3>1 (uart_top_/uart_/_old_tx_countdown_17<3>)
+     LUT4_D:I3->O         11   0.648   0.936  uart_top_/uart_/tx_state_and000171 (uart_top_/uart_/tx_state_and0001)
+     LUT4:I3->O            9   0.648   0.823  uart_top_/uart_/tx_bits_remaining_mux0000<2>11 (uart_top_/uart_/N9)
+     LUT4:I3->O            1   0.648   0.420  uart_top_/uart_/tx_data_mux0000<6>_SW0 (N43)
+     FDS:S                     0.869          uart_top_/uart_/tx_data_6
     ----------------------------------------
-    Total                      4.777ns (1.382ns logic, 3.395ns route)
-                                       (28.9% logic, 71.1% route)
+    Total                     13.055ns (7.992ns logic, 5.063ns route)
+                                       (61.2% logic, 38.8% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 11 / 11
+  Total number of paths / destination ports: 9 / 9
 -------------------------------------------------------------------------
-Offset:              2.268ns (Levels of Logic = 1)
-  Source:            btnR (PAD)
-  Destination:       arst_ff_0 (FF)
+Offset:              1.521ns (Levels of Logic = 1)
+  Source:            sw<0> (PAD)
+  Destination:       inst_wd_0 (FF)
   Destination Clock: clk rising
 
-  Data Path: btnR to arst_ff_0
+  Data Path: sw<0> to inst_wd_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             2   1.222   0.616  btnR_IBUF (btnR_IBUF)
-     FDP:PRE                   0.430          arst_ff_0
+     IBUF:I->O             1   0.849   0.420  sw_0_IBUF (sw_0_IBUF)
+     FDRE:D                    0.252          inst_wd_0
     ----------------------------------------
-    Total                      2.268ns (1.652ns logic, 0.616ns route)
-                                       (72.8% logic, 27.2% route)
+    Total                      1.521ns (1.101ns logic, 0.420ns route)
+                                       (72.4% logic, 27.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
   Total number of paths / destination ports: 9 / 9
 -------------------------------------------------------------------------
-Offset:              3.701ns (Levels of Logic = 1)
+Offset:              5.558ns (Levels of Logic = 1)
   Source:            uart_top_/uart_/tx_out (FF)
   Destination:       RsTx (PAD)
   Source Clock:      clk rising
@@ -765,37 +892,24 @@ Offset:              3.701ns (Levels of Logic = 1)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q               4   0.447   0.683  uart_top_/uart_/tx_out (uart_top_/uart_/tx_out)
-     OBUF:I->O                 2.571          RsTx_OBUF (RsTx)
+     FDS:C->Q              2   0.591   0.447  uart_top_/uart_/tx_out (uart_top_/uart_/tx_out)
+     OBUF:I->O                 4.520          RsTx_OBUF (RsTx)
     ----------------------------------------
-    Total                      3.701ns (3.018ns logic, 0.683ns route)
-                                       (81.6% logic, 18.4% route)
-
-=========================================================================
-
-Cross Clock Domains Report:
---------------------------
-
-Clock to Setup on destination clock clk
----------------+---------+---------+---------+---------+
-               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
-Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
----------------+---------+---------+---------+---------+
-clk            |    4.777|         |         |         |
----------------+---------+---------+---------+---------+
+    Total                      5.558ns (5.111ns logic, 0.447ns route)
+                                       (92.0% logic, 8.0% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.26 secs
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 4.55 secs
  
 --> 
 
 
-Total memory usage is 388456 kilobytes
+Total memory usage is 531328 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   58 (   0 filtered)
-Number of infos    :    7 (   0 filtered)
+Number of warnings :   39 (   0 filtered)
+Number of infos    :    4 (   0 filtered)
 
