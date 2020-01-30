@@ -21,21 +21,23 @@ module model_uart(/*AUTOARG*/
    event     evTxByte;
    reg       TX;
 
+   
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
    // Begin our variables and such
    reg [31:0] rxBuffer;
-
    // End our variables and such
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
 
+   
    initial
      begin
         TX = 1'b1;
 
 	//////////////////////////////////////////////////
 	//////////////////////////////////////////////////
+	// required for printing out full packet in tskRxBuffer
 	rxBuffer = 8'b0;
 	//////////////////////////////////////////////////
 	//////////////////////////////////////////////////
@@ -52,6 +54,8 @@ module model_uart(/*AUTOARG*/
 	// considered a spurious pulse and is ignored. -Wikipedia
 	//////////////////////////////////////////////////
 	//////////////////////////////////////////////////
+
+
         repeat (8)
           begin
              #bittime ->evBit;
@@ -59,23 +63,39 @@ module model_uart(/*AUTOARG*/
              rxData[7:0] = {RX,rxData[7:1]};
           end
         ->evByte;
+
+	
+	//////////////////////////////////////////////////
+	// Deleted this because it was replaced by the task tskRxBuffer below
+	// $display ("%d %s Received byte %02x (%s)", $time, name, rxData,
+	// rxData); Leaving it here just in case
+	//////////////////////////////////////////////////
+
+
 	tskRxBuffer (rxData);
-        $display ("%d %s Received byte %02x (%s)", $stime, name, rxData, rxData);
      end // always @ (negedge RX)
 
+
+
+   
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
    // Begin our tasks, functions, and such
    task tskRxBuffer;
       input [7:0] rxByte;
       begin
-	 if (rxByte == 8'b0000_1010)
+	 if (rxByte == 8'h0a)
 	   begin
-	      // $display("%d %s Received bytes %08x (%s)", $stime, name, rxBuffer, rxBuffer);
-	      $display("Received byte %b from UART task", rxByte);
-	      $display("Contents of rxBuffer: %02x (%s)", rxBuffer, rxBuffer);
+	      $timeformat(-9,3,"ns",5);
+	      $display("%d %s Received bytes %02x (%s)", $time, name, rxBuffer, rxBuffer);
 	   end
-	 rxBuffer = {rxBuffer[23:0], rxByte};
+	 else if (rxByte == 8'h0d)
+	   begin
+	      $display("received carriage return");
+	      rxBuffer <= 0;
+	   end
+	 else
+	   rxBuffer <= {rxBuffer[23:0], rxByte};
 	 // rxBuffer = rxBuffer << 1;
 
       end

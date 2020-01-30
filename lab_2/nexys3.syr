@@ -530,13 +530,14 @@ WARNING:Xst:646 - Signal <uart_rx_data> is assigned but never used. This unconne
     Found 17-bit adder carry out for signal <clk_dv_inc$addsub0000>.
     Found 1-bit register for signal <clk_en>.
     Found 1-bit register for signal <clk_en_d>.
+    Found 3-bit register for signal <go_d>.
     Found 8-bit up counter for signal <inst_cnt>.
     Found 1-bit register for signal <inst_vld>.
     Found 8-bit register for signal <inst_wd>.
     Found 3-bit register for signal <step_d>.
     Summary:
 	inferred   1 Counter(s).
-	inferred  33 D-type flip-flop(s).
+	inferred  36 D-type flip-flop(s).
 	inferred   1 Adder/Subtractor(s).
 Unit <nexys3> synthesized.
 
@@ -563,14 +564,14 @@ Macro Statistics
 # Counters                                             : 3
  10-bit up counter                                     : 2
  8-bit up counter                                      : 1
-# Registers                                            : 29
+# Registers                                            : 30
  1-bit register                                        : 7
  10-bit register                                       : 1
  11-bit register                                       : 2
  16-bit register                                       : 5
  17-bit register                                       : 1
  2-bit register                                        : 2
- 3-bit register                                        : 3
+ 3-bit register                                        : 4
  4-bit register                                        : 2
  6-bit register                                        : 2
  8-bit register                                        : 4
@@ -636,8 +637,8 @@ Macro Statistics
 # Counters                                             : 3
  10-bit up counter                                     : 2
  8-bit up counter                                      : 1
-# Registers                                            : 193
- Flip-Flops                                            : 193
+# Registers                                            : 196
+ Flip-Flops                                            : 196
 # Multiplexers                                         : 36
  1-bit 4-to-1 multiplexer                              : 35
  16-bit 4-to-1 multiplexer                             : 1
@@ -702,8 +703,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 189
- Flip-Flops                                            : 189
+# Registers                                            : 192
+ Flip-Flops                                            : 192
 
 =========================================================================
 
@@ -729,35 +730,35 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 21
+# IOs                              : 22
 
 Cell Usage :
-# BELS                             : 530
+# BELS                             : 533
 #      GND                         : 1
 #      INV                         : 15
 #      LUT1                        : 42
-#      LUT2                        : 42
-#      LUT3                        : 119
+#      LUT2                        : 41
+#      LUT3                        : 122
 #      LUT4                        : 85
 #      LUT4_D                      : 3
 #      LUT4_L                      : 14
 #      MUXCY                       : 76
-#      MUXF5                       : 50
+#      MUXF5                       : 51
 #      VCC                         : 1
 #      XORCY                       : 82
-# FlipFlops/Latches                : 189
+# FlipFlops/Latches                : 192
 #      FD                          : 18
 #      FDE                         : 16
 #      FDP                         : 2
 #      FDR                         : 25
-#      FDRE                        : 113
+#      FDRE                        : 116
 #      FDS                         : 15
 # RAMS                             : 1
 #      RAMB16BWER                  : 1
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 19
-#      IBUF                        : 10
+# IO Buffers                       : 20
+#      IBUF                        : 11
 #      OBUF                        : 9
 # DSPs                             : 1
 #      DSP48A                      : 1
@@ -768,11 +769,11 @@ Device utilization summary:
 
 Selected Device : 3sd1800afg676-4 
 
- Number of Slices:                      190  out of  16640     1%  
- Number of Slice Flip Flops:            189  out of  33280     0%  
- Number of 4 input LUTs:                320  out of  33280     0%  
- Number of IOs:                          21
- Number of bonded IOBs:                  20  out of    519     3%  
+ Number of Slices:                      193  out of  16640     1%  
+ Number of Slice Flip Flops:            192  out of  33280     0%  
+ Number of 4 input LUTs:                322  out of  33280     0%  
+ Number of IOs:                          22
+ Number of bonded IOBs:                  21  out of    519     4%  
  Number of BRAMs:                         1  out of     84     1%  
  Number of GCLKs:                         1  out of     24     4%  
  Number of DSP48s:                        1  out of     84     1%  
@@ -798,7 +799,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 190   |
+clk                                | BUFGP                  | 193   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -814,7 +815,7 @@ Timing Summary:
 Speed Grade: -4
 
    Minimum period: 13.055ns (Maximum Frequency: 76.599MHz)
-   Minimum input arrival time before clock: 1.521ns
+   Minimum input arrival time before clock: 2.201ns
    Maximum output required time after clock: 5.558ns
    Maximum combinational path delay: No path found
 
@@ -825,7 +826,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 13.055ns (frequency: 76.599MHz)
-  Total number of paths / destination ports: 34271 / 492
+  Total number of paths / destination ports: 34286 / 502
 -------------------------------------------------------------------------
 Delay:               13.055ns (Levels of Logic = 17)
   Source:            uart_top_/uart_/tx_clk_divider_0 (FF)
@@ -854,7 +855,7 @@ Delay:               13.055ns (Levels of Logic = 17)
      LUT3:I2->O            3   0.648   0.534  uart_top_/uart_/_old_tx_countdown_17<3>1 (uart_top_/uart_/_old_tx_countdown_17<3>)
      LUT4_D:I3->O         11   0.648   0.936  uart_top_/uart_/tx_state_and000171 (uart_top_/uart_/tx_state_and0001)
      LUT4:I3->O            9   0.648   0.823  uart_top_/uart_/tx_bits_remaining_mux0000<2>11 (uart_top_/uart_/N9)
-     LUT4:I3->O            1   0.648   0.420  uart_top_/uart_/tx_data_mux0000<6>_SW0 (N43)
+     LUT4:I3->O            1   0.648   0.420  uart_top_/uart_/tx_data_mux0000<6>_SW0 (N45)
      FDS:S                     0.869          uart_top_/uart_/tx_data_6
     ----------------------------------------
     Total                     13.055ns (7.992ns logic, 5.063ns route)
@@ -862,22 +863,23 @@ Delay:               13.055ns (Levels of Logic = 17)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 9 / 9
+  Total number of paths / destination ports: 10 / 10
 -------------------------------------------------------------------------
-Offset:              1.521ns (Levels of Logic = 1)
-  Source:            sw<0> (PAD)
-  Destination:       inst_wd_0 (FF)
+Offset:              2.201ns (Levels of Logic = 2)
+  Source:            sw<6> (PAD)
+  Destination:       inst_wd_6 (FF)
   Destination Clock: clk rising
 
-  Data Path: sw<0> to inst_wd_0
+  Data Path: sw<6> to inst_wd_6
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             1   0.849   0.420  sw_0_IBUF (sw_0_IBUF)
-     FDRE:D                    0.252          inst_wd_0
+     IBUF:I->O             1   0.849   0.452  sw_6_IBUF (sw_6_IBUF)
+     LUT3:I2->O            1   0.648   0.000  inst_wd_or00011 (inst_wd_or0001)
+     FDRE:D                    0.252          inst_wd_6
     ----------------------------------------
-    Total                      1.521ns (1.101ns logic, 0.420ns route)
-                                       (72.4% logic, 27.6% route)
+    Total                      2.201ns (1.749ns logic, 0.452ns route)
+                                       (79.5% logic, 20.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
@@ -901,13 +903,13 @@ Offset:              5.558ns (Levels of Logic = 1)
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.55 secs
+Total REAL time to Xst completion: 5.00 secs
+Total CPU time to Xst completion: 4.43 secs
  
 --> 
 
 
-Total memory usage is 531328 kilobytes
+Total memory usage is 531468 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   39 (   0 filtered)

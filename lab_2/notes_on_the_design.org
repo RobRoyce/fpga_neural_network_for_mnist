@@ -1,0 +1,16 @@
+* seq definitions file
+This file contains many of the constants used throughout the design. It has the
+number of registers, the bit-widths, the op codes, etc.
+
+
+* model uart file
+This file contains a bunch of tasks (functions) that, so far as I can tell, are
+literally only here for simulation purposes (i.e. it acts like a computer or
+device that we might be interested in communicating with from the overall
+design). Some of the tasks do nothing, such as tskRxData, which I can't find
+reference to in any other modules.
+
+* nexys 3 file
+This is the top level module. It's what connects all of the submodules with the
+board. Hence, it is responsible for IO from/to the buttons, LED's, switches,
+etc.
