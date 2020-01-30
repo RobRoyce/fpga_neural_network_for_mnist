@@ -2,7 +2,7 @@ module uart_top (/*AUTOARG*/
    // Outputs
    o_tx, o_tx_busy, o_rx_data, o_rx_valid,
    // Inputs
-   i_rx, i_tx_data, i_tx_stb, clk, rst
+   i_rx, i_tx_data, i_tx_stb, i_rg, clk, rst
    );
 
 `include "seq_definitions.v"
@@ -17,13 +17,20 @@ module uart_top (/*AUTOARG*/
    input [seq_dp_width-1:0] i_tx_data;
    input                    i_tx_stb;
    
+   ////////////////////////////////////////////////////////
+   input [1:0]              i_rg; // Input register address
+   ////////////////////////////////////////////////////////
+   
    input                    clk;
    input                    rst;
 
    parameter stIdle = 0;
-   parameter stNib1 = 1;
-   parameter stNL   = uart_num_nib+1;
-   parameter stCR   = uart_num_nib+2;
+   parameter stReg1 = 1;
+   parameter stReg2 = 2;
+   parameter stReg3 = 3;
+   parameter stNib1 = 4;
+   parameter stNL   = uart_num_nib+4;
+   parameter stCR   = uart_num_nib+5;
    
    /*AUTOWIRE*/
    // Beginning of automatic wires (for undeclared instantiated-module outputs)
@@ -37,7 +44,7 @@ module uart_top (/*AUTOARG*/
    wire                 tfifo_rd;
    reg                  tfifo_rd_z;
    reg [seq_dp_width-1:0]  tx_data;
-   reg [2:0]               state;
+   reg [3:0]               state;
 
    assign o_tx_busy = (state!=stIdle);
    
@@ -49,11 +56,30 @@ module uart_top (/*AUTOARG*/
          stIdle:
            if (i_tx_stb)
              begin
-                state   <= stNib1;
+                state   <= stReg1;
                 tx_data <= i_tx_data;
              end
          stCR:
            if (~tfifo_full) state <= stIdle;
+         stReg1: 
+           if (~tfifo_full) state <= state + 1;
+         stReg2:
+           if (~tfifo_full) 
+             begin
+                state <= state + 1;
+             end
+         stReg3:
+           if (~tfifo_full) 
+             begin
+                state <= stNib1;
+                //tx_data <= i_tx_data;
+             end
+         //stNib1:
+         //  if (~tfifo_full) 
+         //    begin
+         //       state <= state + 1;
+                //tx_data <= i_tx_data;
+         //    end
          default:
            if (~tfifo_full)
              begin
@@ -90,6 +116,9 @@ module uart_top (/*AUTOARG*/
      case (state)
        stNL:    tfifo_in = "\n";
        stCR:    tfifo_in = "\r";
+       stReg1:  tfifo_in = "R";
+       stReg2:  tfifo_in = fnNib2ASCII({2'b00, i_rg[1:0]});
+       stReg3:  tfifo_in = ":";
        default: tfifo_in = fnNib2ASCII(tx_data[seq_dp_width-1:seq_dp_width-4]);
      endcase // case (state)
    
