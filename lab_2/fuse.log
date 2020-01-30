@@ -18,7 +18,7 @@ Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into li
 Starting static elaboration
 Completed static elaboration
 Fuse Memory Usage: 97992 KB
-Fuse CPU Usage: 790 ms
+Fuse CPU Usage: 800 ms
 Compiling module model_uart(baud=1000000,name="UA...
 Compiling module seq_rf_default
 Compiling module seq_add_default

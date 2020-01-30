@@ -30,7 +30,6 @@ module model_uart(/*AUTOARG*/
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
 
-
    initial
      begin
         TX = 1'b1;
@@ -62,8 +61,7 @@ module model_uart(/*AUTOARG*/
         ->evByte;
 	tskRxBuffer (rxData);
         $display ("%d %s Received byte %02x (%s)", $stime, name, rxData, rxData);
-     end
-
+     end // always @ (negedge RX)
 
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
@@ -73,6 +71,7 @@ module model_uart(/*AUTOARG*/
       begin
 	 if (rxByte == 8'b0000_1010)
 	   begin
+	      // $display("%d %s Received bytes %08x (%s)", $stime, name, rxBuffer, rxBuffer);
 	      $display("Received byte %b from UART task", rxByte);
 	      $display("Contents of rxBuffer: %02x (%s)", rxBuffer, rxBuffer);
 	   end
