@@ -3,6 +3,7 @@ This file contains many of the constants used throughout the design. It has the
 number of registers, the bit-widths, the op codes, etc.
 
 * model uart file
+- Level :: 1 (top, but not synthesizezd)
 This file contains a bunch of tasks (functions) that, so far as I can tell, are
 literally only here for simulation purposes (i.e. it acts like a computer or
 device that we might be interested in communicating with from the overall
@@ -10,6 +11,7 @@ design). Some of the tasks do nothing, such as tskRxData, which I can't find
 reference to in any other modules.
 
 * nexys 3 file
+- Level :: 1 (top)
 This is the top level module. It's what connects all of the submodules with the
 board. Hence, it is responsible for IO from/to the buttons, LED's, switches,
 etc.
@@ -25,6 +27,7 @@ etc.
  - btnR :: reset button
 
 * uart top file
+- Level :: 2
 This file contains the bulk of the UART functionality. 
 
 ** Outputs
@@ -83,6 +86,7 @@ The fifo write bit is set if the fifo is not full and we're not idling (i.e. sta
 
 
 * seq rf file
+- Level :: 3
 This file /appears/ to contain the _register files_ (i.e. R0, R1, R2, and R3),
 or at least something to do with them. 
 ** Inputs
@@ -109,6 +113,44 @@ It takes 2 select inputs (~i_sel_a~ and
 ~b~ both 2 bits wide (register number size)), a write stop bit, a data in
 (~i_wdata~ 16 bits wide), write select, clock, and reset. It outputs only 2
 bits: ~o_data_a~ and ~o_data_b~.
+
+
+* seq file
+- Level :: 2
+This file contains the ALU and register file modules. 
+
+** Inputs
+- ~i_tx_busy~: 
+- ~i_inst~:
+- ~i_inst_valid~:
+- ~clk~
+- ~rst~
+
+** Outputs
+- ~o_tx_data~:
+- ~o_tx_valid~:
+
+** Internal wires/regs
+- ~alu_data~:
+- ~alu_valid~:
+- ~rf_data_a~:
+- ~rf_data_b~:
+- ~inst_const~: [4 bit] constants (assigned ~i_inst[3:0]~)
+- ~inst_ra~: [2 bit] register addr (assigned ~i_inst[1:0]~)
+- ~inst_rb~: [2 bit] register addr (assigned ~i_inst[3:2]~)
+- ~inst_rc~: [2 bit] register addr (assigned ~i_inst[5:4]~)
+- ~inst_op~: [2 bit] operations (assigned ~i_inst[7:6]~)
+- ~inst_op_push~: (assigned true if operation == push)
+- ~inst_op_send~: (assigned true if operation == send)
+- ~inst_op_add~: (assigned true if operation == add)
+- ~inst_op_mult~: (assigned true if operation == mult)
+- ~rf_wsel~: [2 bit] register number select (= ~inst_ra~ if push, else ~inst_rc~)
+- ~rf_wstb~: register file write stop bit (= ~alu_valid~) [normal high?]
+- ~alu_valid_in~: (assigned ~i_inst_valid~ & (push | add | mult))
+
+** Internal Modules
+- ~seq_rf~: register file module
+- ~seq_alu~: alu module
 
 * Assignment Tasks
 ** Nicer UART Printout
