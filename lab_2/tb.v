@@ -107,8 +107,13 @@ module tb;
 	 // for debugging purposes (trying to figure out wtf is going on)
 	 //////////////////////////////////////////////////
 	 
-         inst = {2'b11, ra[1:0], 4'h0};
-	 tskRunInst(inst);
+	 //////////////////////////////////////////////////
+	 // tskRunSEND emulates pressing the btnG button
+	 // which does not require the opcode to be set
+	 // explicitly by the switches.
+         inst = {2'b00, ra[1:0], 4'h0};
+	 //////////////////////////////////////////////////
+	 //tskRunInst(inst);
 
 	 //////////////////////////////////////////////////
 	 // inst = 11ra0000 => sends the contents of local ra to the UART for
@@ -128,15 +133,13 @@ module tb;
 
 
 	 //////////////////////////////////////////////////
-	 // Why was this here? It's not in the original!	 
-	 // $display ("%d ... Sending with data: %08b", $time, inst);       
-	 //
-	 // Sets sw equal to inst i.e. acts like the instruction is set on the
-	 // board switches
+	 // Set the switches equal to the test instruction
+	 // stored in inst. Note that the opcode portion
+	 // of inst is irrelevant for this part.
 	 //////////////////////////////////////////////////
-	 // sw = inst;
-         // #1500000 btnG = 1;
-         // #3000000 btnG = 0;
+	  sw = inst;
+          #1500000 btnG = 1;
+          #3000000 btnG = 0;
 
       end
    endtask // tskRunSEND

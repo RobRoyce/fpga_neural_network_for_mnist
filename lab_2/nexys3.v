@@ -104,13 +104,10 @@ module nexys3 (/*AUTOARG*/
      if (rst)
        inst_vld <= 1'b0;
      else if (clk_en_d)
-       inst_vld <= is_btnS_posedge;
-     else if (clk_en)
-       /////////////////////////////////////
-       // Note: must be synched to clk_en.
-       // Using clk_en_d does not work.
-       inst_vld <= is_btnG_posedge;
-       /////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////////////////
+	  // Set instruction as valid if btnS or btnG is pressed.
+       inst_vld <= is_btnS_posedge | is_btnG_posedge;
+   ///////////////////////////////////////////////////////////////////////////////
 	  else
 	    inst_vld <= 0;
 
@@ -132,30 +129,22 @@ module nexys3 (/*AUTOARG*/
    always @ (posedge clk)
      if (rst)
        begin
+			 // Reset instruction word and debounce timers.
           inst_wd[7:0] <= 0;
           step_d[2:0]  <= 0;
-	  
-	  ////////////////////////////////////////////////////////////	  
-	  ////////////////////////////////////////////////////////////
-	  // not sure what this does
-	  go_d[2:0]    <= 0;
-	  ////////////////////////////////////////////////////////////
-	  //////////////////////////////////////////////////////////// 	  
+			 go_d[2:0]    <= 0;  
        end
      else if (clk_en) // Down sampling
-       begin
-	  //////////////////////////////////////////////////////////////////////
-	  //////////////////////////////////////////////////////////////////////       
-          // OR'ing sw[7] and sw[6] with is_btnG_posedge will
-          // force those bits to 11 in the event that the SEND
-          // button is pushed. Note that 11 is the send opcode.
-	  //////////////////////////////////////////////////////////////////////
-	  ////////////////////////////////////////////////////////////////////// 	  
-          inst_wd[7:0] <= {sw[7] | is_btnG_posedge, sw[6] | is_btnG_posedge, sw[5:0]};	  
+       begin	  
+          inst_wd[7:0] <= sw[7:0];	  
+			 // step_d and go_d are debouncing timers for btnS and btnG, respectively.
           step_d[2:0]  <= {btnS, step_d[2:1]};
-	  go_d[2:0] <= {btnG, go_d[2:1]};
-	  
+			 go_d[2:0] <= {btnG, go_d[2:1]};
        end
+	  else if (clk_en_d)
+		 begin
+			 inst_wd[7:6] <= {inst_wd[7] | is_btnG_posedge, inst_wd[6] | is_btnG_posedge};
+		 end
 
    //////////////////////////////////////////////////////////////////////
    //////////////////////////////////////////////////////////////////////   
