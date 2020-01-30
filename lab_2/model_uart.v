@@ -91,13 +91,10 @@ module model_uart(/*AUTOARG*/
 	   end
 	 else if (rxByte == 8'h0d)
 	   begin
-	      $display("received carriage return");
 	      rxBuffer <= 0;
 	   end
 	 else
 	   rxBuffer <= {rxBuffer[23:0], rxByte};
-	 // rxBuffer = rxBuffer << 1;
-
       end
    endtask // tskRxBuffer
    // End our tasks, functions, and such

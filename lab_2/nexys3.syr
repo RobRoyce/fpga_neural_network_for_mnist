@@ -4,14 +4,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 1.00 secs
+Total REAL time to Xst completion: 0.00 secs
 Total CPU time to Xst completion: 0.03 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 1.00 secs
+Total REAL time to Xst completion: 0.00 secs
 Total CPU time to Xst completion: 0.03 secs
  
 --> 
@@ -497,7 +497,7 @@ Synthesizing Unit <uart_top>.
     Related source file is "uart_top.v".
     Found 16x8-bit ROM for signal <fnNib2ASCII/1/fnNib2ASCII>.
     Found 3-bit register for signal <state>.
-    Found 3-bit adder for signal <state$addsub0000> created at line 60.
+    Found 3-bit adder for signal <state$addsub0000> created at line 61.
     Found 1-bit register for signal <tfifo_rd_z>.
     Found 16-bit register for signal <tx_data>.
     Summary:
@@ -564,8 +564,8 @@ Macro Statistics
 # Counters                                             : 3
  10-bit up counter                                     : 2
  8-bit up counter                                      : 1
-# Registers                                            : 30
- 1-bit register                                        : 7
+# Registers                                            : 37
+ 1-bit register                                        : 15
  10-bit register                                       : 1
  11-bit register                                       : 2
  16-bit register                                       : 5
@@ -574,7 +574,7 @@ Macro Statistics
  3-bit register                                        : 4
  4-bit register                                        : 2
  6-bit register                                        : 2
- 8-bit register                                        : 4
+ 8-bit register                                        : 3
 # Multiplexers                                         : 6
  1-bit 4-to-1 multiplexer                              : 3
  16-bit 4-to-1 multiplexer                             : 3
@@ -733,25 +733,27 @@ Design Statistics
 # IOs                              : 22
 
 Cell Usage :
-# BELS                             : 533
+# BELS                             : 534
 #      GND                         : 1
 #      INV                         : 15
 #      LUT1                        : 42
-#      LUT2                        : 41
-#      LUT3                        : 122
-#      LUT4                        : 85
+#      LUT2                        : 44
+#      LUT3                        : 118
+#      LUT3_D                      : 1
+#      LUT4                        : 87
 #      LUT4_D                      : 3
 #      LUT4_L                      : 14
 #      MUXCY                       : 76
-#      MUXF5                       : 51
+#      MUXF5                       : 50
 #      VCC                         : 1
 #      XORCY                       : 82
 # FlipFlops/Latches                : 192
 #      FD                          : 18
 #      FDE                         : 16
 #      FDP                         : 2
-#      FDR                         : 25
+#      FDR                         : 24
 #      FDRE                        : 116
+#      FDRS                        : 1
 #      FDS                         : 15
 # RAMS                             : 1
 #      RAMB16BWER                  : 1
@@ -769,9 +771,9 @@ Device utilization summary:
 
 Selected Device : 3sd1800afg676-4 
 
- Number of Slices:                      193  out of  16640     1%  
+ Number of Slices:                      194  out of  16640     1%  
  Number of Slice Flip Flops:            192  out of  33280     0%  
- Number of 4 input LUTs:                322  out of  33280     0%  
+ Number of 4 input LUTs:                324  out of  33280     0%  
  Number of IOs:                          22
  Number of bonded IOBs:                  21  out of    519     4%  
  Number of BRAMs:                         1  out of     84     1%  
@@ -815,7 +817,7 @@ Timing Summary:
 Speed Grade: -4
 
    Minimum period: 13.055ns (Maximum Frequency: 76.599MHz)
-   Minimum input arrival time before clock: 2.201ns
+   Minimum input arrival time before clock: 2.172ns
    Maximum output required time after clock: 5.558ns
    Maximum combinational path delay: No path found
 
@@ -826,7 +828,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 13.055ns (frequency: 76.599MHz)
-  Total number of paths / destination ports: 34286 / 502
+  Total number of paths / destination ports: 34215 / 503
 -------------------------------------------------------------------------
 Delay:               13.055ns (Levels of Logic = 17)
   Source:            uart_top_/uart_/tx_clk_divider_0 (FF)
@@ -865,21 +867,21 @@ Delay:               13.055ns (Levels of Logic = 17)
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
   Total number of paths / destination ports: 10 / 10
 -------------------------------------------------------------------------
-Offset:              2.201ns (Levels of Logic = 2)
-  Source:            sw<6> (PAD)
-  Destination:       inst_wd_6 (FF)
+Offset:              2.172ns (Levels of Logic = 2)
+  Source:            sw<7> (PAD)
+  Destination:       inst_wd_7 (FF)
   Destination Clock: clk rising
 
-  Data Path: sw<6> to inst_wd_6
+  Data Path: sw<7> to inst_wd_7
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             1   0.849   0.452  sw_6_IBUF (sw_6_IBUF)
-     LUT3:I2->O            1   0.648   0.000  inst_wd_or00011 (inst_wd_or0001)
-     FDRE:D                    0.252          inst_wd_6
+     IBUF:I->O             1   0.849   0.423  sw_7_IBUF (sw_7_IBUF)
+     LUT4:I3->O            1   0.648   0.000  inst_wd_7_mux00001 (inst_wd_7_mux0000)
+     FDRE:D                    0.252          inst_wd_7
     ----------------------------------------
-    Total                      2.201ns (1.749ns logic, 0.452ns route)
-                                       (79.5% logic, 20.5% route)
+    Total                      2.172ns (1.749ns logic, 0.423ns route)
+                                       (80.5% logic, 19.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
@@ -904,12 +906,12 @@ Offset:              5.558ns (Levels of Logic = 1)
 
 
 Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.42 secs
+Total CPU time to Xst completion: 4.61 secs
  
 --> 
 
 
-Total memory usage is 531460 kilobytes
+Total memory usage is 531616 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   39 (   0 filtered)

@@ -22,8 +22,9 @@ module uart_top (/*AUTOARG*/
 
    parameter stIdle = 0;
    parameter stNib1 = 1;
-   parameter stNL   = uart_num_nib+1;
-   parameter stCR   = uart_num_nib+2;
+   parameter stNL   = uart_num_nib+1; // "string newline" == 5 (not sure why,
+				      // check seq_def)
+   parameter stCR   = uart_num_nib+2; // "string carriage return" == 6
    
    /*AUTOWIRE*/
    // Beginning of automatic wires (for undeclared instantiated-module outputs)
@@ -43,17 +44,17 @@ module uart_top (/*AUTOARG*/
    
    always @ (posedge clk)
      if (rst)
-       state <= stIdle;
+       state <= stIdle; // stIdle == 0
      else
        case (state)
-         stIdle:
-           if (i_tx_stb)
+         stIdle: // stIdle == 0
+           if (i_tx_stb) // if transmit stop bit
              begin
-                state   <= stNib1;
-                tx_data <= i_tx_data;
+                state   <= stNib1; // stNib1 == 1
+                tx_data <= i_tx_data; // receive data
              end
-         stCR:
-           if (~tfifo_full) state <= stIdle;
+         stCR: // stCR == uart_num_nib+2 == seq_dp_width/4+2 == 16/4 + 2 == 6
+           if (~tfifo_full) state <= stIdle; // stIdle == 0
          default:
            if (~tfifo_full)
              begin

@@ -24,32 +24,44 @@ module tb;
 
         clk = 0;
         btnR = 1;
-        btnS = 0;
-	////////////////////////////////////////////////////////////
-	// Not in the original file
-	//
-	btnG = 0;
-	//
-	////////////////////////////////////////////////////////////
+        btnS = 0;	
         #1000 btnR = 0;
         #1500000;
 
-	
-        tskRunPUSH(0,4);
-        tskRunPUSH(0,0);
-        tskRunPUSH(1,3);
-        tskRunMULT(0,1,2);
-        tskRunADD(2,0,3);
-        tskRunSEND(0);
-        tskRunSEND(1);
-        tskRunSEND(2);
-        tskRunSEND(3);
-        
-        #1000;        
-        $finish;
+	////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////
+	// Begin custom test stuff
+	//
+	btnG = 0;
+	tskRunTestFile();
+	////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////	
+
+        #1000;
+	$finish;
      end
 
    always #5 clk = ~clk;
+
+
+   ////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////
+   task tskRunTestFile;
+      reg [7:0] inst_count;
+      reg [7:0] inst [0:1023];
+      integer 	i;
+      begin
+	 $readmemb("seq.code", inst, 0, 1023);
+	 assign inst_count = inst[0];
+	 $display("inst_count: %b", inst_count);
+	 for(i = 1; i <= inst_count + 1; i = i + 1)
+	   begin
+	      #10000 tskRunInst(inst[i]);
+	   end
+      end
+   endtask // tskRunTestFile
+   ////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////
    
    model_uart model_uart0_ (// Outputs
                             .TX                  (RsRx),
@@ -57,6 +69,8 @@ module tb;
                             .RX                  (RsTx)
                             /*AUTOINST*/);
 
+
+   
    defparam model_uart0_.name = "UART0";
    defparam model_uart0_.baud = 1000000;
    
