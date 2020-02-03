@@ -183,10 +183,13 @@ Analyzing hierarchy for module <uart_top> in library <work> with parameters.
 	seq_op_width = "00000000000000000000000000000010"
 	seq_rf_width = "00000000000000000000000000010000"
 	seq_rn_width = "00000000000000000000000000000010"
-	stCR = "00000000000000000000000000000110"
+	stCR = "00000000000000000000000000001001"
 	stIdle = "00000000000000000000000000000000"
-	stNL = "00000000000000000000000000000101"
-	stNib1 = "00000000000000000000000000000001"
+	stNL = "00000000000000000000000000001000"
+	stNib1 = "00000000000000000000000000000100"
+	stReg1 = "00000000000000000000000000000001"
+	stReg2 = "00000000000000000000000000000010"
+	stReg3 = "00000000000000000000000000000011"
 	uart_num_nib = "00000000000000000000000000000100"
 
 Analyzing hierarchy for module <seq_rf> in library <work> with parameters.
@@ -379,11 +382,15 @@ Analyzing module <uart_top> in library <work>.
 	seq_op_width = 32'sb00000000000000000000000000000010
 	seq_rf_width = 32'sb00000000000000000000000000010000
 	seq_rn_width = 32'sb00000000000000000000000000000010
-	stCR = 32'sb00000000000000000000000000000110
+	stCR = 32'sb00000000000000000000000000001001
 	stIdle = 32'sb00000000000000000000000000000000
-	stNL = 32'sb00000000000000000000000000000101
-	stNib1 = 32'sb00000000000000000000000000000001
+	stNL = 32'sb00000000000000000000000000001000
+	stNib1 = 32'sb00000000000000000000000000000100
+	stReg1 = 32'sb00000000000000000000000000000001
+	stReg2 = 32'sb00000000000000000000000000000010
+	stReg3 = 32'sb00000000000000000000000000000011
 	uart_num_nib = 32'sb00000000000000000000000000000100
+	Calling function <fnNib2ASCII>.
 	Calling function <fnNib2ASCII>.
 Module <uart_top> is correct for synthesis.
  
@@ -470,11 +477,11 @@ Unit <uart_fifo> synthesized.
 
 Synthesizing Unit <uart>.
     Related source file is "uart.v".
-    Found 4-bit subtractor for signal <old_rx_bits_remaining_11$sub0000> created at line 138.
-    Found 11-bit subtractor for signal <old_rx_clk_divider_6$sub0000> created at line 90.
-    Found 6-bit subtractor for signal <old_rx_countdown_9$sub0000> created at line 93.
-    Found 11-bit subtractor for signal <old_tx_clk_divider_7$sub0000> created at line 95.
-    Found 6-bit subtractor for signal <old_tx_countdown_17$sub0000> created at line 98.
+    Found 4-bit subtractor for signal <old_rx_bits_remaining_12$sub0000> created at line 138.
+    Found 11-bit subtractor for signal <old_rx_clk_divider_7$sub0000> created at line 90.
+    Found 6-bit subtractor for signal <old_rx_countdown_10$sub0000> created at line 93.
+    Found 11-bit subtractor for signal <old_tx_clk_divider_8$sub0000> created at line 95.
+    Found 6-bit subtractor for signal <old_tx_countdown_18$sub0000> created at line 98.
     Found 3-bit register for signal <recv_state>.
     Found 4-bit register for signal <rx_bits_remaining>.
     Found 11-bit register for signal <rx_clk_divider>.
@@ -496,13 +503,14 @@ Unit <uart> synthesized.
 Synthesizing Unit <uart_top>.
     Related source file is "uart_top.v".
     Found 16x8-bit ROM for signal <fnNib2ASCII/1/fnNib2ASCII>.
-    Found 3-bit register for signal <state>.
-    Found 3-bit adder for signal <state$addsub0000> created at line 61.
+    Found 16x8-bit ROM for signal <fnNib2ASCII/2/fnNib2ASCII>.
+    Found 4-bit register for signal <state>.
+    Found 4-bit adder for signal <state$addsub0000>.
     Found 1-bit register for signal <tfifo_rd_z>.
     Found 16-bit register for signal <tx_data>.
     Summary:
-	inferred   1 ROM(s).
-	inferred  20 D-type flip-flop(s).
+	inferred   2 ROM(s).
+	inferred  21 D-type flip-flop(s).
 	inferred   1 Adder/Subtractor(s).
 Unit <uart_top> synthesized.
 
@@ -549,8 +557,8 @@ HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 1
  1024x8-bit dual-port RAM                              : 1
-# ROMs                                                 : 1
- 16x8-bit ROM                                          : 1
+# ROMs                                                 : 2
+ 16x8-bit ROM                                          : 2
 # Multipliers                                          : 1
  16x16-bit multiplier                                  : 1
 # Adders/Subtractors                                   : 10
@@ -558,7 +566,7 @@ Macro Statistics
  11-bit subtractor                                     : 2
  16-bit adder                                          : 1
  17-bit adder carry out                                : 1
- 3-bit adder                                           : 1
+ 4-bit adder                                           : 1
  4-bit subtractor                                      : 2
  6-bit subtractor                                      : 2
 # Counters                                             : 3
@@ -571,8 +579,8 @@ Macro Statistics
  16-bit register                                       : 5
  17-bit register                                       : 1
  2-bit register                                        : 2
- 3-bit register                                        : 4
- 4-bit register                                        : 2
+ 3-bit register                                        : 3
+ 4-bit register                                        : 3
  6-bit register                                        : 2
  8-bit register                                        : 3
 # Multiplexers                                         : 6
@@ -613,7 +621,7 @@ INFO:Xst:3226 - The RAM <Mram_mem> will be implemented as a BLOCK RAM, absorbing
 Unit <uart_fifo> synthesized (advanced).
 
 Synthesizing (advanced) Unit <uart_top>.
-INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_fnNib2ASCII_1_fnNib2ASCII> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
+INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_fnNib2ASCII_2_fnNib2ASCII> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
 Unit <uart_top> synthesized (advanced).
 
 =========================================================================
@@ -622,8 +630,8 @@ Advanced HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 1
  1024x8-bit dual-port block RAM                        : 1
-# ROMs                                                 : 1
- 16x8-bit ROM                                          : 1
+# ROMs                                                 : 2
+ 16x8-bit ROM                                          : 2
 # Multipliers                                          : 1
  16x16-bit multiplier                                  : 1
 # Adders/Subtractors                                   : 10
@@ -631,14 +639,14 @@ Macro Statistics
  11-bit subtractor                                     : 2
  16-bit adder                                          : 1
  17-bit adder carry out                                : 1
- 3-bit adder                                           : 1
+ 4-bit adder                                           : 1
  4-bit subtractor                                      : 2
  6-bit subtractor                                      : 2
 # Counters                                             : 3
  10-bit up counter                                     : 2
  8-bit up counter                                      : 1
-# Registers                                            : 196
- Flip-Flops                                            : 196
+# Registers                                            : 197
+ Flip-Flops                                            : 197
 # Multiplexers                                         : 36
  1-bit 4-to-1 multiplexer                              : 35
  16-bit 4-to-1 multiplexer                             : 1
@@ -703,8 +711,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 192
- Flip-Flops                                            : 192
+# Registers                                            : 193
+ Flip-Flops                                            : 193
 
 =========================================================================
 
@@ -733,25 +741,25 @@ Design Statistics
 # IOs                              : 22
 
 Cell Usage :
-# BELS                             : 534
+# BELS                             : 561
 #      GND                         : 1
 #      INV                         : 15
 #      LUT1                        : 42
-#      LUT2                        : 44
-#      LUT3                        : 118
-#      LUT3_D                      : 1
-#      LUT4                        : 87
+#      LUT2                        : 46
+#      LUT3                        : 128
+#      LUT3_L                      : 1
+#      LUT4                        : 101
 #      LUT4_D                      : 3
-#      LUT4_L                      : 14
+#      LUT4_L                      : 6
 #      MUXCY                       : 76
-#      MUXF5                       : 50
+#      MUXF5                       : 59
 #      VCC                         : 1
 #      XORCY                       : 82
-# FlipFlops/Latches                : 192
+# FlipFlops/Latches                : 193
 #      FD                          : 18
 #      FDE                         : 16
 #      FDP                         : 2
-#      FDR                         : 24
+#      FDR                         : 25
 #      FDRE                        : 116
 #      FDRS                        : 1
 #      FDS                         : 15
@@ -771,9 +779,9 @@ Device utilization summary:
 
 Selected Device : 3sd1800afg676-4 
 
- Number of Slices:                      194  out of  16640     1%  
- Number of Slice Flip Flops:            192  out of  33280     0%  
- Number of 4 input LUTs:                324  out of  33280     0%  
+ Number of Slices:                      198  out of  16640     1%  
+ Number of Slice Flip Flops:            193  out of  33280     0%  
+ Number of 4 input LUTs:                342  out of  33280     1%  
  Number of IOs:                          22
  Number of bonded IOBs:                  21  out of    519     4%  
  Number of BRAMs:                         1  out of     84     1%  
@@ -801,7 +809,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 193   |
+clk                                | BUFGP                  | 194   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -828,7 +836,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 13.055ns (frequency: 76.599MHz)
-  Total number of paths / destination ports: 34215 / 503
+  Total number of paths / destination ports: 34429 / 505
 -------------------------------------------------------------------------
 Delay:               13.055ns (Levels of Logic = 17)
   Source:            uart_top_/uart_/tx_clk_divider_0 (FF)
@@ -841,23 +849,23 @@ Delay:               13.055ns (Levels of Logic = 17)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDS:C->Q              1   0.591   0.563  uart_top_/uart_/tx_clk_divider_0 (uart_top_/uart_/tx_clk_divider_0)
-     LUT1:I0->O            1   0.648   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0>_rt (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0>_rt)
-     MUXCY:S->O            1   0.632   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<0>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<1> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<1>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<2> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<2>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<3> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<3>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<4> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<4>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<5> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<5>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<6> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<6>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<7> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<7>)
-     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<8> (uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_cy<8>)
-     XORCY:CI->O           2   0.844   0.450  uart_top_/uart_/Msub_old_tx_clk_divider_7_sub0000_xor<9> (uart_top_/uart_/old_tx_clk_divider_7_sub0000<9>)
-     LUT4:I3->O            1   0.648   0.423  uart_top_/uart_/old_tx_countdown_17_cmp_eq0000115 (uart_top_/uart_/old_tx_countdown_17_cmp_eq0000115)
-     LUT4:I3->O           10   0.648   0.914  uart_top_/uart_/old_tx_countdown_17_cmp_eq0000150 (uart_top_/uart_/old_tx_countdown_17_cmp_eq0000)
-     LUT3:I2->O            3   0.648   0.534  uart_top_/uart_/_old_tx_countdown_17<3>1 (uart_top_/uart_/_old_tx_countdown_17<3>)
+     LUT1:I0->O            1   0.648   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<0>_rt (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<0>_rt)
+     MUXCY:S->O            1   0.632   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<0> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<0>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<1> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<2> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<3> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<4> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<5> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<6> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<7> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<8> (uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_cy<8>)
+     XORCY:CI->O           2   0.844   0.450  uart_top_/uart_/Msub_old_tx_clk_divider_8_sub0000_xor<9> (uart_top_/uart_/old_tx_clk_divider_8_sub0000<9>)
+     LUT4:I3->O            1   0.648   0.423  uart_top_/uart_/old_tx_countdown_18_cmp_eq0000115 (uart_top_/uart_/old_tx_countdown_18_cmp_eq0000115)
+     LUT4:I3->O           10   0.648   0.914  uart_top_/uart_/old_tx_countdown_18_cmp_eq0000150 (uart_top_/uart_/old_tx_countdown_18_cmp_eq0000)
+     LUT3:I2->O            3   0.648   0.534  uart_top_/uart_/_old_tx_countdown_18<3>1 (uart_top_/uart_/_old_tx_countdown_18<3>)
      LUT4_D:I3->O         11   0.648   0.936  uart_top_/uart_/tx_state_and000171 (uart_top_/uart_/tx_state_and0001)
      LUT4:I3->O            9   0.648   0.823  uart_top_/uart_/tx_bits_remaining_mux0000<2>11 (uart_top_/uart_/N9)
-     LUT4:I3->O            1   0.648   0.420  uart_top_/uart_/tx_data_mux0000<6>_SW0 (N45)
+     LUT4:I3->O            1   0.648   0.420  uart_top_/uart_/tx_data_mux0000<6>_SW0 (N22)
      FDS:S                     0.869          uart_top_/uart_/tx_data_6
     ----------------------------------------
     Total                     13.055ns (7.992ns logic, 5.063ns route)
@@ -906,12 +914,12 @@ Offset:              5.558ns (Levels of Logic = 1)
 
 
 Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.61 secs
+Total CPU time to Xst completion: 4.64 secs
  
 --> 
 
 
-Total memory usage is 531616 kilobytes
+Total memory usage is 532204 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   39 (   0 filtered)

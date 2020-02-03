@@ -34,6 +34,6 @@ Compiling module glbl
 Time Resolution for simulation is 1ps.
 Compiled 12 Verilog Units
 Built simulation executable /home/parallels/ucla/m152acs/labs/csm152a/lab_2/tb_isim_beh.exe
-Fuse Memory Usage: 658272 KB
-Fuse CPU Usage: 820 ms
-GCC CPU Usage: 140 ms
+Fuse Memory Usage: 658284 KB
+Fuse CPU Usage: 830 ms
+GCC CPU Usage: 180 ms

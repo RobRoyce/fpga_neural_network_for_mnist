@@ -1600,9 +1600,9 @@ LAB23:    t114 = *((unsigned int *)t97);
 }
 
 
-extern void work_m_06794591779438282845_3235807583_init()
+extern void work_m_06794591779438282878_3235807583_init()
 {
 	static char *pe[] = {(void *)Cont_65_0,(void *)Cont_66_1,(void *)Always_68_2,(void *)Cont_78_3,(void *)Always_80_4,(void *)Cont_98_5,(void *)Cont_101_6,(void *)Always_103_7,(void *)Always_114_8,(void *)Cont_120_9,(void *)Always_129_10};
-	xsi_register_didat("work_m_06794591779438282845_3235807583", "isim/tb_isim_beh.exe.sim/work/m_06794591779438282845_3235807583.didat");
+	xsi_register_didat("work_m_06794591779438282878_3235807583", "isim/tb_isim_beh.exe.sim/work/m_06794591779438282878_3235807583.didat");
 	xsi_register_executes(pe);
 }
