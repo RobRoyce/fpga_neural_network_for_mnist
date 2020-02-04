@@ -9,3 +9,10 @@
 #*
 *#
 .#*
+*.html
+*.xreport
+*.sdb
+*.log
+*.dat
+*.dbg
+*.didat
