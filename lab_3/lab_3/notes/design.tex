@@ -1,0 +1,71 @@
+% Created 2020-02-04 Tue 10:58
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{minted}
+\author{parallels}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={parallels},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{Top Level}
+\label{sec:orgf5511c6}
+
+\subsection{Stopwatch}
+\label{sec:org441d777}
+
+\subsubsection{Inputs}
+\label{sec:orgd2bafda}
+
+\begin{center}
+\begin{tabular}{llll}
+Name & Assigned Port & Description & Requirements\\
+\hline
+Select & switch[?] & Choose min(0) or sec(1) in adjust mode & \\
+\hline
+Adjust & switch[?] & Enter (1) of Stop (0) adjust mode & Normal increment stops in adj mode\\
+ &  &  & Selected portion blinks in adj mode\\
+ &  &  & Select portion \emph{increments} at 2Hz in adj mode\\
+ &  &  & Unselected portion is "frozen"(does not blink)\\
+\hline
+Pause & button[?] &  & \\
+\hline
+Reset & button[?] &  & \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{llrl}
+Name & Behavior & State & Assignment\\
+\hline
+Select & Choose min or sec & 0 & Minutes\\
+ &  & 1 & Seconds\\
+\hline
+Adjust & Enter or exit adj mode & 0 & Normal behvaior\\
+ &  & 1 & Adjust mode\\
+\hline
+\end{tabular}
+\end{center}
+\end{document}

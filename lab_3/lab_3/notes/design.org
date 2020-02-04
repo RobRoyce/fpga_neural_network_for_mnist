@@ -1,0 +1,39 @@
+* Top Level
+
+** Stopwatch
+
+*** Inputs
+
+| Name   | Assigned Port | Description                            | Requirements                                   |
+|--------+---------------+----------------------------------------+------------------------------------------------|
+| Select | switch[?]     | Choose min(0) or sec(1) in adjust mode |                                                |
+|--------+---------------+----------------------------------------+------------------------------------------------|
+| Adjust | switch[?]     | Enter (1) of Stop (0) adjust mode      | Normal increment stops in adj mode             |
+|        |               |                                        | Selected portion blinks in adj mode            |
+|        |               |                                        | Select portion /increments/ at 2Hz in adj mode |
+|        |               |                                        | Unselected portion is "frozen"(does not blink) |
+|--------+---------------+----------------------------------------+------------------------------------------------|
+| Pause  | button[?]     |                                        | Pause and resume counter on press              |
+|--------+---------------+----------------------------------------+------------------------------------------------|
+| Reset  | button[?]     |                                        | Force all counters to initial state (00:00)    |
+|--------+---------------+----------------------------------------+------------------------------------------------|
+
+*** Outputs
+
+| Name          | Assigned Port | Description                        | Requirements                                        |
+|---------------+---------------+------------------------------------+-----------------------------------------------------|
+| 7 Segment     | seg[6:0]      | 7 segment display for clock output |                                                     |
+|---------------+---------------+------------------------------------+-----------------------------------------------------|
+| Common Annode | digit[3:0]    | Common annode for 7 segment        | Annode must be sequenced to display coherent digits |
+|---------------+---------------+------------------------------------+-----------------------------------------------------|
+|               |               |                                    |                                                     |
+
+*** State
+| Name   | Behavior               | State | Assignment      |
+|--------+------------------------+-------+-----------------|
+| Select | Choose min or sec      |     0 | Minutes         |
+|        |                        |     1 | Seconds         |
+|--------+------------------------+-------+-----------------|
+| Adjust | Enter or exit adj mode |     0 | Normal behvaior |
+|        |                        |     1 | Adjust mode     |
+|--------+------------------------+-------+-----------------|
