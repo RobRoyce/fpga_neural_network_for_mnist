@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=/home/parallels/ucla/m152acs/labs/csm152a/lab_2/nexys3.ncd
-OUTFILE=/home/parallels/ucla/m152acs/labs/csm152a/lab_2/nexys3.bit
+INFILE=/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_2/nexys3.ncd
+OUTFILE=/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_2/nexys3.bit
 FAMILY=Spartan6
 PART=xc6slx16-3csg324
-WORKINGDIR=/home/parallels/ucla/m152acs/labs/csm152a/lab_2
+WORKINGDIR=/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_2
 LICENSE=WebPack
 USER_INFO=211861903_0_0_331

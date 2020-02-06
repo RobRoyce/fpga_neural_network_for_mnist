@@ -17,25 +17,25 @@ module fpcvt(
     wire [3:0] significand;
     wire fifth_bit;
    twos_comp_to_sm_converter twos_comp_converter (
-						  .D(D), 
-						  .S(S), 
+						  .D(D),
+						  .S(S),
 						  .SM(SM)
 						  );
    priority_encoder encoder (
-			     .SM(SM), 
+			     .SM(SM),
 			     .exponent(exponent)
 			     );
    significand_extractor leading_extractor (
-					    .SM(SM), 
-					    .exponent(exponent), 
-					    .significand(significand), 
+					    .SM(SM),
+					    .exponent(exponent),
+					    .significand(significand),
 					    .fifth_bit(fifth_bit)
 					    );
    rounding rounder (
-		     .exponent(exponent), 
-		     .significand(significand), 
-		     .fifth_bit(fifth_bit), 
-		     .E(E), 
+		     .exponent(exponent),
+		     .significand(significand),
+		     .fifth_bit(fifth_bit),
+		     .E(E),
 		     .F(F)
 		     );
 endmodule // fpcvt
@@ -83,7 +83,7 @@ module priority_encoder(input wire [11:0] SM, output reg [2:0] exponent);
 	  12'b0000_0000_XXXX : exponent = 3'b000;
 	  default: exponent = 3'b000;
 	endcase // case (SM)
-     end // always @ (SM)   
+     end // always @ (SM)
 endmodule // priority_encoder
 
 
@@ -135,14 +135,13 @@ module rounding(
 	     if(exponent != 3'b111)
 	       begin
 		  F = 4'b1000;
-		  E = exponent + 1'b1;		 
+		  E = exponent + 1'b1;
 	       end
 	     else
 	       begin
 		  F = 4'b1111;
 		  E = 3'b111;
-	       end	     
+	       end
 	  end
      end
 endmodule // rounding
-
