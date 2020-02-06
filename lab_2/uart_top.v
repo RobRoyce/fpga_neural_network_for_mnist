@@ -1,53 +1,55 @@
 module uart_top (/*AUTOARG*/
-   // Outputs
-   o_tx, o_tx_busy, o_rx_data, o_rx_valid,
-   // Inputs
-   i_rx, i_tx_data, i_tx_stb, i_rg, clk, rst
-   );
+                 // Outputs
+                 o_tx, o_tx_busy, o_rx_data, o_rx_valid,
+                 // Inputs
+                 i_rx, i_tx_data, i_tx_stb, i_rg, clk, rst
+                 );
 
 `include "seq_definitions.v"
-   
+
    output                   o_tx; // asynchronous UART TX
    input                    i_rx; // asynchronous UART RX
-   
+
    output                   o_tx_busy;
    output [7:0]             o_rx_data;
    output                   o_rx_valid;
-   
+
    input [seq_dp_width-1:0] i_tx_data;
    input                    i_tx_stb;
-   
-   ////////////////////////////////////////////////////////
-   input [1:0]              i_rg; // Input register address
-   ////////////////////////////////////////////////////////
-   
+
+
    input                    clk;
    input                    rst;
-
    parameter stIdle = 0;
-   parameter stReg1 = 1;
-   parameter stReg2 = 2;
-   parameter stReg3 = 3;
    parameter stNib1 = 4;
    parameter stNL   = uart_num_nib+4;
    parameter stCR   = uart_num_nib+5;
-   
+
+   ////////////////////////////////////////////////////////
+   // Begin custom variables
+   input [1:0]              i_rg; // Input register address
+   parameter stReg1 = 1;
+   parameter stReg2 = 2;
+   parameter stReg3 = 3;
+   ////////////////////////////////////////////////////////
+
+
    /*AUTOWIRE*/
    // Beginning of automatic wires (for undeclared instantiated-module outputs)
-   wire                 tfifo_empty;            // From tfifo_ of uart_fifo.v
-   wire                 tfifo_full;             // From tfifo_ of uart_fifo.v
-   wire [7:0]           tfifo_out;              // From tfifo_ of uart_fifo.v
+   wire                     tfifo_empty;            // From tfifo_ of uart_fifo.v
+   wire                     tfifo_full;             // From tfifo_ of uart_fifo.v
+   wire [7:0]               tfifo_out;              // From tfifo_ of uart_fifo.v
    // End of automatics
 
-   reg [7:0]            tfifo_in;
-   wire                 tx_active;
-   wire                 tfifo_rd;
-   reg                  tfifo_rd_z;
-   reg [seq_dp_width-1:0]  tx_data;
-   reg [3:0]               state;
+   reg [7:0]                tfifo_in;
+   wire                     tx_active;
+   wire                     tfifo_rd;
+   reg                      tfifo_rd_z;
+   reg [seq_dp_width-1:0]   tx_data;
+   reg [3:0]                state;
 
    assign o_tx_busy = (state!=stIdle);
-   
+
    always @ (posedge clk)
      if (rst)
        state <= stIdle;
@@ -61,25 +63,12 @@ module uart_top (/*AUTOARG*/
              end
          stCR:
            if (~tfifo_full) state <= stIdle;
-         stReg1: 
+         stReg1:
            if (~tfifo_full) state <= state + 1;
          stReg2:
-           if (~tfifo_full) 
-             begin
-                state <= state + 1;
-             end
+           if (~tfifo_full) state <= state + 1;
          stReg3:
-           if (~tfifo_full) 
-             begin
-                state <= stNib1;
-                //tx_data <= i_tx_data;
-             end
-         //stNib1:
-         //  if (~tfifo_full) 
-         //    begin
-         //       state <= state + 1;
-                //tx_data <= i_tx_data;
-         //    end
+           if (~tfifo_full) state <= stNib1;
          default:
            if (~tfifo_full)
              begin
@@ -114,6 +103,10 @@ module uart_top (/*AUTOARG*/
 
    always @*
      case (state)
+       ////////////////////////////////////////////////////////////
+       // The following code was modified to support the printing of
+       // the register number when we send over UART. We simply added
+       // three new states for 'R', ':', and the reg number
        stNL:    tfifo_in = "\n";
        stCR:    tfifo_in = "\r";
        stReg1:  tfifo_in = "R";
@@ -121,11 +114,10 @@ module uart_top (/*AUTOARG*/
        stReg3:  tfifo_in = ":";
        default: tfifo_in = fnNib2ASCII(tx_data[seq_dp_width-1:seq_dp_width-4]);
      endcase // case (state)
-   
-   assign tfifo_rd = ~tfifo_empty & ~tx_active & ~tfifo_rd_z;
 
+   assign tfifo_rd = ~tfifo_empty & ~tx_active & ~tfifo_rd_z;
    assign tfifo_wr = ~tfifo_full & (state!=stIdle);
-   
+
    uart_fifo tfifo_ (// Outputs
                      .fifo_cnt          (),
                      .fifo_out          (tfifo_out[7:0]),
@@ -161,7 +153,7 @@ module uart_top (/*AUTOARG*/
                // Inputs
                .clk                     (clk),
                .rst                     (rst));
-   
+
 endmodule // uart_top
 // Local Variables:
 // verilog-library-flags:("-y ../../osdvu/")

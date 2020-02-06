@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <ImplementationReportsDirectory>/home/parallels/ucla/m152acs/labs/csm152a/lab_2/</ImplementationReportsDirectory>
+  <ImplementationReportsDirectory>/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_2/</ImplementationReportsDirectory>
   <ModuleName>nexys3</ModuleName>
-  <DateModified>2020-02-04T10:12:00</DateModified>
-  <SavedFilePath>/home/parallels/ucla/m152acs/labs/csm152a/lab_2/iseconfig/nexys3.xreport</SavedFilePath>
+  <DateModified>2020-02-06T12:56:02</DateModified>
+  <SavedFilePath>/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_2/iseconfig/nexys3.xreport</SavedFilePath>
   <DateInitialized>2020-01-26T20:31:42</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
+  <SummaryTimeStamp>2020-02-06T12:55:22</SummaryTimeStamp>
  </header>
 </report-views>

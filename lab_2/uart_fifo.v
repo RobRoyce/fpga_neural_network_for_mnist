@@ -12,22 +12,22 @@ module uart_fifo (/*AUTOARG*/
    output [7:0]       fifo_out;
    output             fifo_full;
    output             fifo_empty;
-   
+
    input [7:0]        fifo_in;
    input              fifo_rd;
    input              fifo_wr;
-   
+
    input              clk;
    input              rst;
-   
+
    (* ram_style = "block" *) reg [7:0] mem [0:size-1];
 
    reg [sizew-1:0] wp;
    reg [sizew-1:0] rp;
-   
+
    reg [sizew-1:0] fifo_cnt;
    reg             fifo_full;
-   reg             fifo_empty;   
+   reg             fifo_empty;
    reg [7:0]       fifo_out;
 
    wire            wr;
@@ -35,7 +35,7 @@ module uart_fifo (/*AUTOARG*/
 
    assign wr = (fifo_wr & ~fifo_full);
    assign rd = (fifo_rd & ~fifo_empty);
-   
+
    always @ (posedge clk)
      if (rst)
        begin
@@ -50,7 +50,7 @@ module uart_fifo (/*AUTOARG*/
           wp[sizew-1:0]  <= wp[sizew-1:0] + wr;
           rp[sizew-1:0]  <= rp[sizew-1:0] + rd;
           case ({wr,rd})
-            2'b10: 
+            2'b10:
               begin
                  fifo_cnt   <= fifo_cnt + 1;
                  fifo_full  <= (fifo_cnt==(size-2));
@@ -71,6 +71,5 @@ module uart_fifo (/*AUTOARG*/
 
    always @ (posedge clk)
      fifo_out[7:0] <= mem[rp];
-   
-endmodule // uart_fifo
 
+endmodule // uart_fifo

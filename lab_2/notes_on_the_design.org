@@ -28,7 +28,7 @@ etc.
 
 * uart top file
 - Level :: 2
-This file contains the bulk of the UART functionality. 
+This file contains the bulk of the UART functionality.
 
 ** Outputs
 - o-tx :: transmit out
@@ -40,7 +40,7 @@ This file contains the bulk of the UART functionality.
 - i-rx
 - i-tx-data
 - i-tx-stb
-- clk 
+- clk
 - rst
 
 ** FiFo
@@ -88,10 +88,10 @@ The fifo write bit is set if the fifo is not full and we're not idling (i.e. sta
 * seq rf file
 - Level :: 3
 This file /appears/ to contain the _register files_ (i.e. R0, R1, R2, and R3),
-or at least something to do with them. 
+or at least something to do with them.
 ** Inputs
 - ~i_sel_a~: 2 bits (size of register number)
-- ~i_sel_b~: 2 bits 
+- ~i_sel_b~: 2 bits
 - ~i_wdata~: 16 bits (size of ALU)
 - ~i_wstb~:  write stop bit
 - ~i_wsel~:  2 bits (size of register number) [select which reg to write to?]
@@ -117,10 +117,10 @@ bits: ~o_data_a~ and ~o_data_b~.
 
 * seq file
 - Level :: 2
-This file contains the ALU and register file modules. 
+This file contains the ALU and register file modules.
 
 ** Inputs
-- ~i_tx_busy~: 
+- ~i_tx_busy~:
 - ~i_inst~:
 - ~i_inst_valid~:
 - ~clk~
@@ -166,7 +166,7 @@ uart). As for the carriage return, we haven't figured out what to do when that
 occurs. It is slightly odd that we are getting both newline and carriage return
 every time we receive a packet of 4 bytes (or maybe it's not weird at
 all). Either way, I am currently using the carriage return to reset the
-rxBuffer to 0, since it always comes after the newline. 
+rxBuffer to 0, since it always comes after the newline.
 
 *** TODO figure out how to handle the carriage return, if at all.
 

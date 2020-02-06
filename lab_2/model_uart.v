@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 
 module model_uart(/*AUTOARG*/
-   // Outputs
-   TX,
-   // Inputs
-   RX
-   );
+                  // Outputs
+                  TX,
+                  // Inputs
+                  RX
+                  );
 
    output TX;
    input  RX;
@@ -21,41 +21,31 @@ module model_uart(/*AUTOARG*/
    event     evTxByte;
    reg       TX;
 
-   
+
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
-   // Begin our variables and such
+   // Begin custom variables
    reg [55:0] rxBuffer;
-   // End our variables and such
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
 
-   
+
    initial
      begin
         TX = 1'b1;
 
-	//////////////////////////////////////////////////
-	//////////////////////////////////////////////////
-	// required for printing out full packet in tskRxBuffer
-	rxBuffer = 56'b0;
-	//////////////////////////////////////////////////
-	//////////////////////////////////////////////////
+	      //////////////////////////////////////////////////
+	      //////////////////////////////////////////////////
+	      // required for printing out full packet in tskRxBuffer
+	      rxBuffer = 56'b0;
+	      //////////////////////////////////////////////////
+	      //////////////////////////////////////////////////
      end
 
    always @ (negedge RX)
      begin
         rxData[7:0] = 8'h0;
         #(0.5*bittime);
-	//////////////////////////////////////////////////
-	//////////////////////////////////////////////////
-	// If the apparent start bit lasts at least one-half of the bit time, it
-	// is valid and signals the start of a new character. If not, it is
-	// considered a spurious pulse and is ignored. -Wikipedia
-	//////////////////////////////////////////////////
-	//////////////////////////////////////////////////
-
-
         repeat (8)
           begin
              #bittime ->evBit;
@@ -63,41 +53,43 @@ module model_uart(/*AUTOARG*/
              rxData[7:0] = {RX,rxData[7:1]};
           end
         ->evByte;
+        ////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////
+        // Call tskRxBuffer after each bit is read
+	      tskRxBuffer (rxData);
+        ////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////
 
-	
-	//////////////////////////////////////////////////
-	// Deleted this because it was replaced by the task tskRxBuffer below
-	// $display ("%d %s Received byte %02x (%s)", $time, name, rxData,
-	// rxData); Leaving it here just in case
-	//////////////////////////////////////////////////
-
-
-	tskRxBuffer (rxData);
      end // always @ (negedge RX)
 
 
 
-   
+
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
-   // Begin our tasks, functions, and such
+   // Begin custom tasks, functions, and such
+   //
+   // tskRxBuffer takes the income rxByte's and adds them to the
+   // 56-bit rxBuffer. This allows enough padding for a 32-bit
+   // message as well as 24-bits for the "R", ":", and register
+   // number. When a newline is received, we print the buffer.
+   // When a carriage return is received, we reset the buffer to 0.
    task tskRxBuffer;
       input [7:0] rxByte;
       begin
-	 if (rxByte == 8'h0a)
-	   begin
-	      $timeformat(-9,3,"ns",5);
-	      $display("%d %s Received bytes %02x (%s)", $time, name, rxBuffer, rxBuffer);
-	   end
-	 else if (rxByte == 8'h0d)
-	   begin
-	      rxBuffer <= 0;
-	   end
-	 else
-	   rxBuffer <= {rxBuffer[47:0], rxByte};
+	       if (rxByte == 8'h0a)
+	         begin
+	            $timeformat(-9,3,"ns",5);
+	            $display("%d %s Received bytes %02x (%s)", $time, name, rxBuffer, rxBuffer);
+	         end
+	       else if (rxByte == 8'h0d)
+	         begin
+	            rxBuffer <= 0;
+	         end
+	       else
+	         rxBuffer <= {rxBuffer[47:0], rxByte};
       end
    endtask // tskRxBuffer
-   // End our tasks, functions, and such
    //////////////////////////////////////////////////
    //////////////////////////////////////////////////
 

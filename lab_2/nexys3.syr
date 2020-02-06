@@ -447,8 +447,8 @@ Synthesizing Unit <seq_mult>.
     Related source file is "seq_mult.v".
 WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:643 - "seq_mult.v" line 21: The result of a 16x16-bit multiplication is partially used. Only the 16 least significant bits are used. If you are doing this on purpose, you may safely ignore this warning. Otherwise, make sure you are not losing information, leading to unexpected circuit behavior.
-    Found 16x16-bit multiplier for signal <o_data$mult0001> created at line 21.
+WARNING:Xst:643 - "seq_mult.v" line 23: The result of a 16x16-bit multiplication is partially used. Only the 16 least significant bits are used. If you are doing this on purpose, you may safely ignore this warning. Otherwise, make sure you are not losing information, leading to unexpected circuit behavior.
+    Found 16x16-bit multiplier for signal <o_data$mult0001> created at line 23.
     Summary:
 	inferred   1 Multiplier(s).
 Unit <seq_mult> synthesized.
@@ -914,12 +914,12 @@ Offset:              5.558ns (Levels of Logic = 1)
 
 
 Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.64 secs
+Total CPU time to Xst completion: 4.82 secs
  
 --> 
 
 
-Total memory usage is 532204 kilobytes
+Total memory usage is 532148 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   39 (   0 filtered)

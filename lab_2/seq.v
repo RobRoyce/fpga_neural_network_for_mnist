@@ -6,7 +6,7 @@ module seq (/*AUTOARG*/
    );
 
 `include "seq_definitions.v"
-   
+
    // UART interface
    output [seq_dp_width-1:0] o_tx_data;
    output                    o_tx_valid;
@@ -42,7 +42,7 @@ module seq (/*AUTOARG*/
    wire                    rf_wstb;
 
    wire                    alu_valid_in;
-   
+
    // ===========================================================================
    // Instruction Decoding
    // ===========================================================================
@@ -54,7 +54,7 @@ module seq (/*AUTOARG*/
    assign inst_ra    = i_inst[seq_rn_width*3-1:seq_rn_width*2];
 
    assign inst_op_push = (inst_op == seq_op_push);
-   assign inst_op_add  = (inst_op == seq_op_add); 
+   assign inst_op_add  = (inst_op == seq_op_add);
    assign inst_op_mult = (inst_op == seq_op_mult);
    assign inst_op_send = (inst_op == seq_op_send);
 
@@ -64,7 +64,7 @@ module seq (/*AUTOARG*/
 
    assign rf_wsel = inst_op_push ? inst_ra : inst_rc;
    assign rf_wstb = alu_valid;
-      
+
    seq_rf rf_ (// Outputs
                .o_data_a                (rf_data_a[alu_width-1:0]),
                .o_data_b                (rf_data_b[alu_width-1:0]),
@@ -84,7 +84,7 @@ module seq (/*AUTOARG*/
    // ===========================================================================
 
    assign alu_valid_in = i_inst_valid & (inst_op_push | inst_op_add | inst_op_mult);
-   
+
    seq_alu alu_ (// Outputs
                  .o_data                (alu_data[alu_width-1:0]),
                  .o_valid               (alu_valid),
@@ -98,12 +98,12 @@ module seq (/*AUTOARG*/
                  // Inputs
                  .clk                   (clk),
                  .rst                   (rst));
-   
+
    // ===========================================================================
    // Send Instruction
    // ===========================================================================
 
    assign o_tx_data  = rf_data_a[seq_dp_width-1:0];
    assign o_tx_valid = i_inst_valid & inst_op_send & ~i_tx_busy;
-   
+
 endmodule // seq

@@ -1,70 +1,56 @@
 module nexys3 (/*AUTOARG*/
-   // Outputs
-   RsTx, led,
-   // Inputs
-   RsRx, sw, btnS, btnG, btnR, clk
-   );
+               // Outputs
+               RsTx, led,
+               // Inputs
+               RsRx, sw, btnS, btnG, btnR, clk
+               );
 
 `include "seq_definitions.v"
-   
+   //////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////
+   // "Go" button. Sends data through UART
+   input        btnG;
+   // Register used to debounce the "go" button
+   reg [2:0]    go_d;
+   //////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////
+
    // USB-UART
    input        RsRx;
    output       RsTx;
-
    // Misc.
-   input  [7:0] sw;
+   input [7:0]  sw;
    output [7:0] led;
    input        btnS;                 // single-step instruction
-   input        btnG;                 // "Go" button. Sends data through UART
    input        btnR;                 // arst
-   
    // Logic
    input        clk;                  // 100MHz
-   
    /*AUTOWIRE*/
    // Beginning of automatic wires (for undeclared instantiated-module outputs)
    wire [seq_dp_width-1:0] seq_tx_data;         // From seq_ of seq.v
-   wire                 seq_tx_valid;           // From seq_ of seq.v
-   wire [7:0]           uart_rx_data;           // From uart_top_ of uart_top.v
-   wire                 uart_rx_valid;          // From uart_top_ of uart_top.v
-   wire                 uart_tx_busy;           // From uart_top_ of uart_top.v
+   wire                    seq_tx_valid;           // From seq_ of seq.v
+   wire [7:0]              uart_rx_data;           // From uart_top_ of uart_top.v
+   wire                    uart_rx_valid;          // From uart_top_ of uart_top.v
+   wire                    uart_tx_busy;           // From uart_top_ of uart_top.v
    // End of automatics
-   
-   wire        rst;
-   wire        arst_i;
-   wire [17:0] clk_dv_inc;
+   wire                    rst;
+   wire                    arst_i;
+   wire [17:0]             clk_dv_inc;
+   reg [1:0]               arst_ff;
+   reg [16:0]              clk_dv;
+   reg                     clk_en;
+   reg                     clk_en_d;
+   reg [7:0]               inst_wd;
+   reg                     inst_vld;
+   reg [2:0]               step_d;
+   reg [7:0]               inst_cnt;
 
-   reg [1:0]   arst_ff;
-   reg [16:0]  clk_dv;
-   reg         clk_en;
-   reg         clk_en_d;
-      
-   reg [7:0]   inst_wd;
-   reg         inst_vld;
-   reg [2:0]   step_d;
-
-
-   
-   ///////////////////////////////////////////////////////////////////////////////
-   ///////////////////////////////////////////////////////////////////////////////
-   // Another thing I can't find in the original files
-   reg [2:0]   go_d;
-   //
-   ///////////////////////////////////////////////////////////////////////////////
-   ///////////////////////////////////////////////////////////////////////////////
-
-
-   
-
-   reg [7:0]   inst_cnt;
-   
    // ===========================================================================
    // Asynchronous Reset
    // ===========================================================================
 
    assign arst_i = btnR;
    assign rst = arst_ff[0];
-   
    always @ (posedge clk or posedge arst_i)
      if (arst_i)
        arst_ff <= 2'b11;
@@ -76,7 +62,6 @@ module nexys3 (/*AUTOARG*/
    // ===========================================================================
 
    assign clk_dv_inc = clk_dv + 1;
-   
    always @ (posedge clk)
      if (rst)
        begin
@@ -93,23 +78,25 @@ module nexys3 (/*AUTOARG*/
 
    ///////////////////////////////////////////////////////////////////////////////
    ///////////////////////////////////////////////////////////////////////////////
-	// Detecting posedge of btnS and btnG
+	 // Detecting posedge of btnS and btnG
    wire is_btnS_posedge;
    assign is_btnS_posedge = ~ step_d[0] & step_d[1];
-	
+
    wire is_btnG_posedge;
    assign is_btnG_posedge = ~ go_d[0] & go_d[1];
-	
+
    always @ (posedge clk)
      if (rst)
        inst_vld <= 1'b0;
      else if (clk_en_d)
+
    ///////////////////////////////////////////////////////////////////////////////
-	  // Set instruction as valid if btnS or btnG is pressed.
+	 // Set instruction as valid if btnS or btnG is pressed.
        inst_vld <= is_btnS_posedge | is_btnG_posedge;
    ///////////////////////////////////////////////////////////////////////////////
-	  else
-	    inst_vld <= 0;
+
+	   else
+	     inst_vld <= 0;
 
    always @ (posedge clk)
      if (rst)
@@ -121,7 +108,7 @@ module nexys3 (/*AUTOARG*/
    ///////////////////////////////////////////////////////////////////////////////
    ///////////////////////////////////////////////////////////////////////////////
 
-   
+
    // ===========================================================================
    // Instruction Stepping Control / Debouncing
    // ===========================================================================
@@ -129,52 +116,37 @@ module nexys3 (/*AUTOARG*/
    always @ (posedge clk)
      if (rst)
        begin
-			 // Reset instruction word and debounce timers.
+			    // Reset instruction word and debounce timers.
           inst_wd[7:0] <= 0;
           step_d[2:0]  <= 0;
-			 go_d[2:0]    <= 0;  
+
+          //////////////////////////////////////////////////////////////////////
+          // Reset debounce register
+			    go_d[2:0]    <= 0;
+          //////////////////////////////////////////////////////////////////////
+
        end
      else if (clk_en) // Down sampling
-       begin	  
-          inst_wd[7:0] <= sw[7:0];	  
-			 // step_d and go_d are debouncing timers for btnS and btnG, respectively.
+       begin
+          inst_wd[7:0] <= sw[7:0];
           step_d[2:0]  <= {btnS, step_d[2:1]};
-			 go_d[2:0] <= {btnG, go_d[2:1]};
+
+          /////////////////////////////////////////////////////////////////////////
+			 // step_d and go_d are debouncing timers for btnS and btnG, respectively.
+			    go_d[2:0] <= {btnG, go_d[2:1]};
+          //////////////////////////////////////////////////////////////////////
+
        end
-	  else if (clk_en_d)
-		 begin
-			 inst_wd[7:6] <= {inst_wd[7] | is_btnG_posedge, inst_wd[6] | is_btnG_posedge};
-		 end
+	   else if (clk_en_d)
+		   begin
 
-   //////////////////////////////////////////////////////////////////////
-   //////////////////////////////////////////////////////////////////////   
-   // Part of the original code - putting it back here just in case
-   //
-   //
-   // 	// Detecting posedge of btnS
-   // wire is_btnS_posedge;
-   // assign is_btnS_posedge = ~ step_d[0] & step_d[1];
-   // always @ (posedge clk)
-   //   if (rst)
-   //     inst_vld <= 1'b0;
-   //   else if (clk_en_d)
-   //     inst_vld <= is_btnS_posedge;
-   // 	  else
-   // 	    inst_vld <= 0;
-   //
-   // always @ (posedge clk)
-   //   if (rst)
-   //     inst_cnt <= 0;
-   //   else if (inst_vld)
-   //     inst_cnt <= inst_cnt + 1;
-   //
-   // assign led[7:0] = inst_cnt[7:0];
-   //
-   //////////////////////////////////////////////////////////////////////
-   //////////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////////////////////////
+          // This is our dedicated Send button
+          // Set op-code to 11 when btnG is pressed
+			    inst_wd[7:6] <= {inst_wd[7] | is_btnG_posedge, inst_wd[6] | is_btnG_posedge};
+          ////////////////////////////////////////////////////////////
 
-
-   
+		   end
    // ===========================================================================
    // Sequencer
    // ===========================================================================
@@ -190,7 +162,7 @@ module nexys3 (/*AUTOARG*/
              // Inputs
              .clk                       (clk),
              .rst                       (rst));
-   
+
    // ===========================================================================
    // UART controller
    // ===========================================================================
@@ -209,7 +181,7 @@ module nexys3 (/*AUTOARG*/
                        // Inputs
                        .clk             (clk),
                        .rst             (rst));
-   
+
 endmodule // nexys3
 // Local Variables:
 // verilog-library-flags:("-f ../input.vc")
