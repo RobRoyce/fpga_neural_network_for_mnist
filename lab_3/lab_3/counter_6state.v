@@ -19,47 +19,39 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module counter_6state(
-    input wire i_clk,
-    input wire i_clk_en,
-    input wire i_rst,
-    output reg o_transition,
-    output reg [2:0] o_state
-    );
+                      input wire       i_clk,
+                      input wire       i_clk_en,
+                      input wire       i_rst,
+                      output reg       o_transition,
+                      output reg [2:0] o_state
+                      );
 
-    parameter transition_state = 5;
+   parameter transition_state = 5;
 
-    initial
-    begin
+   initial
+     begin
         o_transition <= 0;
         o_state      <= 0;
-    end
+     end
 
-    always @ (posedge i_clk)
-    begin
-        if (i_rst == 1)
-        begin
-            o_state      <= 3'b0;
-            o_transition <= 1'b0;
-        end
-    end
-
-    always @ (posedge i_clk_en)
-    begin
-        if (i_rst == 1'b0)
-        begin
-
-            if (o_state == transition_state)
-            begin
-                o_state <= 3'b0;
-                o_transition <= 1'b1;
+   always @ (posedge i_clk) begin
+      if (i_rst == 1) begin
+         o_state      <= 3'b0;
+         o_transition <= 1'b0;
+      end else if(i_clk_en == 1'b1) begin
+         if (i_rst == 1'b0) begin
+            if (o_state == transition_state) begin
+               o_state <= 3'b0;
+               o_transition <= 1'b1;
             end
-            else
-            begin
-                o_state <= o_state + 3'b1;
-                o_transition <= 1'b0;
+            else begin
+               o_state <= o_state + 3'b1;
+               o_transition <= 1'b0;
             end
+         end // if (i_rst == 1'b0)
+      end // if (i_clk_en == 1'b1)
+   end // always @ (posedge i_clk)
 
-        end
-    end
+
 
 endmodule

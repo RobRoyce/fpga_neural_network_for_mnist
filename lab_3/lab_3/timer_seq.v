@@ -26,10 +26,7 @@ module timer_seq(
                  input wire pause,
                  input wire sel,
                  input wire adj,
-                 output reg sec_ones,
-                 output reg sec_tens,
-                 output reg min_ones,
-                 output reg min_tens
+                 output wire [13:0] time_
 );
 
    reg [2:0]                sec_ones_reg;
@@ -37,11 +34,22 @@ module timer_seq(
    reg [2:0]                min_ones_reg;
    reg [3:0]                min_tens_reg;
    wire                     sec_ones_en;
+   wire                     sec_tens_en;
+   wire                     min_ones_en;
+   wire                     min_tens_en;
+
 
    assign sec_ones_en = (!pause && clk_1hz);
 
 
-   // counter_6state sec_ones_counter();
+
+   counter_6state sec_ones_counter(
+                                   .i_clk(clk_1hz),
+                                   .i_clk_en(sec_ones_en),
+                                   .i_rst(rst),
+                                   .o_transition(sec_tens_en),
+                                   .o_state(time_[2:0])
+                                   );
    // counter_10state sec_tens_counter();
    // counter_6state min_ones_counter();
    // counter_10state min_tens_counter();

@@ -19,35 +19,35 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module clk_div(
-    input wire i_clk,        // Input clock
-    output wire o_clk_1hz,    // 1Hz output clk
-    output wire o_clk_2hz,    // 2Hz output clk
-    output wire o_clk_blink,  // >1Hz output clk
-    output wire o_clk_decoder // 50-700hz output clk
-    );
+               input wire  i_clk, // Input clock
+               output wire o_clk_1hz, // 1Hz output clk
+               output wire o_clk_2hz, // 2Hz output clk
+               output wire o_clk_blink, // >1Hz output clk
+               output wire o_clk_decoder // 50-700hz output clk
+               );
 
-    
 
-    // Prescaler counts. Each count is based
-    // On the speed of the previous clock.
-    // The decoder_cnt is based on a 100Mhz
-    // input i_clk.
-    parameter pscl_decoder_cnt = 50_000 - 1; // 1KHz
-    parameter pscl_blink_cnt   = 25 - 1;     // 20Hz
-    parameter pscl_2hz_cnt     = 5 - 1;      // 2Hz
-    parameter pscl_1hz_cnt     = 1 - 1;      // 1Hz
 
-    reg [15:0] prescaler_decoder;
-    reg [4:0] prescaler_blink;
-    reg [2:0]  prescaler_2hz;
+   // Prescaler counts. Each count is based
+   // On the speed of the previous clock.
+   // The decoder_cnt is based on a 100Mhz
+   // input i_clk.
+   parameter pscl_decoder_cnt = 50_000 - 1; // 1KHz
+   parameter pscl_blink_cnt   = 25 - 1;     // 20Hz
+   parameter pscl_2hz_cnt     = 5 - 1;      // 2Hz
+   parameter pscl_1hz_cnt     = 1 - 1;      // 1Hz
+
+   reg [15:0]              prescaler_decoder;
+   reg [4:0]               prescaler_blink;
+   reg [2:0]               prescaler_2hz;
    //No need for a 1hz prescaler. Just flip
    //clk_1hz on every posedge of clk_2hz.
-    //reg        prescaler_1hz;
+   //reg        prescaler_1hz;
 
-   reg clk_1hz;
-   reg clk_2hz;
-   reg clk_blink;
-   reg clk_decoder;
+   reg                     clk_1hz;
+   reg                     clk_2hz;
+   reg                     clk_blink;
+   reg                     clk_decoder;
 
    assign o_clk_1hz     = clk_1hz;
    assign o_clk_2hz     = clk_2hz;
@@ -55,55 +55,55 @@ module clk_div(
    assign o_clk_decoder = clk_decoder;
 
    initial
-   begin
-    prescaler_decoder <= 0;
-    prescaler_blink   <= 0;
-    prescaler_2hz     <= 0;
+     begin
+        prescaler_decoder <= 0;
+        prescaler_blink   <= 0;
+        prescaler_2hz     <= 0;
 
-    clk_1hz     <= 0;
-    clk_2hz     <= 0;
-    clk_blink   <= 0;
-    clk_decoder <= 0;
-   end
+        clk_1hz     <= 0;
+        clk_2hz     <= 0;
+        clk_blink   <= 0;
+        clk_decoder <= 0;
+     end
 
-    always @ (posedge i_clk)
-    begin
+   always @ (posedge i_clk)
+     begin
 
         prescaler_decoder <= prescaler_decoder + 1;
 
         if(prescaler_decoder == pscl_decoder_cnt)
-        begin
-            prescaler_decoder <= 0;
-        clk_decoder <= ~clk_decoder;
-        end
+          begin
+             prescaler_decoder <= 0;
+             clk_decoder <= ~clk_decoder;
+          end
 
-   end
+     end
 
    always @ (posedge clk_decoder)
-   begin
+     begin
         prescaler_blink   <= prescaler_blink + 1;
 
-      if(prescaler_blink == pscl_blink_cnt)
-      begin
-        prescaler_blink <= 0;
-        clk_blink <= ~clk_blink;
-      end
-   end
+        if(prescaler_blink == pscl_blink_cnt)
+          begin
+             prescaler_blink <= 0;
+             clk_blink <= ~clk_blink;
+          end
+     end
 
    always @ (posedge clk_blink)
-   begin
+     begin
         prescaler_2hz     <= prescaler_2hz + 1;
 
-      if(prescaler_2hz == pscl_2hz_cnt)
-      begin
-        prescaler_2hz <= 0;
-        clk_2hz <= ~clk_2hz;
-      end
-   end
+        if(prescaler_2hz == pscl_2hz_cnt)
+          begin
+             prescaler_2hz <= 0;
+             clk_2hz <= ~clk_2hz;
+          end
+     end
 
    always @ (posedge clk_2hz)
-   begin
+     begin
         clk_1hz <= ~clk_1hz;
-    end
+     end
 
 endmodule

@@ -1,4 +1,5 @@
 verilog work "decoder_7_seg.v"
+verilog work "counter_6state.v"
 verilog work "timer_seq.v"
 verilog work "display_7_seg.v"
 verilog work "debouncer.v"

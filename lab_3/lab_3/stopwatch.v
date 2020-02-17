@@ -41,7 +41,7 @@ module stopwatch(
    wire                           pause_btn;
    wire                           sel;
    wire                           adj;
-   wire [3:0]                     time_;
+   wire [13:0]                    time_;
 
    assign sel = sw[0];
    assign adj = sw[1];
@@ -73,26 +73,22 @@ module stopwatch(
 
    display_7_seg display(
                          .clk(clk),
-                         .units(time_[0]),
-                         .tens(time_[1]),
-                         .hundreds(time_[2]),
-                         .thousands(time_[3]),
+                         .units({1'b0, time_[2:0]}),
+                         .tens(time_[6:3]),
+                         .hundreds({1'b0, time_[9:7]}),
+                         .thousands(time_[13:10]),
                          .seg(seg),
                          .digit(digit)
                          );
 
    timer_seq timer_seq(
                        .clk(clk),
+                       .clk_1hz(clk_1hz),
+                       .clk_2hz(clk_2hz),
                        .rst(rst_btn),
                        .pause(pause_btn),
                        .sel(sel),
                        .adj(adj),
-                       .sec_ones(time_[0]),
-                       .sec_tens(time_[1]),
-                       .min_ones(time_[2]),
-                       .min_tens(time_[3])
+                       .time_(time_)
                        );
-
-
-
 endmodule

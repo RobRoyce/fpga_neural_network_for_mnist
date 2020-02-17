@@ -68,3 +68,17 @@ i.e., the ~digit~ output, is housed in the ~display_7_seg~ module. Hence, both ~
 ~digit~ are wires in the top-level ~stopwatch~ module, since they already have corresponding
 regs.
 
+Since the ~display_7_seg~ module takes in 4x 4-bit wires for units, tens, etc... but the 
+corresponding counter modules either output 3-bit or 4-bit signals, I padded the 3-bit signals
+with a 0 bit in the form of a vector ~{1'b0, time_[2:0]}~, etc. This was probably not 100% 
+necessary, but I figured it would be good to make sure we never get a rouge 1 in the MSB
+of those 3-bit counters.
+
+
+** Notes about the Timer Sequencer
+The ~timer_seq~ module has 4 internal counters, one for each digit of the stopwatch.
+The counters are daisy chained together, such that when the lower order counter transitions
+from max state to min state (i.e. 5->0 or 9->0), the transition signal ~o_transition~ 
+becomes the ~clk_en~ signal for the next higher order counter. This is effectively
+how state is handled. Neither counter module needs to be aware of the adjacent counters,
+yet they are all synchronized.
