@@ -1,22 +1,22 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
+// Company:
+// Engineer:
+//
 // Create Date: 12/20/2019 03:48:15 PM
-// Design Name: 
+// Design Name:
 // Module Name: decoder_7_seg
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -26,9 +26,9 @@ module decoder_7_seg(input clk, [3:0] digit, output reg [6:0] seg);
         seg <= 7'b1111111;
 
     always @(posedge clk)
-    begin       
+    begin
         // MSB -> LSB <----> GFEDCBA
-        // A -> F <----> from top segment moving clockwise 
+        // A -> F <----> from top segment moving clockwise
         // G is the middle segment
         // dp is the decimal point
         case(digit)

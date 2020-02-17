@@ -57,3 +57,14 @@
 |        |                          |     1 | Reset Clock     |
 |--------+--------------------------+-------+-----------------|
 
+
+
+* Organization of Modules
+
+** Notes about the 7-Segment Display
+Using the bottom up approach, the register that contains the data for the 7-segment display is
+housed in the ~decoder~ module, and the register that contains the data for the common-anode,
+i.e., the ~digit~ output, is housed in the ~display_7_seg~ module. Hence, both ~seg~ and 
+~digit~ are wires in the top-level ~stopwatch~ module, since they already have corresponding
+regs.
+

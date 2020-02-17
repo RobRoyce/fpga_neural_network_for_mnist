@@ -9,7 +9,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module debouncer(input clk, switch_input, output reg state, output trans_up, trans_dn);
+module debouncer(
+                 input wire  clk,
+                 input wire  switch_input,
+                 output reg  state,
+                 output wire trans_up,
+                 output wire trans_dn);
 
     // Registers used to synchronize button presses to clk
     reg sync_0, sync_1;

@@ -67,8 +67,8 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1581927164" xil_pn:in_ck="783507721850522820" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="6843451773911550352" xil_pn:start_ts="1581927160">
-      <status xil_pn:value="FailedRun"/>
+    <transform xil_pn:end_ts="1581978876" xil_pn:in_ck="783507721850522820" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="6843451773911550352" xil_pn:start_ts="1581978871">
+      <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
@@ -76,6 +76,7 @@
       <outfile xil_pn:name="stopwatch.ngc"/>
       <outfile xil_pn:name="stopwatch.ngr"/>
       <outfile xil_pn:name="stopwatch.prj"/>
+      <outfile xil_pn:name="stopwatch.stx"/>
       <outfile xil_pn:name="stopwatch.syr"/>
       <outfile xil_pn:name="stopwatch.xst"/>
       <outfile xil_pn:name="stopwatch_xst.xrpt"/>

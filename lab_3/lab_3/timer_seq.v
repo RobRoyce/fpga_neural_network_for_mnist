@@ -41,13 +41,10 @@ module timer_seq(
    assign sec_ones_en = (!pause && clk_1hz);
 
 
-   counter_6state sec_ones_counter();
-   counter_10state sec_tens_counter(
-                                    );
-   counter_6state min_ones_counter(
-                                   );
-   counter_10state min_tens_counter(
-                                    );
+   // counter_6state sec_ones_counter();
+   // counter_10state sec_tens_counter();
+   // counter_6state min_ones_counter();
+   // counter_10state min_tens_counter();
 
 
 

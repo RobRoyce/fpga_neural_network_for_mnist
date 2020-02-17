@@ -20,9 +20,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module display_7_seg
-    (input clk, input [3:0] units, tens, hundreds, thousands,
-    output [6:0] seg, output reg [3:0] digit);
+module display_7_seg(
+                     input wire        clk,
+                     input wire [3:0]  units,
+                     input wire [3:0]  tens,
+                     input wire [3:0]  hundreds,
+                     input wire [3:0]  thousands,
+                     output wire [6:0] seg,
+                     output reg [3:0] digit
+                     );
 
     // 4-bit register that will be assigned to the 4-bit number to be decoded
     // for the digit currently being processed
@@ -33,6 +39,9 @@ module display_7_seg
 
     // 24-bit counter used to divide the clk in order to set refresh rate
     reg [23:0] prescaler;
+
+   
+
 
     // Decoder used to turn the 4-bit digit_data into a 7-bit segment pattern
     decoder_7_seg decoder(.clk(clk), .seg(seg), .digit(digit_data));
