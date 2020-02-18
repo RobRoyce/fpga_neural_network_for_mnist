@@ -33,13 +33,13 @@ module clk_div(
    // The display_cnt is based on a 100Mhz
    // input i_clk.
    parameter pscl_display_cnt = 50_000 - 1; // 1KHz
-   parameter pscl_blink_cnt   = 16 - 1;     // ??? Hz
-   parameter pscl_2hz_cnt     = 5 - 1;      // 2Hz
+   parameter pscl_blink_cnt   = 50 - 1;     // ??? Hz
+   parameter pscl_2hz_cnt     = 250 - 1;      // 2Hz
    parameter pscl_1hz_cnt     = 1 - 1;      // 1Hz
 
    reg [15:0]              prescaler_display;
-   reg [4:0]               prescaler_blink;
-   reg [2:0]               prescaler_2hz;
+   reg [5:0]               prescaler_blink;
+   reg [7:0]               prescaler_2hz;
    //No need for a 1hz prescaler. Just flip
    //clk_1hz on every posedge of clk_2hz.
    //reg        prescaler_1hz;
@@ -82,15 +82,20 @@ module clk_div(
    always @ (posedge clk_display)
      begin
         prescaler_blink   <= prescaler_blink + 1;
-
+		  prescaler_2hz <= prescaler_2hz + 1;
         if(prescaler_blink == pscl_blink_cnt)
           begin
              prescaler_blink <= 0;
              clk_blink <= ~clk_blink;
           end
+		  if(prescaler_2hz == pscl_2hz_cnt)
+		  begin
+				prescaler_2hz <= 0;
+				clk_2hz <= ~clk_2hz;
+		  end
      end
 
-   always @ (posedge clk_blink)
+   /*always @ (posedge clk_blink)
      begin
         prescaler_2hz     <= prescaler_2hz + 1;
 
@@ -99,7 +104,7 @@ module clk_div(
              prescaler_2hz <= 0;
              clk_2hz <= ~clk_2hz;
           end
-     end
+     end*/
 
    always @ (posedge clk_2hz)
      begin

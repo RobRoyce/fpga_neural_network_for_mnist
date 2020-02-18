@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module decoder_7_seg(input clk, [3:0] digit, output reg [6:0] seg);
+module decoder_7_seg(input clk, input [3:0] digit, output reg [6:0] seg);
 
     initial
         seg <= 7'b1111111;
