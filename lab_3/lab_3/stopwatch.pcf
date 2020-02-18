@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Mon Feb 17 22:10:06 2020
+// Written by: Map P.20131013 on Mon Feb 17 22:40:09 2020
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -30,14 +30,14 @@ TIMEGRP sys_clk_pin = BEL "rst_d/count_15" BEL "rst_d/count_14" BEL
         "pause_d/count_8" BEL "pause_d/count_7" BEL "pause_d/count_6" BEL
         "pause_d/count_5" BEL "pause_d/count_4" BEL "pause_d/count_3" BEL
         "pause_d/count_2" BEL "pause_d/count_1" BEL "pause_d/count_0" BEL
-        "divider/prescaler_decoder_15" BEL "divider/prescaler_decoder_14" BEL
-        "divider/prescaler_decoder_13" BEL "divider/prescaler_decoder_12" BEL
-        "divider/prescaler_decoder_11" BEL "divider/prescaler_decoder_10" BEL
-        "divider/prescaler_decoder_9" BEL "divider/prescaler_decoder_8" BEL
-        "divider/prescaler_decoder_7" BEL "divider/prescaler_decoder_6" BEL
-        "divider/prescaler_decoder_5" BEL "divider/prescaler_decoder_4" BEL
-        "divider/prescaler_decoder_3" BEL "divider/prescaler_decoder_2" BEL
-        "divider/prescaler_decoder_1" BEL "divider/prescaler_decoder_0" BEL
+        "divider/prescaler_display_15" BEL "divider/prescaler_display_14" BEL
+        "divider/prescaler_display_13" BEL "divider/prescaler_display_12" BEL
+        "divider/prescaler_display_11" BEL "divider/prescaler_display_10" BEL
+        "divider/prescaler_display_9" BEL "divider/prescaler_display_8" BEL
+        "divider/prescaler_display_7" BEL "divider/prescaler_display_6" BEL
+        "divider/prescaler_display_5" BEL "divider/prescaler_display_4" BEL
+        "divider/prescaler_display_3" BEL "divider/prescaler_display_2" BEL
+        "divider/prescaler_display_1" BEL "divider/prescaler_display_0" BEL
         "display/digit_posn_1" BEL "display/digit_posn_0" BEL
         "display/digit_3" BEL "display/digit_2" BEL "display/digit_1" BEL
         "display/digit_0" BEL "display/digit_data_3" BEL
@@ -47,7 +47,7 @@ TIMEGRP sys_clk_pin = BEL "rst_d/count_15" BEL "rst_d/count_14" BEL
         "display/decoder/seg_3" BEL "display/decoder/seg_2" BEL
         "display/decoder/seg_1" BEL "display/decoder/seg_0" BEL
         "timer_seq/sec_ones_clock" BEL "rst_d/state" BEL "pause_d/state" BEL
-        "divider/clk_decoder" BEL "timer_seq/pause_state" BEL
+        "divider/clk_display" BEL "timer_seq/pause_state" BEL
         "timer_seq/min_ones_clock" BEL "display/prescaler_18" BEL
         "display/prescaler_17" BEL "display/prescaler_16" BEL
         "display/prescaler_15" BEL "display/prescaler_14" BEL

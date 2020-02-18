@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-robuntu::  Mon Feb 17 22:10:08 2020
+robuntu::  Mon Feb 17 22:40:11 2020
 
 par -w -intstyle ise -ol high -mt off stopwatch_map.ncd stopwatch.ncd
 stopwatch.pcf 
@@ -150,7 +150,7 @@ Generating Clock Report
 |timer_seq/min_ones_c |              |      |      |            |             |
 |                lock |         Local|      |    2 |  0.000     |  0.702      |
 +---------------------+--------------+------+------+------------+-------------+
-| divider/clk_decoder |         Local|      |    3 |  0.000     |  0.678      |
+| divider/clk_display |         Local|      |    3 |  0.000     |  0.678      |
 +---------------------+--------------+------+------+------------+-------------+
 |timer_seq/min_tens_e |              |      |      |            |             |
 |                   n |         Local|      |    1 |  0.000     |  0.512      |
@@ -191,7 +191,7 @@ Generating Pad Report.
 All signals are completely routed.
 
 Total REAL time to PAR completion: 4 secs 
-Total CPU time to PAR completion: 3 secs 
+Total CPU time to PAR completion: 4 secs 
 
 Peak Memory Usage:  670 MB
 

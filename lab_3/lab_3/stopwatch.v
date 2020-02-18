@@ -56,7 +56,7 @@ module stopwatch(
                    .o_clk_1hz(clk_1hz),
                    .o_clk_2hz(clk_2hz),
                    .o_clk_blink(clk_blink),
-                   .o_clk_decoder(clk_display)
+                   .o_clk_display(clk_display)
                    );
 
    debouncer rst_d(

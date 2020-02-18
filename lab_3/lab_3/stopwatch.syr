@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.03 secs
+Total CPU time to Xst completion: 0.04 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.03 secs
+Total CPU time to Xst completion: 0.04 secs
  
 --> 
 Reading design: stopwatch.prj
@@ -130,6 +130,7 @@ Parsing module <stopwatch>.
 =========================================================================
 WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 62: Port trans_up is not connected to this instance
 WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 68: Port state is not connected to this instance
+WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 74: Port clk_blink is not connected to this instance
 
 Elaborating module <stopwatch>.
 
@@ -138,7 +139,7 @@ WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/
 WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/clk_div.v" Line 84: Result of 6-bit expression is truncated to fit in 5-bit target.
 WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/clk_div.v" Line 95: Result of 4-bit expression is truncated to fit in 3-bit target.
 WARNING:HDLCompiler:1127 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 58: Assignment to clk_blink ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 59: Assignment to clk_decoder ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 59: Assignment to clk_display ignored, since the identifier is never used
 
 Elaborating module <debouncer>.
 WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/debouncer.v" Line 51: Result of 17-bit expression is truncated to fit in 16-bit target.
@@ -153,6 +154,7 @@ Elaborating module <timer_seq>.
 Elaborating module <counter_10state>.
 
 Elaborating module <counter_6state>.
+WARNING:HDLCompiler:552 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 74: Input port clk_blink is not connected on this instance
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -162,8 +164,9 @@ Synthesizing Unit <stopwatch>.
     Related source file is "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v".
         state_pause = 0
         state_count = 1
+WARNING:Xst:2898 - Port 'clk_blink', unconnected in block instance 'display', is tied to GND.
 INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 54: Output port <o_clk_blink> of the instance <divider> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 54: Output port <o_clk_decoder> of the instance <divider> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 54: Output port <o_clk_display> of the instance <divider> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 62: Output port <trans_up> of the instance <rst_d> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 68: Output port <state> of the instance <pause_d> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 68: Output port <trans_up> of the instance <pause_d> is unconnected or connected to loadless signal.
@@ -173,18 +176,18 @@ Unit <stopwatch> synthesized.
 
 Synthesizing Unit <clk_div>.
     Related source file is "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/clk_div.v".
-        pscl_decoder_cnt = 49999
+        pscl_display_cnt = 49999
         pscl_blink_cnt = 24
         pscl_2hz_cnt = 4
         pscl_1hz_cnt = 0
-    Found 1-bit register for signal <clk_decoder>.
+    Found 1-bit register for signal <clk_display>.
     Found 5-bit register for signal <prescaler_blink>.
     Found 1-bit register for signal <clk_blink>.
     Found 3-bit register for signal <prescaler_2hz>.
     Found 1-bit register for signal <clk_2hz>.
     Found 1-bit register for signal <clk_1hz>.
-    Found 16-bit register for signal <prescaler_decoder>.
-    Found 16-bit adder for signal <prescaler_decoder[15]_GND_2_o_add_1_OUT> created at line 72.
+    Found 16-bit register for signal <prescaler_display>.
+    Found 16-bit adder for signal <prescaler_display[15]_GND_2_o_add_1_OUT> created at line 72.
     Found 5-bit adder for signal <prescaler_blink[4]_GND_2_o_add_6_OUT> created at line 84.
     Found 3-bit adder for signal <prescaler_2hz[2]_GND_2_o_add_11_OUT> created at line 95.
     Summary:
@@ -208,14 +211,15 @@ Unit <debouncer> synthesized.
 
 Synthesizing Unit <display_7_seg>.
     Related source file is "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/display_7_seg.v".
+WARNING:Xst:647 - Input <clk_blink> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 2-bit register for signal <digit_posn>.
     Found 4-bit register for signal <digit_data>.
     Found 4-bit register for signal <digit>.
     Found 24-bit register for signal <prescaler>.
-    Found 24-bit adder for signal <prescaler[23]_GND_4_o_add_1_OUT> created at line 60.
-    Found 2-bit adder for signal <digit_posn[1]_GND_4_o_add_3_OUT> created at line 64.
+    Found 24-bit adder for signal <prescaler[23]_GND_4_o_add_1_OUT> created at line 63.
+    Found 2-bit adder for signal <digit_posn[1]_GND_4_o_add_3_OUT> created at line 67.
     Found 4x4-bit Read Only RAM for signal <digit[3]_PWR_4_o_mux_15_OUT>
-    Found 4-bit 4-to-1 multiplexer for signal <digit_data[3]_units[3]_mux_14_OUT> created at line 69.
+    Found 4-bit 4-to-1 multiplexer for signal <digit_data[3]_units[3]_mux_14_OUT> created at line 73.
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
@@ -306,7 +310,7 @@ Macro Statistics
 
 
 Synthesizing (advanced) Unit <clk_div>.
-The following registers are absorbed into counter <prescaler_decoder>: 1 register on signal <prescaler_decoder>.
+The following registers are absorbed into counter <prescaler_display>: 1 register on signal <prescaler_display>.
 The following registers are absorbed into counter <prescaler_blink>: 1 register on signal <prescaler_blink>.
 The following registers are absorbed into counter <prescaler_2hz>: 1 register on signal <prescaler_2hz>.
 Unit <clk_div> synthesized (advanced).
@@ -516,7 +520,7 @@ Clock Information:
 Clock Signal                                                     | Clock buffer(FF name)                      | Load  |
 -----------------------------------------------------------------+--------------------------------------------+-------+
 clk                                                              | BUFGP                                      | 94    |
-divider/clk_decoder                                              | NONE(divider/prescaler_blink_4)            | 6     |
+divider/clk_display                                              | NONE(divider/prescaler_blink_4)            | 6     |
 divider/clk_blink                                                | NONE(divider/prescaler_2hz_2)              | 4     |
 divider/clk_2hz                                                  | NONE(divider/clk_1hz)                      | 1     |
 timer_seq/sec_tens_en(timer_seq/sec_ones_counter/o_transition1:O)| NONE(*)(timer_seq/sec_tens_counter/state_2)| 4     |
@@ -571,15 +575,15 @@ Delay:               4.369ns (Levels of Logic = 3)
                                        (26.5% logic, 73.5% route)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'divider/clk_decoder'
+Timing constraint: Default period analysis for Clock 'divider/clk_display'
   Clock period: 2.789ns (frequency: 358.519MHz)
   Total number of paths / destination ports: 46 / 11
 -------------------------------------------------------------------------
 Delay:               2.789ns (Levels of Logic = 1)
   Source:            divider/prescaler_blink_4 (FF)
   Destination:       divider/prescaler_blink_4 (FF)
-  Source Clock:      divider/clk_decoder rising
-  Destination Clock: divider/clk_decoder rising
+  Source Clock:      divider/clk_display rising
+  Destination Clock: divider/clk_display rising
 
   Data Path: divider/prescaler_blink_4 to divider/prescaler_blink_4
                                 Gate     Net
@@ -800,12 +804,12 @@ Source Clock     |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 divider/clk_blink|    2.612|         |         |         |
 -----------------+---------+---------+---------+---------+
 
-Clock to Setup on destination clock divider/clk_decoder
+Clock to Setup on destination clock divider/clk_display
 -------------------+---------+---------+---------+---------+
                    | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 -------------------+---------+---------+---------+---------+
-divider/clk_decoder|    2.789|         |         |         |
+divider/clk_display|    2.789|         |         |         |
 -------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock timer_seq/min_ones_clock
@@ -848,14 +852,14 @@ timer_seq/sec_tens_en|    2.048|         |         |         |
 
 
 Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 3.63 secs
+Total CPU time to Xst completion: 3.69 secs
  
 --> 
 
 
-Total memory usage is 387032 kilobytes
+Total memory usage is 387052 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   15 (   0 filtered)
+Number of warnings :   19 (   0 filtered)
 Number of infos    :    9 (   0 filtered)
 

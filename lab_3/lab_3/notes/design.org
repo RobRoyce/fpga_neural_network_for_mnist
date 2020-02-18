@@ -74,6 +74,8 @@ with a 0 bit in the form of a vector ~{1'b0, time_[2:0]}~, etc. This was probabl
 necessary, but I figured it would be good to make sure we never get a rouge 1 in the MSB
 of those 3-bit counters.
 
+Note that the flashing clock will need to have a 50% duty cycle at whichever frequency it oscillates at.
+
 
 ** Notes about the Timer Sequencer
 The ~timer_seq~ module has 4 internal counters, one for each digit of the stopwatch.
@@ -89,3 +91,14 @@ Both pause and reset are debounced, but only reset requires use of both down tra
 is held down, the timer should reset back to 0000 continuously until reset is let go. Therefore,
 the reset input to the ~timer_seq~ module is the down transition OR'd with the state, so that either
 will trigger the timer to reset.
+
+*** How the clocks are divided in the Timer Sequencer
+The clocks to the counters depend on the values of pause, adjust, and select. If we are in
+pause mode, we don't want to issue any clock signals to the counters. If we are in adjust
+mode, we want one set of counters to run at 2hz while the other set is paused completely.
+Additionally, during normal operation, we want the lowest order clock to run at 1Hz
+and use it as a transition for all signals above, in a cascading fashion.
+
+We execute an always block on the posedge of ~clk~. We have a case statement
+that checks a vector composed of ~{sel, adj, pause}~, and depending on those values, we assign
+to the proper clock registers.
