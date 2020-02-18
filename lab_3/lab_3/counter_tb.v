@@ -38,7 +38,6 @@ module counter_tb;
 
    counter_10state uut_10c (
                             .i_clk(i_clk),
-                            .i_clk_en(i_clk_en),
                             .i_rst(i_rst),
                             .o_transition(transition_10),
                             .o_state(state_10)
@@ -47,8 +46,7 @@ module counter_tb;
 
    // Instantiate the Unit Under Test (UUT)
    counter_6state uut_6c (
-                          .i_clk(i_clk),
-                          .i_clk_en(transition_10),
+                          .i_clk(transition_10),
                           .i_rst(i_rst),
                           .o_transition(transition_6),
                           .o_state(state_6)
