@@ -38,18 +38,21 @@ module stopwatch(
    wire                           clk_blink;
    wire                           clk_decoder;
    wire                           rst_btn;
+   wire                           rst_state;
    wire                           pause_btn;
+   wire                           pause_state;
    wire                           sel;
    wire                           adj;
    wire [13:0]                    time_;
 
    assign sel = sw[0];
    assign adj = sw[1];
+   
    //////////////////////////////////////////////////////////////////////
 
    //////////////////////////////////////////////////////////////////////
    // Regs
-   
+
    //////////////////////////////////////////////////////////////////////
 
    clk_div divider(
@@ -63,6 +66,7 @@ module stopwatch(
    debouncer rst_d(
                    .clk(clk),
                    .trans_dn(rst_btn),
+                   .state(rst_state),
                    .switch_input(reset)
                    );
    debouncer pause_d(
@@ -73,10 +77,10 @@ module stopwatch(
 
    display_7_seg display(
                          .clk(clk),
-                         .units({1'b0, time_[2:0]}),
-                         .tens(time_[6:3]),
-                         .hundreds({1'b0, time_[9:7]}),
-                         .thousands(time_[13:10]),
+                         .units(time_[3:0]),
+                         .tens({1'b0, time_[6:4]}),
+                         .hundreds(time_[10:7]),
+                         .thousands({1'b0, time_[13:11]}),
                          .seg(seg),
                          .digit(digit)
                          );
@@ -85,7 +89,7 @@ module stopwatch(
                        .clk(clk),
                        .clk_1hz(clk_1hz),
                        .clk_2hz(clk_2hz),
-                       .rst(rst_btn),
+                       .reset(rst_btn || rst_state),
                        .pause(pause_btn),
                        .sel(sel),
                        .adj(adj),

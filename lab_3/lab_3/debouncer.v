@@ -19,6 +19,11 @@ module debouncer(
     // Registers used to synchronize button presses to clk
     reg sync_0, sync_1;
 
+   initial begin
+      sync_0 = 0;
+      sync_1 = 0;
+      state = 0;
+      end
 
     // Use sync_0 and sync_1 as a sort-of master-slave configuration
     always @(posedge clk)

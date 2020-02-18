@@ -82,3 +82,10 @@ from max state to min state (i.e. 5->0 or 9->0), the transition signal ~o_transi
 becomes the ~clk_en~ signal for the next higher order counter. This is effectively
 how state is handled. Neither counter module needs to be aware of the adjacent counters,
 yet they are all synchronized.
+
+*** Pause and Reset buttons
+Both pause and reset are debounced, but only reset requires use of both down transition and state
+(from the debounce module), since if reset is briefly pushed, we want to reset, but also if reset 
+is held down, the timer should reset back to 0000 continuously until reset is let go. Therefore,
+the reset input to the ~timer_seq~ module is the down transition OR'd with the state, so that either
+will trigger the timer to reset.
