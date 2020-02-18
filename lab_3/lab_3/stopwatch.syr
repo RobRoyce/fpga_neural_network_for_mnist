@@ -4,15 +4,15 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.04 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.02 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.04 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.02 secs
  
 --> 
 Reading design: stopwatch.prj
@@ -130,7 +130,7 @@ Parsing module <stopwatch>.
 =========================================================================
 WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 62: Port trans_up is not connected to this instance
 WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 68: Port state is not connected to this instance
-WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 74: Port clk_blink is not connected to this instance
+WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 74: Port clk_display is not connected to this instance
 
 Elaborating module <stopwatch>.
 
@@ -138,7 +138,6 @@ Elaborating module <clk_div>.
 WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/clk_div.v" Line 72: Result of 17-bit expression is truncated to fit in 16-bit target.
 WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/clk_div.v" Line 84: Result of 6-bit expression is truncated to fit in 5-bit target.
 WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/clk_div.v" Line 95: Result of 4-bit expression is truncated to fit in 3-bit target.
-WARNING:HDLCompiler:1127 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 58: Assignment to clk_blink ignored, since the identifier is never used
 WARNING:HDLCompiler:1127 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 59: Assignment to clk_display ignored, since the identifier is never used
 
 Elaborating module <debouncer>.
@@ -147,6 +146,7 @@ WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/
 Elaborating module <display_7_seg>.
 
 Elaborating module <decoder_7_seg>.
+WARNING:HDLCompiler:413 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/display_7_seg.v" Line 96: Result of 3-bit expression is truncated to fit in 2-bit target.
 WARNING:HDLCompiler:1016 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/timer_seq.v" Line 126: Port o_transition is not connected to this instance
 
 Elaborating module <timer_seq>.
@@ -154,7 +154,7 @@ Elaborating module <timer_seq>.
 Elaborating module <counter_10state>.
 
 Elaborating module <counter_6state>.
-WARNING:HDLCompiler:552 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 74: Input port clk_blink is not connected on this instance
+WARNING:HDLCompiler:552 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" Line 74: Input port clk_display is not connected on this instance
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -164,8 +164,7 @@ Synthesizing Unit <stopwatch>.
     Related source file is "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v".
         state_pause = 0
         state_count = 1
-WARNING:Xst:2898 - Port 'clk_blink', unconnected in block instance 'display', is tied to GND.
-INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 54: Output port <o_clk_blink> of the instance <divider> is unconnected or connected to loadless signal.
+WARNING:Xst:2898 - Port 'clk_display', unconnected in block instance 'display', is tied to GND.
 INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 54: Output port <o_clk_display> of the instance <divider> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 62: Output port <trans_up> of the instance <rst_d> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch.v" line 68: Output port <state> of the instance <pause_d> is unconnected or connected to loadless signal.
@@ -177,7 +176,7 @@ Unit <stopwatch> synthesized.
 Synthesizing Unit <clk_div>.
     Related source file is "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/clk_div.v".
         pscl_display_cnt = 49999
-        pscl_blink_cnt = 24
+        pscl_blink_cnt = 15
         pscl_2hz_cnt = 4
         pscl_1hz_cnt = 0
     Found 1-bit register for signal <clk_display>.
@@ -211,20 +210,25 @@ Unit <debouncer> synthesized.
 
 Synthesizing Unit <display_7_seg>.
     Related source file is "/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/display_7_seg.v".
-WARNING:Xst:647 - Input <clk_blink> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+        display_speed = 24'b000001111010000100100000
+        blink_speed = 25'b0000011110100001001000000
+WARNING:Xst:647 - Input <clk_display> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <min_active>.
+    Found 24-bit register for signal <prescaler>.
     Found 2-bit register for signal <digit_posn>.
     Found 4-bit register for signal <digit_data>.
     Found 4-bit register for signal <digit>.
-    Found 24-bit register for signal <prescaler>.
-    Found 24-bit adder for signal <prescaler[23]_GND_4_o_add_1_OUT> created at line 63.
-    Found 2-bit adder for signal <digit_posn[1]_GND_4_o_add_3_OUT> created at line 67.
-    Found 4x4-bit Read Only RAM for signal <digit[3]_PWR_4_o_mux_15_OUT>
-    Found 4-bit 4-to-1 multiplexer for signal <digit_data[3]_units[3]_mux_14_OUT> created at line 73.
+    Found 1-bit register for signal <sec_active>.
+    Found 24-bit adder for signal <prescaler[23]_GND_4_o_add_4_OUT> created at line 92.
+    Found 2-bit adder for signal <digit_posn[1]_GND_4_o_add_6_OUT> created at line 96.
+    Found 4x2-bit Read Only RAM for signal <_n0094>
+    Found 4-bit 4-to-1 multiplexer for signal <digit_data[3]_units[3]_mux_21_OUT> created at line 101.
+    Found 4-bit 4-to-1 multiplexer for signal <digit[3]_PWR_4_o_mux_22_OUT> created at line 101.
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
-	inferred  34 D-type flip-flop(s).
-	inferred   1 Multiplexer(s).
+	inferred  36 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
 Unit <display_7_seg> synthesized.
 
 Synthesizing Unit <decoder_7_seg>.
@@ -277,7 +281,7 @@ HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 2
  16x7-bit single-port Read Only RAM                    : 1
- 4x4-bit single-port Read Only RAM                     : 1
+ 4x2-bit single-port Read Only RAM                     : 1
 # Adders/Subtractors                                   : 11
  16-bit adder                                          : 3
  2-bit adder                                           : 1
@@ -285,10 +289,10 @@ Macro Statistics
  3-bit adder                                           : 3
  4-bit adder                                           : 2
  5-bit adder                                           : 1
-# Registers                                            : 31
+# Registers                                            : 32
  1-bit register                                        : 17
  16-bit register                                       : 3
- 2-bit register                                        : 1
+ 2-bit register                                        : 2
  24-bit register                                       : 1
  3-bit register                                        : 3
  4-bit register                                        : 4
@@ -296,11 +300,11 @@ Macro Statistics
  7-bit register                                        : 1
 # Comparators                                          : 2
  1-bit comparator equal                                : 2
-# Multiplexers                                         : 13
+# Multiplexers                                         : 14
  1-bit 2-to-1 multiplexer                              : 8
  3-bit 2-to-1 multiplexer                              : 2
  4-bit 2-to-1 multiplexer                              : 2
- 4-bit 4-to-1 multiplexer                              : 1
+ 4-bit 4-to-1 multiplexer                              : 2
 
 =========================================================================
 
@@ -344,14 +348,14 @@ Unit <decoder_7_seg> synthesized (advanced).
 Synthesizing (advanced) Unit <display_7_seg>.
 The following registers are absorbed into counter <prescaler>: 1 register on signal <prescaler>.
 The following registers are absorbed into counter <digit_posn>: 1 register on signal <digit_posn>.
-INFO:Xst:3231 - The small RAM <Mram_digit[3]_PWR_4_o_mux_15_OUT> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+INFO:Xst:3231 - The small RAM <Mram__n0094> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
     | Port A                                                              |
-    |     aspect ratio   | 4-word x 4-bit                      |          |
+    |     aspect ratio   | 4-word x 2-bit                      |          |
     |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <digit_posn>    |          |
+    |     addrA          | connected to signal <(sel,adj)>     |          |
     |     diA            | connected to signal <GND>           |          |
     |     doA            | connected to internal node          |          |
     -----------------------------------------------------------------------
@@ -363,7 +367,7 @@ Advanced HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 2
  16x7-bit single-port distributed Read Only RAM        : 1
- 4x4-bit single-port distributed Read Only RAM         : 1
+ 4x2-bit single-port distributed Read Only RAM         : 1
 # Counters                                             : 11
  16-bit up counter                                     : 3
  2-bit up counter                                      : 1
@@ -371,13 +375,13 @@ Macro Statistics
  3-bit up counter                                      : 3
  4-bit up counter                                      : 2
  5-bit up counter                                      : 1
-# Registers                                            : 32
- Flip-Flops                                            : 32
+# Registers                                            : 34
+ Flip-Flops                                            : 34
 # Comparators                                          : 2
  1-bit comparator equal                                : 2
-# Multiplexers                                         : 9
+# Multiplexers                                         : 10
  1-bit 2-to-1 multiplexer                              : 8
- 4-bit 4-to-1 multiplexer                              : 1
+ 4-bit 4-to-1 multiplexer                              : 2
 
 =========================================================================
 
@@ -420,8 +424,8 @@ Unit <stopwatch> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 118
- Flip-Flops                                            : 118
+# Registers                                            : 120
+ Flip-Flops                                            : 120
 # Shift Registers                                      : 2
  2-bit shift register                                  : 2
 
@@ -446,20 +450,20 @@ Top Level Output File Name         : stopwatch.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 302
+# BELS                             : 304
 #      GND                         : 1
 #      INV                         : 11
 #      LUT1                        : 63
-#      LUT2                        : 8
+#      LUT2                        : 10
 #      LUT3                        : 17
-#      LUT4                        : 21
+#      LUT4                        : 17
 #      LUT5                        : 8
-#      LUT6                        : 42
+#      LUT6                        : 46
 #      MUXCY                       : 63
 #      VCC                         : 1
 #      XORCY                       : 67
-# FlipFlops/Latches                : 120
-#      FD                          : 35
+# FlipFlops/Latches                : 122
+#      FD                          : 37
 #      FDC                         : 17
 #      FDE                         : 12
 #      FDR                         : 56
@@ -478,17 +482,17 @@ Selected Device : 6slx16csg324-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             120  out of  18224     0%  
- Number of Slice LUTs:                  172  out of   9112     1%  
-    Number used as Logic:               170  out of   9112     1%  
+ Number of Slice Registers:             122  out of  18224     0%  
+ Number of Slice LUTs:                  174  out of   9112     1%  
+    Number used as Logic:               172  out of   9112     1%  
     Number used as Memory:                2  out of   2176     0%  
        Number used as SRL:                2
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    172
-   Number with an unused Flip Flop:      52  out of    172    30%  
-   Number with an unused LUT:             0  out of    172     0%  
-   Number of fully used LUT-FF pairs:   120  out of    172    69%  
+ Number of LUT Flip Flop pairs used:    176
+   Number with an unused Flip Flop:      54  out of    176    30%  
+   Number with an unused LUT:             2  out of    176     1%  
+   Number of fully used LUT-FF pairs:   120  out of    176    68%  
    Number of unique control sets:        16
 
 IO Utilization: 
@@ -519,7 +523,7 @@ Clock Information:
 -----------------------------------------------------------------+--------------------------------------------+-------+
 Clock Signal                                                     | Clock buffer(FF name)                      | Load  |
 -----------------------------------------------------------------+--------------------------------------------+-------+
-clk                                                              | BUFGP                                      | 94    |
+clk                                                              | BUFGP                                      | 96    |
 divider/clk_display                                              | NONE(divider/prescaler_blink_4)            | 6     |
 divider/clk_blink                                                | NONE(divider/prescaler_2hz_2)              | 4     |
 divider/clk_2hz                                                  | NONE(divider/clk_1hz)                      | 1     |
@@ -541,8 +545,8 @@ Timing Summary:
 ---------------
 Speed Grade: -3
 
-   Minimum period: 4.369ns (Maximum Frequency: 228.883MHz)
-   Minimum input arrival time before clock: 4.357ns
+   Minimum period: 4.486ns (Maximum Frequency: 222.913MHz)
+   Minimum input arrival time before clock: 4.421ns
    Maximum output required time after clock: 3.634ns
    Maximum combinational path delay: No path found
 
@@ -552,10 +556,10 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 4.369ns (frequency: 228.883MHz)
-  Total number of paths / destination ports: 1695 / 150
+  Clock period: 4.486ns (frequency: 222.913MHz)
+  Total number of paths / destination ports: 1699 / 150
 -------------------------------------------------------------------------
-Delay:               4.369ns (Levels of Logic = 3)
+Delay:               4.486ns (Levels of Logic = 3)
   Source:            display/prescaler_1 (FF)
   Destination:       display/digit_3 (FF)
   Source Clock:      clk rising
@@ -566,35 +570,35 @@ Delay:               4.369ns (Levels of Logic = 3)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FD:C->Q               2   0.447   0.981  display/prescaler_1 (display/prescaler_1)
-     LUT6:I0->O           22   0.203   1.238  display/prescaler[23]_GND_4_o_equal_3_o<23>2 (display/prescaler[23]_GND_4_o_equal_3_o<23>1)
-     LUT4:I2->O            6   0.203   0.992  display/prescaler[23]_GND_4_o_equal_3_o<23>4_rstpot (display/prescaler[23]_GND_4_o_equal_3_o<23>4_rstpot)
-     LUT4:I0->O            1   0.203   0.000  display/digit_0_dpot (display/digit_0_dpot)
+     LUT6:I0->O           22   0.203   1.238  display/prescaler[23]_GND_4_o_equal_6_o<23>2 (display/prescaler[23]_GND_4_o_equal_6_o<23>1)
+     LUT4:I2->O            6   0.203   1.109  display/prescaler[23]_GND_4_o_equal_6_o<23>4_rstpot (display/prescaler[23]_GND_4_o_equal_6_o<23>4_rstpot)
+     LUT6:I0->O            1   0.203   0.000  display/digit_0_dpot (display/digit_0_dpot)
      FDE:D                     0.102          display/digit_0
     ----------------------------------------
-    Total                      4.369ns (1.158ns logic, 3.211ns route)
-                                       (26.5% logic, 73.5% route)
+    Total                      4.486ns (1.158ns logic, 3.328ns route)
+                                       (25.8% logic, 74.2% route)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'divider/clk_display'
-  Clock period: 2.789ns (frequency: 358.519MHz)
+  Clock period: 2.822ns (frequency: 354.415MHz)
   Total number of paths / destination ports: 46 / 11
 -------------------------------------------------------------------------
-Delay:               2.789ns (Levels of Logic = 1)
-  Source:            divider/prescaler_blink_4 (FF)
+Delay:               2.822ns (Levels of Logic = 1)
+  Source:            divider/prescaler_blink_3 (FF)
   Destination:       divider/prescaler_blink_4 (FF)
   Source Clock:      divider/clk_display rising
   Destination Clock: divider/clk_display rising
 
-  Data Path: divider/prescaler_blink_4 to divider/prescaler_blink_4
+  Data Path: divider/prescaler_blink_3 to divider/prescaler_blink_4
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q              3   0.447   0.995  divider/prescaler_blink_4 (divider/prescaler_blink_4)
-     LUT5:I0->O            5   0.203   0.714  divider/GND_2_o_GND_2_o_equal_8_o<4>1 (divider/GND_2_o_GND_2_o_equal_8_o)
+     FDR:C->Q              4   0.447   1.028  divider/prescaler_blink_3 (divider/prescaler_blink_3)
+     LUT5:I0->O            5   0.203   0.714  divider/Mcount_prescaler_blink_xor<4>1311 (divider/Mcount_prescaler_blink_xor<4>13)
      FDR:R                     0.430          divider/prescaler_blink_0
     ----------------------------------------
-    Total                      2.789ns (1.080ns logic, 1.709ns route)
-                                       (38.7% logic, 61.3% route)
+    Total                      2.822ns (1.080ns logic, 1.742ns route)
+                                       (38.3% logic, 61.7% route)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'divider/clk_blink'
@@ -730,9 +734,9 @@ Delay:               2.078ns (Levels of Logic = 1)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 10 / 5
+  Total number of paths / destination ports: 14 / 7
 -------------------------------------------------------------------------
-Offset:              4.357ns (Levels of Logic = 4)
+Offset:              4.421ns (Levels of Logic = 4)
   Source:            sw<0> (PAD)
   Destination:       timer_seq/min_ones_clock (FF)
   Destination Clock: clk rising
@@ -741,14 +745,14 @@ Offset:              4.357ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             3   1.222   0.898  sw_0_IBUF (sw_0_IBUF)
-     LUT5:I1->O            1   0.203   0.944  rst_btn_rst_state_OR_56_o1_SW1 (N14)
+     IBUF:I->O             5   1.222   0.962  sw_0_IBUF (sw_0_IBUF)
+     LUT5:I1->O            1   0.203   0.944  rst_btn_rst_state_OR_60_o1_SW1 (N14)
      LUT6:I0->O            1   0.203   0.580  timer_seq/Mmux_sel_GND_6_o_Mux_2_o11 (timer_seq/sel_GND_6_o_Mux_2_o)
      LUT4:I3->O            1   0.205   0.000  timer_seq/min_ones_clock_rstpot (timer_seq/min_ones_clock_rstpot)
      FD:D                      0.102          timer_seq/min_ones_clock
     ----------------------------------------
-    Total                      4.357ns (1.935ns logic, 2.422ns route)
-                                       (44.4% logic, 55.6% route)
+    Total                      4.421ns (1.935ns logic, 2.486ns route)
+                                       (43.8% logic, 56.2% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
@@ -779,9 +783,10 @@ Clock to Setup on destination clock clk
                         | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock            |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ------------------------+---------+---------+---------+---------+
-clk                     |    4.369|         |         |         |
+clk                     |    4.486|         |         |         |
 divider/clk_2hz         |    1.371|         |         |         |
 divider/clk_blink       |    3.629|         |         |         |
+divider/clk_display     |    1.926|         |         |         |
 timer_seq/min_ones_clock|    3.349|         |         |         |
 timer_seq/min_tens_en   |    2.324|         |         |         |
 timer_seq/sec_ones_clock|    3.252|         |         |         |
@@ -809,7 +814,7 @@ Clock to Setup on destination clock divider/clk_display
                    | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 -------------------+---------+---------+---------+---------+
-divider/clk_display|    2.789|         |         |         |
+divider/clk_display|    2.822|         |         |         |
 -------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock timer_seq/min_ones_clock
@@ -851,15 +856,15 @@ timer_seq/sec_tens_en|    2.048|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 3.69 secs
+Total REAL time to Xst completion: 5.00 secs
+Total CPU time to Xst completion: 3.61 secs
  
 --> 
 
 
-Total memory usage is 387052 kilobytes
+Total memory usage is 387092 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   19 (   0 filtered)
-Number of infos    :    9 (   0 filtered)
+Number of infos    :    8 (   0 filtered)
 

@@ -73,6 +73,9 @@ module stopwatch(
 
    display_7_seg display(
                          .clk(clk),
+                         .clk_blink(clk_blink),
+                         .sel(sel),
+                         .adj(adj),
                          .units(time_[3:0]),
                          .tens({1'b0, time_[6:4]}),
                          .hundreds(time_[10:7]),

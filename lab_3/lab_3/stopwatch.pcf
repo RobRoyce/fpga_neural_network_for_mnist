@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Mon Feb 17 22:40:09 2020
+// Written by: Map P.20131013 on Tue Feb 18 00:11:03 2020
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -42,7 +42,8 @@ TIMEGRP sys_clk_pin = BEL "rst_d/count_15" BEL "rst_d/count_14" BEL
         "display/digit_3" BEL "display/digit_2" BEL "display/digit_1" BEL
         "display/digit_0" BEL "display/digit_data_3" BEL
         "display/digit_data_2" BEL "display/digit_data_1" BEL
-        "display/digit_data_0" BEL "display/decoder/seg_6" BEL
+        "display/digit_data_0" BEL "display/sec_active" BEL
+        "display/min_active" BEL "display/decoder/seg_6" BEL
         "display/decoder/seg_5" BEL "display/decoder/seg_4" BEL
         "display/decoder/seg_3" BEL "display/decoder/seg_2" BEL
         "display/decoder/seg_1" BEL "display/decoder/seg_0" BEL

@@ -76,6 +76,11 @@ of those 3-bit counters.
 
 Note that the flashing clock will need to have a 50% duty cycle at whichever frequency it oscillates at.
 
+In order to strobe the lights for the minutes or seconds, depending on select and adjust, we
+simply keep track of state in an always loop. If we get select and adjust such that one of the
+segments should be flashing, we call that segment "inactive" and begin conditionally switching
+the particular segments on and off depending on the blink clock.
+
 
 ** Notes about the Timer Sequencer
 The ~timer_seq~ module has 4 internal counters, one for each digit of the stopwatch.
@@ -102,3 +107,5 @@ and use it as a transition for all signals above, in a cascading fashion.
 We execute an always block on the posedge of ~clk~. We have a case statement
 that checks a vector composed of ~{sel, adj, pause}~, and depending on those values, we assign
 to the proper clock registers.
+
+
