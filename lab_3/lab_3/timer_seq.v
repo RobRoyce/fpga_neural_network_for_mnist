@@ -54,6 +54,8 @@ module timer_seq(
    always @(posedge clk) begin
       if(pause && !adj)
         pause_state <= ~pause_state;
+		else if(time_[13:0] == 14'b10110011011001)
+		  pause_state <= 1;
 
       case({sel, adj, pause_state})
         //////////////////////////////////////////////////////////////////////
