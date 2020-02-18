@@ -19,10 +19,10 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module stopwatch(
-                 input wire       pause, // Start/Stop
-                 input wire       reset, // Reset
-                 input wire [1:0] sw,
-                 input wire       clk,
+                 input wire        pause, // Start/Stop
+                 input wire        reset, // Reset
+                 input wire [1:0]  sw,
+                 input wire        clk,
                  output wire [6:0] seg,
                  output wire [3:0] digit
                  );
@@ -36,23 +36,19 @@ module stopwatch(
    wire                           clk_1hz;
    wire                           clk_2hz;
    wire                           clk_blink;
-   wire                           clk_decoder;
+   wire                           clk_display;
    wire                           rst_btn;
    wire                           rst_state;
    wire                           pause_btn;
-   wire                           pause_state;
    wire                           sel;
    wire                           adj;
    wire [13:0]                    time_;
 
    assign sel = sw[0];
    assign adj = sw[1];
+   //////////////////////////////////////////////////////////////////////
+
    
-   //////////////////////////////////////////////////////////////////////
-
-   //////////////////////////////////////////////////////////////////////
-   // Regs
-
    //////////////////////////////////////////////////////////////////////
 
    clk_div divider(
@@ -60,7 +56,7 @@ module stopwatch(
                    .o_clk_1hz(clk_1hz),
                    .o_clk_2hz(clk_2hz),
                    .o_clk_blink(clk_blink),
-                   .o_clk_decoder(clk_decoder)
+                   .o_clk_decoder(clk_display)
                    );
 
    debouncer rst_d(

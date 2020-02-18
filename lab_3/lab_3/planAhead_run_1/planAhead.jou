@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:24:36 MDT 2013
+# Start of session at: Mon Feb 17 20:27:13 2020
+# Process ID: 5968
+# Log file: /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/planAhead_run_1/planAhead.log
+# Journal file: /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/pa.fromNetlist.tcl
