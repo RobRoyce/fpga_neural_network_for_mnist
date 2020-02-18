@@ -40,6 +40,8 @@ module stopwatch(
    wire                           rst_btn;
    wire                           rst_state;
    wire                           pause_btn;
+	wire									 sel_db;
+	wire								    adj_db;
    wire                           sel;
    wire                           adj;
    wire [13:0]                    time_;
@@ -70,12 +72,22 @@ module stopwatch(
                      .trans_dn(pause_btn),
                      .switch_input(pause)
                      );
+   debouncer sel_d(
+                     .clk(clk),
+                     .state(sel_db),
+                     .switch_input(sel)
+                     );
+   debouncer adj_d(
+                     .clk(clk),
+                     .state(adj_db),
+                     .switch_input(adj)
+                     );
 
    display_7_seg display(
                          .clk(clk),
                          .clk_blink(clk_blink),
-                         .sel(sel),
-                         .adj(adj),
+                         .sel(sel_db),
+                         .adj(adj_db),
                          .units(time_[3:0]),
                          .tens({1'b0, time_[6:4]}),
                          .hundreds(time_[10:7]),
@@ -90,8 +102,8 @@ module stopwatch(
                        .clk_2hz(clk_2hz),
                        .reset(rst_btn || rst_state),
                        .pause(pause_btn),
-                       .sel(sel),
-                       .adj(adj),
+                       .sel(sel_db),
+                       .adj(adj_db),
                        .time_(time_)
                        );
 endmodule
