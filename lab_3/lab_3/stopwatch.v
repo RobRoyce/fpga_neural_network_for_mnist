@@ -32,66 +32,64 @@ module stopwatch(
    parameter state_count = 1;
 
    //////////////////////////////////////////////////////////////////////
-   // Wires
-   wire                           clk_1hz;
-   wire                           clk_2hz;
-   wire                           clk_blink;
-   wire                           clk_display;
-   wire                           rst_btn;
-   wire                           rst_state;
-   wire                           pause_btn;
-   wire                           sel;
-   wire                           adj;
-   wire [13:0]                    time_;
-
-   assign sel = sw[0];
-   assign adj = sw[1];
+     // Wires
+   wire                            clk_1hz;
+   wire                            clk_2hz;
+   wire                            clk_blink;
+   wire                            clk_display;
+   wire                            rst_btn;
+   wire                            rst_state;
+   wire                            pause_btn;
+   wire                            sel_state;
+   wire                            sel_trans;
+   wire                            adj_state;
+   wire                            adj_trans;
+   wire [13:0]                     time_;
    //////////////////////////////////////////////////////////////////////
 
-   
-   //////////////////////////////////////////////////////////////////////
 
-   clk_div divider(
-                   .i_clk(clk),
+   //////////////////////////////////////////////////////////////////////
+   clk_div divider(.i_clk(clk),
                    .o_clk_1hz(clk_1hz),
                    .o_clk_2hz(clk_2hz),
-                   .o_clk_blink(clk_blink),
-                   .o_clk_display(clk_display)
-                   );
+                   .o_clk_blink(clk_blink));
 
-   debouncer rst_d(
-                   .clk(clk),
+   debouncer rst_d(.clk(clk),
                    .trans_dn(rst_btn),
                    .state(rst_state),
-                   .switch_input(reset)
-                   );
-   debouncer pause_d(
-                     .clk(clk),
-                     .trans_dn(pause_btn),
-                     .switch_input(pause)
-                     );
+                   .switch_input(reset));
 
-   display_7_seg display(
-                         .clk(clk),
+   debouncer pause_d(.clk(clk),
+                     .trans_dn(pause_btn),
+                     .switch_input(pause));
+
+   debouncer sel_d(.clk(clk),
+                   .state(sel_state),
+                   .switch_input(sw[0]),
+                   .trans_dn(sel_trans));
+
+   debouncer adj_d(.clk(clk),
+                   .state(adj_state),
+                   .switch_input(sw[1]),
+                   .trans_dn(adj_trans));
+
+   display_7_seg display(.clk(clk),
                          .clk_blink(clk_blink),
-                         .sel(sel),
-                         .adj(adj),
+                         .sel(sel_state || sel_trans),
+                         .adj(adj_state || adj_trans),
                          .units(time_[3:0]),
                          .tens({1'b0, time_[6:4]}),
                          .hundreds(time_[10:7]),
                          .thousands({1'b0, time_[13:11]}),
                          .seg(seg),
-                         .digit(digit)
-                         );
+                         .digit(digit));
 
-   timer_seq timer_seq(
-                       .clk(clk),
+   timer_seq timer_seq(.clk(clk),
                        .clk_1hz(clk_1hz),
                        .clk_2hz(clk_2hz),
-                       .reset(rst_btn || rst_state),
                        .pause(pause_btn),
-                       .sel(sel),
-                       .adj(adj),
-                       .time_(time_)
-                       );
+                       .reset(rst_btn || rst_state),
+                       .sel(sel_state || sel_trans),
+                       .adj(adj_state || adj_trans),
+                       .time_(time_));
 endmodule

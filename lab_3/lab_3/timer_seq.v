@@ -52,7 +52,9 @@ module timer_seq(
    assign min_ones_en = min_ones_clock;
 
    always @(posedge clk) begin
-      if(pause && !adj)
+      if(time_ == 14'b10110011011001)
+        pause_state <= 1'b1;
+      else if(pause && !adj)
         pause_state <= ~pause_state;
 
       case({sel, adj, pause_state})
@@ -109,7 +111,8 @@ module timer_seq(
                                     .i_clk(sec_ones_en),
                                     .i_rst(reset),
                                     .o_transition(sec_tens_en),
-                                    .o_state(time_[3:0])
+                                    .o_state(time_[3:0]),
+                                    .step(adj)
                                     );
    counter_6state sec_tens_counter(
                                    .i_clk(sec_tens_en),
@@ -121,7 +124,8 @@ module timer_seq(
                                     .i_clk(min_ones_en),
                                     .i_rst(reset),
                                     .o_transition(min_tens_en),
-                                    .o_state(time_[10:7])
+                                    .o_state(time_[10:7]),
+                                    .step(adj)
                                     );
    counter_6state min_tens_counter(
                                    .i_clk(min_tens_en),
@@ -130,3 +134,4 @@ module timer_seq(
                                    );
 
 endmodule
+

@@ -18,12 +18,11 @@
 // Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
-module counter_10state(
-                       input wire        i_clk,
+module counter_10state(input wire        i_clk,
                        input wire        i_rst,
+                       input wire        step,
                        output wire       o_transition,
-                       output wire [3:0] o_state
-                       );
+                       output wire [3:0] o_state);
 
    parameter transition_state = 9;
 
@@ -40,16 +39,33 @@ module counter_10state(
          state <= 4'b0;
          trans <= 4'b0;
       end
-      else if (state == transition_state) begin
-         state <= 4'b0;
-         trans <= 1'b1;
+      else if(step == 1'b0) begin
+         if(state == transition_state) begin
+            state <= 4'b0;
+            trans <= 1'b1;
+         end
+         else begin
+            state <= state + 4'b1;
+            trans <= 1'b0;
+         end
       end
-      else begin
-         state <= state + 4'b1;
-         trans <= 1'b0;
+      else if (step == 1'b1) begin
+         if (state == transition_state - 1) begin
+            state <= 4'b0;
+            trans <= 1'b1;
+         end
+         else if (state == transition_state) begin
+            state <= 4'b1;
+            trans <= 1'b1;
+         end
+         else begin
+            state <= state + 4'd2;
+            trans <= 1'b0;
+         end
       end
+      // else: !if(step == 1'b1)
+   end // always @ (posedge i_clk or posedge i_rst)
 
-   end // always @ (posedge i_clk)
 
    assign o_transition = trans & (~i_rst);
    assign o_state[3:0] = state[3:0] & {4{~i_rst}};

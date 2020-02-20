@@ -23,7 +23,6 @@
 module display_7_seg(
                      input wire        clk,
                      input wire        clk_blink,
-                     input wire        clk_display,
                      input wire        adj,
                      input wire        sel,
                      input wire [3:0]  units,
@@ -42,8 +41,8 @@ module display_7_seg(
    reg [1:0]                           digit_posn;
 
    // 24-bit counter used to divide the clk in order to set refresh rate
-   reg [23:0]                          prescaler;
-   parameter display_speed = 24'd500_000;
+   reg [18:0]                          prescaler;
+   parameter display_speed = 19'd500_000;
    parameter blink_speed = 25'd1_000_000;
 
 
@@ -53,13 +52,18 @@ module display_7_seg(
 
    reg                                 sec_active;
    reg                                 min_active;
-
+   reg [1:0]                           blink_div;
+   
    wire                                sec_should_display;
    wire                                min_should_display;
 
 
-   assign sec_should_display = sec_active || (!sec_active && clk_blink);
-   assign min_should_display = min_active || (!min_active && clk_blink);
+   assign sec_should_display = sec_active || (!sec_active && blink_div[1]);
+   assign min_should_display = min_active || (!min_active && blink_div[1]);
+
+   always @(posedge clk_blink) begin
+      blink_div <= blink_div + 2'b1;
+   end
 
    initial
      begin
@@ -88,29 +92,37 @@ module display_7_seg(
       endcase
    end
 
-   always @(posedge clk) begin
-      prescaler <= prescaler + 24'd1; // Add 1 (in 24-bit pattern) to prescaler
-      if (prescaler == display_speed)     // evaluates to true every 500Hz (clock cycles)
-        begin
-           prescaler <= 0;
-           digit_posn <= digit_posn + 4'd1; // Increment digit position
-           if (digit_posn == 0) begin
-              digit_data <= units;
-              if(sec_should_display) digit <= 4'b1110;
-              else digit <= 4'b1111;
-           end else if (digit_posn == 4'd1) begin
-              digit_data <= tens;
-              if(sec_should_display) digit <= 4'b1101;
-              else digit <= 4'b1111;
-           end else if (digit_posn == 4'd2) begin
-              digit_data <= hundreds;
-              if(min_should_display) digit <= 4'b1011;
-              else digit <= 4'b1111;
-           end else if (digit_posn == 4'd3) begin
-              digit_data <= thousands;
-              if(min_should_display) digit <= 4'b0111;
-              else digit <= 4'b1111;
-           end
-        end
-   end
+   always @(posedge clk)
+     begin
+        prescaler <= prescaler + 19'd1; // Add 1 (in 24-bit pattern) to prescaler
+        if (prescaler == display_speed)     // evaluates to true every 500Hz (clock cycles)
+          begin
+             prescaler <= 0;
+             digit_posn <= digit_posn + 2'd1; // Increment digit position
+             if (digit_posn == 0)
+               begin
+                  digit_data <= units;
+                  if(sec_should_display) digit <= 4'b1110;
+                  else digit <= 4'b1111;
+               end
+             else if (digit_posn == 4'd1)
+               begin
+                  digit_data <= tens;
+                  if(sec_should_display) digit <= 4'b1101;
+                  else digit <= 4'b1111;
+               end
+             else if (digit_posn == 4'd2)
+               begin
+                  digit_data <= hundreds;
+                  if(min_should_display) digit <= 4'b1011;
+                  else digit <= 4'b1111;
+               end
+             else if (digit_posn == 4'd3)
+               begin
+                  digit_data <= thousands;
+                  if(min_should_display) digit <= 4'b0111;
+                  else digit <= 4'b1111;
+               end
+          end
+     end
 endmodule

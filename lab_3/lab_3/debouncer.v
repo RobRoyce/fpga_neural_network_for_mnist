@@ -9,8 +9,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module debouncer(
-                 input wire  clk,
+module debouncer(input wire  clk,
                  input wire  switch_input,
                  output reg  state,
                  output wire trans_up,
@@ -48,7 +47,7 @@ module debouncer(
         begin
             count <= 0; // set the counter to zero when the switch is not being pressed
         end else begin
-            count <= count + 1; // start and increment the counter when the switch is being pressed
+            count <= count + 16'b1; // start and increment the counter when the switch is being pressed
             if (finished)
             begin
                 state <= ~state; // Toggle state once counter reaches max value
