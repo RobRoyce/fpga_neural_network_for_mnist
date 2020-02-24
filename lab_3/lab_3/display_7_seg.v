@@ -52,18 +52,13 @@ module display_7_seg(
 
    reg                                 sec_active;
    reg                                 min_active;
-   reg [1:0]                           blink_div;
    
    wire                                sec_should_display;
    wire                                min_should_display;
 
 
-   assign sec_should_display = sec_active || (!sec_active && blink_div[1]);
-   assign min_should_display = min_active || (!min_active && blink_div[1]);
-
-   always @(posedge clk_blink) begin
-      blink_div <= blink_div + 2'b1;
-   end
+   assign sec_should_display = sec_active || (!sec_active && clk_blink);
+   assign min_should_display = min_active || (!min_active && clk_blink);
 
    initial
      begin
