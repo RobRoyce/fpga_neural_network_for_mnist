@@ -33,7 +33,7 @@ module clk_div(
    // The display_cnt is based on a 100Mhz
    // input i_clk.
    parameter pscl_display_cnt = 50_000 - 1; // 1KHz
-   parameter pscl_blink_cnt   = 24 - 1;     // ??? Hz
+   parameter pscl_blink_cnt   = 25 - 1;     // ??? Hz
    parameter pscl_2hz_cnt     = 5 - 1;      // 2Hz
    parameter pscl_1hz_cnt     = 1 - 1;      // 1Hz
 

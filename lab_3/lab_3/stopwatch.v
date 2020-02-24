@@ -27,10 +27,6 @@ module stopwatch(
                  output wire [3:0] digit
                  );
 
-
-   parameter state_pause = 0;
-   parameter state_count = 1;
-
    //////////////////////////////////////////////////////////////////////
      // Wires
    wire                            clk_1hz;

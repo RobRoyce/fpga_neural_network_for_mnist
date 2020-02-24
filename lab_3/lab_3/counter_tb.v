@@ -26,8 +26,8 @@ module counter_tb;
 
    // Inputs
    reg i_clk;
-   reg i_clk_en;
    reg i_rst;
+	reg step_10;
 
    // Outputs
    wire transition_10;
@@ -39,6 +39,7 @@ module counter_tb;
    counter_10state uut_10c (
                             .i_clk(i_clk),
                             .i_rst(i_rst),
+									 .step(step_10),
                             .o_transition(transition_10),
                             .o_state(state_10)
                             );
@@ -54,8 +55,8 @@ module counter_tb;
    initial begin
       // Initialize Inputs
       i_clk = 0;
-      i_clk_en = 0;
       i_rst = 1;
+		step_10 = 0;
 
       // Wait 100 ns for global reset to finish
       #100
@@ -69,6 +70,5 @@ module counter_tb;
    end
 
    always #10 i_clk <= ~i_clk;
-   always #20 i_clk_en <= ~i_clk_en;
 
 endmodule
