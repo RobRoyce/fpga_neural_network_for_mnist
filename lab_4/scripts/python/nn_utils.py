@@ -82,8 +82,11 @@ def fp_sm_2_dec(val, dp):
     return sign * (int(whole,2) + (int(frac,2) * (2**-dp)))
 
 
-def format_verilog(fp_val, width):
+def format_verilog(fp_val, width, add_prefix=True):
     
-    return ("{width}'b{0:0{width}b}".format(fp_val, width=width))
+    if add_prefix:
+        return ("{width}'b{0:0{width}b}".format(fp_val, width=width))
+    else:    
+        return ("{0:0{width}b}".format(fp_val, width=width))
 
 
