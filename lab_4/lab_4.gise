@@ -39,6 +39,8 @@
     <transform xil_pn:end_ts="1582698484" xil_pn:in_ck="-34960439667144572" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1582698484">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputAdded"/>
       <outfile xil_pn:name="definitions.v"/>
       <outfile xil_pn:name="parallel_adder_16.v"/>
       <outfile xil_pn:name="parallel_adder_16_tb.v"/>
@@ -59,6 +61,7 @@
     <transform xil_pn:end_ts="1582698484" xil_pn:in_ck="-34960439667144572" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1582698484">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="definitions.v"/>
       <outfile xil_pn:name="parallel_adder_16.v"/>
       <outfile xil_pn:name="parallel_adder_16_tb.v"/>
@@ -67,6 +70,8 @@
     <transform xil_pn:end_ts="1582698485" xil_pn:in_ck="-34960439667144572" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-1975960899686754469" xil_pn:start_ts="1582698484">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
       <outfile xil_pn:name="parallel_adder_16_tb_beh.prj"/>
@@ -76,6 +81,7 @@
     <transform xil_pn:end_ts="1582698486" xil_pn:in_ck="620616021033428438" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="5693973355382381630" xil_pn:start_ts="1582698485">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="parallel_adder_16_tb_isim_beh.wdb"/>
     </transform>
