@@ -8,10 +8,10 @@ parameter num_output_neurons = 10;
 // Example of computing the product of
 // two fixed-point decimal values.
 task fp_mult;
-input [weight_width-1:0] a;
-input [weight_width-1:0] b;
-output [weight_width-1:0] prod;
-reg [2*weight_width-1:0] int_prod; // Local storage of a * b
+input signed [weight_width-1:0] a;
+input signed [weight_width-1:0] b;
+output signed [weight_width-1:0] prod;
+reg signed [2*weight_width-1:0] int_prod; // Local storage of a * b
 begin
 	int_prod = a * b;
 	prod = (int_prod) >> decimal_place;
