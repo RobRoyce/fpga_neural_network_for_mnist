@@ -25,7 +25,7 @@ module parallel_adder_16(
 
 	 `include "definitions.v";
 	 
-	 input [16*weight_width-1:0]data;
+	 input  [16*weight_width-1:0]data;
 	 output [weight_width:0] sum;
 	 
 	 wire [4*weight_width-1:0] p_sum; //Partial sums

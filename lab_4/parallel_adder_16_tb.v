@@ -30,6 +30,8 @@ module parallel_adder_16_tb;
 	reg [16*weight_width-1:0] data;
 	
 	reg [weight_width-1:0] val;
+	
+	reg [weight_width-1:0] prod_test;
 
 	// Outputs
 	wire [weight_width-1:0] sum;
@@ -44,10 +46,12 @@ module parallel_adder_16_tb;
 		// Initialize Inputs
 		data = 0;
 		
-		val = 3;
+		val = 2;
 		
 		data[weight_width-1:0] = val;
 		data[16*weight_width-1:15*weight_width] = val;
+		
+		fp_mult(32000,-16,prod_test);
 
 		// Wait 100 ns for global reset to finish
 		#100;

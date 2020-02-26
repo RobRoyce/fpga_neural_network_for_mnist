@@ -25,14 +25,14 @@ module parallel_adder_4(
 	 
 	 `include "definitions.v"
 	 
-	 input [4*weight_width-1:0] data;
+	 input  [4*weight_width-1:0] data;
 	 output [weight_width-1:0] sum;
 	 
-	 wire [16:0] s0;
-	 wire [16:0] s1;
+	 wire [weight_width-1:0] s0;
+	 wire [weight_width-1:0] s1;
 	 
-	 assign s0 = data[2*16-1:1*16] + data[1*16-1:0*16];
-	 assign s1 = data[4*16-1:3*16] + data[3*16-1:2*16];
+	 assign s0 = data[2*weight_width-1:1*16] + data[1*weight_width-1:0*16];
+	 assign s1 = data[4*weight_width-1:3*16] + data[3*weight_width-1:2*16];
 	 
 	 assign sum = s0 + s1;
 
