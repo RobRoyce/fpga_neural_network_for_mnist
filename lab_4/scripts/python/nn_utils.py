@@ -20,7 +20,7 @@
 #
 
 def dec_2_fp(val, width, dp):
-    fp_val = ("{0:0{width}b}".format(round(val * (2**dp)), width=width))
+    fp_val = ("{}".format(1 if val < 0 else 0) + "{0:0{width}b}".format(round(abs(val) * (2**dp)), width=width-1))
 
     if len(fp_val) > width: raise Exception("The value {} does not fit in {} bits with dp={}".format(val, width, dp))
 
@@ -31,8 +31,16 @@ def dec_2_fp(val, width, dp):
 #
 def fp_2_dec(val, dp):
     num_bits = len(val)
+    
+    sign = 1 if val[0] == '0' else -1
+    whole = val[1:num_bits-dp]
     frac = val[num_bits-dp:]
-    whole = val[0:num_bits-dp]
 
-    return int(whole,2) + (int(frac,2) * (2**-dp))
+    return sign * (int(whole,2) + (int(frac,2) * (2**-dp)))
+
+
+def format_verilog(fp_val, width):
+    
+    return ("{width}'b{}".format(fp_val, width=width))
+
 
