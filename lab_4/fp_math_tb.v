@@ -4,10 +4,10 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   15:59:57 02/25/2020
+// Create Date:   22:55:47 02/25/2020
 // Design Name:   parallel_adder_16
-// Module Name:   /home/matt/Xilinx/New Folder/test_ml/parallel_adder_16_tb.v
-// Project Name:  test_ml
+// Module Name:   /home/matt/csm152a/lab_4/fp_math_tb.v
+// Project Name:  lab_4
 // Target Device:  
 // Tool versions:  
 // Description: 
@@ -22,17 +22,35 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module parallel_adder_16_tb;
+module fp_math_tb;
 
 	`include "definitions.v"
 
 	// Inputs
-	reg [16*weight_width-1:0] data;
+	wire [16*weight_width-1:0] data;
 	
 	reg [weight_width-1:0] val;
 
 	// Outputs
 	wire [weight_width-1:0] sum;
+	
+	reg [weight_width-1:0] fp_vals [0:15];
+	reg [weight_width-1:0] weights [0:15];
+	
+	reg [weight_width-1:0] weighted_fp_vals [0:15];
+	
+	integer midx;
+	
+	// "Flatten/pack" the weighted_fp_vals array into data register
+	genvar i;
+	generate
+	begin
+		for (i=0; i<16; i=i+1) 
+		begin
+			assign data[weight_width*(i+1)-1:weight_width*i] = weighted_fp_vals[i];
+		end
+	end
+	endgenerate
 
 	// Instantiate the Unit Under Test (UUT)
 	parallel_adder_16 uut (
@@ -42,23 +60,21 @@ module parallel_adder_16_tb;
 
 	initial begin
 		// Initialize Inputs
-		data = 0;
 		
-		val = 2;
-		
-		data[weight_width-1:0] = val;
-		data[16*weight_width-1:15*weight_width] = val;
+		$readmemb("random_fp_vals", fp_vals);
+		$readmemb("random_weights", weights);
 
 		// Wait 100 ns for global reset to finish
 		#100;
+		
+		for (midx = 0; midx < 16; midx = midx + 1)
+		begin
+			fp_mult(fp_vals[midx], weights[midx], weighted_fp_vals[midx]);
+		end
         
 		// Add stimulus here
-		
-		data[weight_width-1:0] = val+1;
 
 	end
-	
-	//always #100 val <= val + 1;
       
 endmodule
 
