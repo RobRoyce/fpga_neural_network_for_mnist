@@ -9,9 +9,12 @@
 
 output_filename="sigmoid_verilog"
 
+sigmoid_range=6 # x-values will be between [-range, +range]
+sigmoid_n_points=31 # the number of evenly-spaced points to sample the sigmoid at
+
 cd octave
 
-octave gen_vals.m | python3 ../python/gen_verilog_case.py > ../$output_filename
+octave gen_vals.m $sigmoid_range $sigmoid_n_points | python3 ../python/gen_verilog_case.py > ../$output_filename
 
 echo "Verilog case statement stored in file: $output_filename"
 
