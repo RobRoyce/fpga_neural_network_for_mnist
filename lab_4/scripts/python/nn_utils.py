@@ -84,6 +84,6 @@ def fp_sm_2_dec(val, dp):
 
 def format_verilog(fp_val, width):
     
-    return ("{width}'b{}".format(fp_val, width=width))
+    return ("{width}'b{0:0{width}b}".format(fp_val, width=width))
 
 
