@@ -91,12 +91,14 @@ def format_verilog(fp_val, width, add_prefix=True):
 
 
 
-def print_weights(weights, width, dp):
+def print_weights(weights, width, dp, end='\n'):
 
     for np_w in weights.numpy():
 
         weight = float(np_w)
 
-        print(format_verilog(dec_2_fp(weight, width, dp), width, add_prefix=False))
+        print(format_verilog(dec_2_fp(weight, width, dp), width, add_prefix=False), end=end)
 
+    if end=='':
+        print()
 
