@@ -27,12 +27,23 @@ module parallel_adder_16_tb;
 	`include "definitions.v"
 
 	// Inputs
-	reg [16*weight_width-1:0] data;
-	
-	reg [weight_width-1:0] val;
+	wire [16*weight_width-1:0] data;
 
 	// Outputs
 	wire [weight_width-1:0] sum;
+	
+	reg [weight_width-1:0] fp_vals [0:15];
+	
+	// "Flatten/pack" the weighted_fp_vals array into data register
+	genvar i;
+	generate
+	begin
+		for (i=0; i<16; i=i+1) 
+		begin
+			assign data[weight_width*(i+1)-1:weight_width*i] = fp_vals[i];
+		end
+	end
+	endgenerate
 
 	// Instantiate the Unit Under Test (UUT)
 	parallel_adder_16 uut (
@@ -42,19 +53,11 @@ module parallel_adder_16_tb;
 
 	initial begin
 		// Initialize Inputs
-		data = 0;
 		
-		val = 2;
-		
-		data[weight_width-1:0] = val;
-		data[16*weight_width-1:15*weight_width] = val;
+		$readmemb("random_weights", fp_vals);
 
 		// Wait 100 ns for global reset to finish
 		#100;
-        
-		// Add stimulus here
-		
-		data[weight_width-1:0] = val+1;
 
 	end
 	
