@@ -90,3 +90,13 @@ def format_verilog(fp_val, width, add_prefix=True):
         return ("{0:0{width}b}".format(fp_val, width=width))
 
 
+
+def print_weights(weights, width, dp):
+
+    for np_w in weights.numpy():
+
+        weight = float(np_w)
+
+        print(format_verilog(dec_2_fp(weight, width, dp), width, add_prefix=False))
+
+
