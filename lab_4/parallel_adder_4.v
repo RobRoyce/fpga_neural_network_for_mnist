@@ -31,8 +31,8 @@ module parallel_adder_4(
 	 wire [weight_width-1:0] s0;
 	 wire [weight_width-1:0] s1;
 	 
-	 assign s0 = data[2*weight_width-1:1*16] + data[1*weight_width-1:0*16];
-	 assign s1 = data[4*weight_width-1:3*16] + data[3*weight_width-1:2*16];
+	 assign s0 = data[weight_width+:weight_width] + data[0+:weight_width];
+	 assign s1 = data[3*weight_width+:weight_width] + data[2*weight_width+:weight_width];
 	 
 	 assign sum = s0 + s1;
 

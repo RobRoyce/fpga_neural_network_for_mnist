@@ -10,8 +10,8 @@ import numpy as np
 from nn_utils import *
 
 # Verilog datatype properties
-width = 22
-decimal_place = 5
+width = 16
+decimal_place = 9
 
 # Filenames
 weights_l1_fn="weights_l1_data"
@@ -20,7 +20,8 @@ biases_l1_fn ="biases_l1_data"
 weights_l2_fn="weights_l2_data"
 biases_l2_fn ="biases_l2_data"
 
-model = tf.keras.models.load_model("model_data/mnist_model")
+#model = tf.keras.models.load_model("model_data/mnist_model")
+model = tf.keras.models.load_model("model_data/land_model")
 
 with open(weights_l1_fn, "w+") as f:
 
