@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4/vga_live_test.ncd
-OUTFILE=/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4/vga_live_test.bit
-FAMILY=Spartan6
-PART=xc6slx16-3csg324
-WORKINGDIR=/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4
-LICENSE=WebPack
-USER_INFO=211861903_0_0_331
