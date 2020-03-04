@@ -26,9 +26,9 @@ module parallel_adder_16(
 	 `include "definitions.v";
 	 
 	 input  [16*weight_width-1:0]data;
-	 output [weight_width-1:0] sum;
+	 output [2*weight_width-1:0] sum;
 	 
-	 wire [4*weight_width-1:0] p_sum; //Partial sums
+	 wire [4*(weight_width+2)-1:0] p_sum; //Partial sums
 	 
 	 genvar i;
 	 generate
@@ -37,18 +37,23 @@ module parallel_adder_16(
 		begin : generate_adders
 			
 			parallel_adder_4 pa_4(
-					.data(data[4*(i+1)*weight_width-1:4*i*weight_width]),
-					.sum(p_sum[(i+1)*weight_width-1:i*weight_width])
+					.data(data[4*i*weight_width+:4*weight_width]),
+					.sum(p_sum[i*(weight_width+2)+:(weight_width+2)])
 			);
 			
 		end
 	 
 	 endgenerate
 	 
-	 parallel_adder_4 pa_4_last(
-				.data(p_sum),
-				.sum(sum)
-	 );
+//	 parallel_adder_4 pa_4_last(
+//				.data(p_sum),
+//				.sum(sum)
+//	 );
+
+     assign sum = { {(weight_width-2){p_sum[weight_width+1]}}, p_sum[0+:weight_width+2] } + 
+                  { {(weight_width-2){p_sum[2*(weight_width+2)-1]}}, p_sum[(weight_width+2)+:weight_width+2] } + 
+                  { {(weight_width-2){p_sum[3*(weight_width+2)-1]}}, p_sum[2*(weight_width+2)+:weight_width+2] } + 
+                  { {(weight_width-2){p_sum[4*(weight_width+2)-1]}}, p_sum[3*(weight_width+2)+:weight_width+2] };
 	 
 
 

@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mnist_network(clk, image);
+module mnist_network(clk, image, led);
 
     `include "definitions.v"
     
@@ -28,13 +28,32 @@ module mnist_network(clk, image);
     
     input [num_input_neurons-1:0] image;
     
+    output [15:0] led;
+    
     wire [weight_width*16-1:0] hidden_neuron_adder_input;
     
     reg [9:0] hidden_neuron_weight_addr;
     
+    reg [weight_width-1:0] hidden_neurons[0:num_hidden_neurons-1];
+    
     wire [weight_width*16-1:0] hidden_neuron_current_weights;
     
-    wire [weight_width-1:0] hidden_neuron_partial_sum;
+    wire [2*weight_width-1:0] hidden_neuron_partial_sum;
+    
+    reg  [2*weight_width-1:0] hidden_neuron_acc;       // Accumulator for the current hidden neuron
+    
+    wire [weight_width-1:0] hidden_neuron;             //Current neuron after activation function
+    
+    assign led = hidden_neuron_partial_sum;
+    
+    initial
+    begin
+        
+        hidden_neuron_weight_addr <= 10'b00000_00000;
+        //image <= {784{1'b1}};
+
+        
+    end
     
     
     blk_mem_input_weights_0 inp_wts_0(
@@ -49,12 +68,99 @@ module mnist_network(clk, image);
                     .douta(hidden_neuron_current_weights[weight_width+:weight_width])
     );
     
-    //TODO generate and instantiate 14 more block mem modules for the input layer :(
+    blk_mem_input_weights_2 inp_wts_2(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[2*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_3 inp_wts_3(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[3*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_4 inp_wts_4(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[4*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_5 inp_wts_5(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[5*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_6 inp_wts_6(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[6*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_7 inp_wts_7(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[7*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_8 inp_wts_8(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[8*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_9 inp_wts_9(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[9*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_10 inp_wts_10(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[10*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_11 inp_wts_11(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[11*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_12 inp_wts_12(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[12*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_13 inp_wts_13(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[13*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_14 inp_wts_14(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[14*weight_width+:weight_width])
+    );
+    
+    blk_mem_input_weights_15 inp_wts_15(
+                    .clka(clk),
+                    .addra(hidden_neuron_weight_addr),
+                    .douta(hidden_neuron_current_weights[15*weight_width+:weight_width])
+    );
     
     parallel_adder_16 l1_pa_16(
                    .data(hidden_neuron_adder_input),
                    .sum(hidden_neuron_partial_sum)
                    
+    );
+    
+    relu relu_module(
+                    .in(hidden_neuron_acc[weight_width-1:0]),
+                    .out(hidden_neuron)
     );
     
     
@@ -77,5 +183,41 @@ module mnist_network(clk, image);
         end
     
     endgenerate
+    
+    parameter total_hidden_partial_sums = 49; //Number of partial sums we need to calculate per neuron in the hidden layer.
+    
+    reg[5:0] neuron_partial_sum_idx;
+    reg[3:0] neuron_idx;
+    
+    initial 
+    begin
+        hidden_neuron_acc <= 0;
+        
+        neuron_partial_sum_idx <= 0;
+        neuron_idx <= 0;
+    end
+    
+    always @(posedge clk)
+    begin
+    
+        if(neuron_idx < num_hidden_neurons)
+        begin
+            if(neuron_partial_sum_idx < total_hidden_partial_sums)
+            begin
+            
+                hidden_neuron_acc <= hidden_neuron_acc + hidden_neuron_partial_sum;
+                neuron_partial_sum_idx <= neuron_partial_sum_idx + 1;
+                
+                hidden_neuron_weight_addr <= hidden_neuron_weight_addr + 1;
+                
+            end
+            else
+            begin
+                neuron_idx <= neuron_idx + 1;
+                hidden_neuron_acc <= 0;
+            end
+        end
+    
+    end
     
 endmodule
