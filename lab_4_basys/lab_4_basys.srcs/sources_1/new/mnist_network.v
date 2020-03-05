@@ -265,6 +265,11 @@ module mnist_network(clk, image, led);
                                     hidden_neuron_acc <= hidden_neuron_partial_sum;
                                 end
                             end
+                            else
+                            begin
+                                state <= st_output_neurons;
+                                neuron_idx <= 0;
+                            end
                     
                     end
                 

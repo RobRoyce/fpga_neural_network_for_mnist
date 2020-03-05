@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583375307">
-  <File Type="VDS-TIMINGSUMMARY" Name="simple_ps2_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="simple_ps2.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="simple_ps2_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="simple_ps2_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="simple_ps2_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="simple_ps2.vds"/>
-  <File Type="REPORTS-TCL" Name="simple_ps2_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="simple_ps2_timing_summary_synth.pb"/>
-  <File Type="PA-TCL" Name="simple_ps2.tcl"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583380401">
+  <File Type="PA-TCL" Name="mnist_network.tcl"/>
+  <File Type="REPORTS-TCL" Name="mnist_network_reports.tcl"/>
+  <File Type="RDS-RDS" Name="mnist_network.vds"/>
+  <File Type="RDS-UTIL" Name="mnist_network_utilization_synth.rpt"/>
+  <File Type="RDS-DCP" Name="mnist_network.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="mnist_network_utilization_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/imports/lab_4/definitions.v">
@@ -215,7 +212,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="simple_ps2"/>
+      <Option Name="TopModule" Val="mnist_network"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
@@ -241,21 +238,21 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_15"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_14"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_13"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_11"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_10"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_9"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_8"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_7"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_6"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_5"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_4"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_3"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_1"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_12"/>
   <BlockFileSet Type="BlockSrcs" Name="blk_mem_gen_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_12"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_3"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_4"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_11"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_7"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_13"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_9"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_14"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_15"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_10"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_6"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_8"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_5"/>
 </GenRun>

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="blk_mem_input_weights_2_synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583372019">
-  <File Type="RDS-RDS" Name="blk_mem_input_weights_2.vds"/>
-  <File Type="REPORTS-TCL" Name="blk_mem_input_weights_2_reports.tcl"/>
-  <File Type="PA-TCL" Name="blk_mem_input_weights_2.tcl"/>
-  <File Type="RDS-UTIL" Name="blk_mem_input_weights_2_utilization_synth.rpt"/>
+<GenRun Id="blk_mem_input_weights_2_synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583393027">
+  <File Type="VDS-TIMINGSUMMARY" Name="blk_mem_input_weights_2_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="blk_mem_input_weights_2.dcp"/>
   <File Type="RDS-UTIL-PB" Name="blk_mem_input_weights_2_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="blk_mem_input_weights_2_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="blk_mem_input_weights_2_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="blk_mem_input_weights_2.vds"/>
+  <File Type="REPORTS-TCL" Name="blk_mem_input_weights_2_reports.tcl"/>
+  <File Type="VDS-TIMING-PB" Name="blk_mem_input_weights_2_timing_summary_synth.pb"/>
+  <File Type="PA-TCL" Name="blk_mem_input_weights_2.tcl"/>
   <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/blk_mem_input_weights_2">
     <File Path="$PSRCDIR/sources_1/ip/blk_mem_input_weights_2/blk_mem_input_weights_2.xci">
       <FileInfo>

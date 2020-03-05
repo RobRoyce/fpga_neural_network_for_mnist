@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
-// Date        : Wed Mar  4 17:55:29 2020
+// Date        : Wed Mar  4 23:37:34 2020
 // Host        : IdeapadZ710 running 64-bit Ubuntu 18.04.3 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /home/matt/csm152a/lab_4_basys/lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_7/blk_mem_input_weights_7_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top blk_mem_input_weights_7 -prefix
+//               blk_mem_input_weights_7_ blk_mem_input_weights_7_stub.v
 // Design      : blk_mem_input_weights_7
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a35tcpg236-1
