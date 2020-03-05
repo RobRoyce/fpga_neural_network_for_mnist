@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir /home/matt/csm152a/lab_4_basys/lab_4_basys.sim/sim_1/behav/xsim/xsim.dir/mnist_network_tb_behav/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Tue Mar  3 21:10:14 2020" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Wed Mar  4 18:59:33 2020" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2019.2 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "2708876" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "LIN64" -context "software_version_and_target_device"
@@ -14,11 +14,11 @@ webtalk_add_data -client project -key target_package -value "not_applicable" -co
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "52482e45-57ee-4c26-bd77-df7ab66a9adc" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_id -value "f70fb3d04a774a4c83032112ff5f034b" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_iteration -value "62" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_iteration -value "160" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Ubuntu" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "Ubuntu 18.04.3 LTS" -context "user_environment"
 webtalk_add_data -client project -key cpu_name -value "Intel(R) Core(TM) i7-4700MQ CPU @ 2.40GHz" -context "user_environment"
-webtalk_add_data -client project -key cpu_speed -value "1607.810 MHz" -context "user_environment"
+webtalk_add_data -client project -key cpu_speed -value "1656.487 MHz" -context "user_environment"
 webtalk_add_data -client project -key total_processors -value "1" -context "user_environment"
 webtalk_add_data -client project -key system_ram -value "8.000 GB" -context "user_environment"
 webtalk_register_client -client xsim
@@ -33,10 +33,10 @@ webtalk_add_data -client xsim -key Debug -value "typical" -context "xsim\\comman
 webtalk_add_data -client xsim -key Simulation_Image_Code -value "1537 KB" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Simulation_Image_Data -value "165 KB" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Total_Nets -value "0" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Total_Processes -value "3043" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Total_Instances -value "120" -context "xsim\\usage"
+webtalk_add_data -client xsim -key Total_Processes -value "3047" -context "xsim\\usage"
+webtalk_add_data -client xsim -key Total_Instances -value "121" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Xilinx_HDL_Libraries_Used -value "secureip unimacro_ver unisims_ver " -context "xsim\\usage"
 webtalk_add_data -client xsim -key Compiler_Time -value "7.46_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Compiler_Memory -value "513248_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 1916725681 -regid "" -xml /home/matt/csm152a/lab_4_basys/lab_4_basys.sim/sim_1/behav/xsim/xsim.dir/mnist_network_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/matt/csm152a/lab_4_basys/lab_4_basys.sim/sim_1/behav/xsim/xsim.dir/mnist_network_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/matt/csm152a/lab_4_basys/lab_4_basys.sim/sim_1/behav/xsim/xsim.dir/mnist_network_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Compiler_Memory -value "513552_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 2497392470 -regid "" -xml /home/matt/csm152a/lab_4_basys/lab_4_basys.sim/sim_1/behav/xsim/xsim.dir/mnist_network_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/matt/csm152a/lab_4_basys/lab_4_basys.sim/sim_1/behav/xsim/xsim.dir/mnist_network_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/matt/csm152a/lab_4_basys/lab_4_basys.sim/sim_1/behav/xsim/xsim.dir/mnist_network_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate

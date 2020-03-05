@@ -186,6 +186,8 @@ module mnist_network(clk, image, led);
     
     parameter total_hidden_partial_sums = 49; //Number of partial sums we need to calculate per neuron in the hidden layer.
     
+    reg [1:0] mem_wait_ctr = 2'b00;
+    
     reg[5:0] neuron_partial_sum_idx;
     reg[3:0] neuron_idx;
     
@@ -199,25 +201,41 @@ module mnist_network(clk, image, led);
     
     always @(posedge clk)
     begin
-    
-        if(neuron_idx < num_hidden_neurons)
+        if(mem_wait_ctr == 0)
         begin
-            if(neuron_partial_sum_idx < total_hidden_partial_sums)
-            begin
-            
-                hidden_neuron_acc <= hidden_neuron_acc + hidden_neuron_partial_sum;
-                neuron_partial_sum_idx <= neuron_partial_sum_idx + 1;
-                
-                hidden_neuron_weight_addr <= hidden_neuron_weight_addr + 1;
-                
-            end
-            else
-            begin
-                neuron_idx <= neuron_idx + 1;
-                hidden_neuron_acc <= 0;
-            end
+            mem_wait_ctr <= mem_wait_ctr + 1;
+            hidden_neuron_weight_addr <= hidden_neuron_weight_addr + 1;
         end
-    
+//        else if(mem_wait_ctr == 1)
+//        begin
+//            //mem_wait_ctr <= mem_wait_ctr + 1;
+//            //hidden_neuron_weight_addr <= hidden_neuron_weight_addr + 1;
+//        end
+        else
+        begin
+        
+                if(neuron_idx < num_hidden_neurons - 1)
+                begin
+                    hidden_neuron_weight_addr <= hidden_neuron_weight_addr + 1;
+                    if(neuron_partial_sum_idx < total_hidden_partial_sums + 1)
+                    begin
+                    
+                        hidden_neuron_acc <= hidden_neuron_acc + hidden_neuron_partial_sum;
+                        neuron_partial_sum_idx <= neuron_partial_sum_idx + 1;
+                        
+                    end
+                    else
+                    begin
+                        hidden_neurons[neuron_idx] <= hidden_neuron;
+                    
+                        neuron_idx <= neuron_idx + 1;
+                        neuron_partial_sum_idx <= 2;
+                        
+                        hidden_neuron_acc <= hidden_neuron_partial_sum;
+                    end
+                end
+        
+        end
     end
     
 endmodule

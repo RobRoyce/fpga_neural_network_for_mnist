@@ -29,7 +29,7 @@ eval( EAInclude(ISEJScriptLib) );
 // pre-commands:
 ISETouchFile( "init_design", "begin" );
 ISEStep( "vivado",
-         "-log mnist_network.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source mnist_network.tcl -notrace" );
+         "-log simple_ps2.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source simple_ps2.tcl -notrace" );
 
 
 

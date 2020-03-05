@@ -1,0 +1,15 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
+| Date         : Wed Mar  4 18:31:17 2020
+| Host         : IdeapadZ710 running 64-bit Ubuntu 18.04.3 LTS
+| Command      : report_bus_skew -warn_on_violation -file simple_ps2_bus_skew_routed.rpt -pb simple_ps2_bus_skew_routed.pb -rpx simple_ps2_bus_skew_routed.rpx
+| Design       : simple_ps2
+| Device       : 7a35t-cpg236
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bus Skew Report
+
+No bus skew constraints
+

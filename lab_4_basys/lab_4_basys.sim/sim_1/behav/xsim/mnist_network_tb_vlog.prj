@@ -1,10 +1,14 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  --include "../../../../lab_4_basys.srcs/sources_1/imports/lab_4" \
 "../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_gen_0_1/sim/blk_mem_gen_0.v" \
-"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_1/sim/blk_mem_input_weights_1.v" \
 "../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_0/sim/blk_mem_input_weights_0.v" \
+"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_1/sim/blk_mem_input_weights_1.v" \
 "../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_2/sim/blk_mem_input_weights_2.v" \
 "../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_3/sim/blk_mem_input_weights_3.v" \
+"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_4/sim/blk_mem_input_weights_4.v" \
+"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_5/sim/blk_mem_input_weights_5.v" \
+"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_6/sim/blk_mem_input_weights_6.v" \
+"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_7/sim/blk_mem_input_weights_7.v" \
 "../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_8/sim/blk_mem_input_weights_8.v" \
 "../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_9/sim/blk_mem_input_weights_9.v" \
 "../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_10/sim/blk_mem_input_weights_10.v" \
@@ -21,10 +25,6 @@ verilog xil_defaultlib  --include "../../../../lab_4_basys.srcs/sources_1/import
 "../../../../lab_4_basys.srcs/sources_1/new/simple_blk_mem.v" \
 "../../../../lab_4_basys.srcs/sources_1/new/mnist_network.v" \
 "../../../../lab_4_basys.srcs/sources_1/new/simple_ps2.v" \
-"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_5/sim/blk_mem_input_weights_5.v" \
-"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_4/sim/blk_mem_input_weights_4.v" \
-"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_6/sim/blk_mem_input_weights_6.v" \
-"../../../../lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_7/sim/blk_mem_input_weights_7.v" \
 "../../../../lab_4_basys.srcs/sim_1/imports/lab_4/simple_nn_tb.v" \
 "../../../../lab_4_basys.srcs/sim_1/imports/lab_4/neural_network_tb.v" \
 "../../../../lab_4_basys.srcs/sim_1/imports/lab_4/fp_math_tb.v" \

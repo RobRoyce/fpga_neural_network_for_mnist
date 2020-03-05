@@ -21,12 +21,14 @@
 
 
 module simple_ps2(
-    output reg PS2Clk,
+    input PS2Clk,
     input PS2Data,
     output [15:0] led
     );
     
     reg [15:0] data;
+    
+    assign led = data;
     
     always @(negedge PS2Clk)
     begin
