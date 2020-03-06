@@ -40,6 +40,8 @@ module mnist_network(clk, image, led);
     
     wire [num_hidden_neurons*weight_width-1:0] hidden_neurons_weighted;
     
+    reg [15:0] current_input_neurons;
+    
     reg [num_output_neurons*weight_width-1:0] output_neurons;
     
     wire [weight_width*16-1:0] current_weights;
@@ -175,7 +177,7 @@ module mnist_network(clk, image, led);
             //TODO see if we can clean up the syntax
             //for the "a" input to the multiplier.
             fp_multiplier fp_hidden_mult(
-                    .a({{weight_width-decimal_place-1{1'b0}}, image[i], {decimal_place{1'b0}}}), // Convert each bit in the image into a 16-bit fixed-point representation
+                    .a({{weight_width-decimal_place-1{1'b0}}, current_input_neurons[15-i], {decimal_place{1'b0}}}), // Convert each bit in the image into a 16-bit fixed-point representation
                     .b(current_weights[weight_width*i+:weight_width]),
                     .prod(hidden_neuron_adder_input[weight_width*i+:weight_width])
             );
@@ -240,8 +242,16 @@ module mnist_network(clk, image, led);
             case(state)
             
             st_hidden_neurons: begin
-                        
+            
+                            if(neuron_partial_sum_idx < total_hidden_partial_sums)
+                                //current_input_neurons <= image[16*neuron_partial_sum_idx+:16];
+                                current_input_neurons <= image[16*(total_hidden_partial_sums-neuron_partial_sum_idx-1)+:16];
+                            
                             if(mem_wait_ctr == 0)
+                            begin
+                                mem_wait_ctr <= mem_wait_ctr + 1;
+                            end
+                            else if(mem_wait_ctr == 1)
                             begin
                                 mem_wait_ctr <= mem_wait_ctr + 1;
                                 neuron_weight_addr <= neuron_weight_addr + 1;
@@ -275,6 +285,8 @@ module mnist_network(clk, image, led);
                                     state <= st_output_neurons;
                                     neuron_idx <= 0;
                                     mem_wait_ctr <= 0;
+                                    neuron_partial_sum_idx <= 0;
+                                    hidden_neuron_acc <= 0;
                                     neuron_weight_addr <= neuron_weight_addr - 3;
                                 end
                             end
@@ -295,6 +307,13 @@ module mnist_network(clk, image, led);
                                     neuron_weight_addr <= neuron_weight_addr + 1;
                                     neuron_idx <= neuron_idx + 1;
                                     output_neurons[weight_width*(num_output_neurons-neuron_idx-1)+:weight_width] <= output_neuron;
+                                end
+                                else
+                                begin
+                                    state <= st_hidden_neurons;
+                                    neuron_idx <= 0;
+                                    neuron_weight_addr <= 0;
+                                    mem_wait_ctr <= 0;
                                 end
                             end
             
