@@ -20,22 +20,20 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mnist_network(clk, image, led);
+module mnist_network(clk, image, prediction);
 
     `include "definitions.v"
     
     input clk;
     
     input [num_input_neurons-1:0] image;
-    //reg [num_input_neurons-1:0] image;
     
-    output [15:0] led;
+    output [3:0] prediction;
     
     wire [weight_width*16-1:0] hidden_neuron_adder_input;
     
     reg [9:0] neuron_weight_addr;
     
-    //reg [weight_width-1:0] hidden_neurons[0:num_hidden_neurons-1];
     reg [num_hidden_neurons*weight_width-1:0] hidden_neurons;
     
     wire [num_hidden_neurons*weight_width-1:0] hidden_neurons_weighted;
@@ -57,14 +55,10 @@ module mnist_network(clk, image, led);
     
     wire [weight_width-1:0] output_neuron;             //Current output neuron after activation function
     
-    assign led = hidden_neurons[0+:weight_width];
-    
     initial
     begin
         
         neuron_weight_addr <= 10'b00000_00000;
-        //image <= {784{1'b1}};
-
         
     end
     

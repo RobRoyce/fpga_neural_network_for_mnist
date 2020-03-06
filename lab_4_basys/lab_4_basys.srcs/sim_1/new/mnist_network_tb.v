@@ -59,6 +59,6 @@ module mnist_network_tb(
         //image <= {784{1'b1}};
     end
     
-    always #10 clk <= ~clk;
+    always #5 clk <= ~clk;
     
 endmodule

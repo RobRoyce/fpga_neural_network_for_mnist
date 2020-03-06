@@ -12,6 +12,9 @@ def dec_2_fp(val, width, dp):
 
     mag  = round(abs(val) * 2**dp)
 
+    if mag == 0:
+        return 0
+
     fp_val = 0
 
     edge_check = mag >> (width-1)
