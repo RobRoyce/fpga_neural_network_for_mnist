@@ -1,5 +1,5 @@
 parameter weight_width = 16;
-parameter decimal_place = 7;
+parameter decimal_place = 8;
 
 parameter num_input_neurons = 784;
 parameter num_hidden_neurons = 16;

@@ -46,9 +46,10 @@ module mnist_network(clk, image, led);
     
     wire [2*weight_width-1:0] hidden_neuron_partial_sum;
     
-    wire  [2*weight_width-1:0] output_neuron_sum;
+    wire [2*weight_width-1:0] output_neuron_sum;
     
     reg  [2*weight_width-1:0] hidden_neuron_acc;       // Accumulator for the current hidden neuron
+    reg  [2*weight_width-1:0] output_neuron_acc;       // Accumulator for the current hidden neuron
     
     wire [weight_width-1:0] hidden_neuron;             //Current hidden neuron after activation function
     
@@ -168,7 +169,7 @@ module mnist_network(clk, image, led);
     genvar i;
     generate
     
-        for(i = 0; i < 16; i = i +1)
+        for(i = 0; i < 16; i = i + 1)
         begin
             
             //TODO see if we can clean up the syntax
@@ -206,18 +207,18 @@ module mnist_network(clk, image, led);
     );
     
     relu output_relu(
-                    .in(output_neuron_sum),
+                    .in(output_neuron_acc[weight_width-1:0]),
                     .out(output_neuron)
     );
     
     parameter total_hidden_partial_sums = 49; //Number of partial sums we need to calculate per neuron in the hidden layer.
+    reg[5:0] neuron_partial_sum_idx;
     
     parameter st_hidden_neurons = 0;
     parameter st_output_neurons = 1;
     
     reg [1:0] mem_wait_ctr = 2'b00;
     
-    reg[5:0] neuron_partial_sum_idx;
     reg[4:0] neuron_idx;
     
     reg[2:0] state = 3'b000;
@@ -232,59 +233,75 @@ module mnist_network(clk, image, led);
     
     always @(posedge clk)
     begin
-        case(state)
         
-        st_hidden_neurons: begin
+        output_neuron_acc <= output_neuron_sum;
+        begin
         
-                    if(mem_wait_ctr == 0)
-                    begin
-                        mem_wait_ctr <= mem_wait_ctr + 1;
-                        neuron_weight_addr <= neuron_weight_addr + 1;
-                    end
-                    else
-                    begin
-                    
-                            if(neuron_idx < num_hidden_neurons)
+            case(state)
+            
+            st_hidden_neurons: begin
+                        
+                            if(mem_wait_ctr == 0)
                             begin
+                                mem_wait_ctr <= mem_wait_ctr + 1;
                                 neuron_weight_addr <= neuron_weight_addr + 1;
-                                if(neuron_partial_sum_idx < total_hidden_partial_sums + 1)
-                                begin
-                                
-                                    hidden_neuron_acc <= hidden_neuron_acc + hidden_neuron_partial_sum;
-                                    neuron_partial_sum_idx <= neuron_partial_sum_idx + 1;
-                                    
-                                end
-                                else
-                                begin
-//                                    hidden_neurons[neuron_idx] <= hidden_neuron;
-                                    hidden_neurons[weight_width*(num_hidden_neurons-neuron_idx-1)+:weight_width] <= hidden_neuron;
-                                
-                                    neuron_idx <= neuron_idx + 1;
-                                    neuron_partial_sum_idx <= 2;
-                                    
-                                    hidden_neuron_acc <= hidden_neuron_partial_sum;
-                                end
                             end
                             else
                             begin
-                                state <= st_output_neurons;
-                                neuron_idx <= 0;
+                                if(neuron_idx < num_hidden_neurons)
+                                begin
+                                    neuron_weight_addr <= neuron_weight_addr + 1;
+                                    if(neuron_partial_sum_idx < total_hidden_partial_sums + 1)
+                                    begin
+                                    
+                                        hidden_neuron_acc <= hidden_neuron_acc + hidden_neuron_partial_sum;
+                                        neuron_partial_sum_idx <= neuron_partial_sum_idx + 1;
+                                        
+                                    end
+                                    else
+                                    begin
+    //                                    hidden_neurons[neuron_idx] <= hidden_neuron;
+    //                                    hidden_neurons[weight_width*(num_hidden_neurons-neuron_idx-1)+:weight_width] <= hidden_neuron;
+                                        hidden_neurons[weight_width*neuron_idx+:weight_width] <= hidden_neuron;
+                                    
+                                        neuron_idx <= neuron_idx + 1;
+                                        neuron_partial_sum_idx <= 2;
+                                        
+                                        hidden_neuron_acc <= hidden_neuron_partial_sum;
+                                    end
+                                end
+                                else
+                                begin
+                                    state <= st_output_neurons;
+                                    neuron_idx <= 0;
+                                    mem_wait_ctr <= 0;
+                                    neuron_weight_addr <= neuron_weight_addr - 3;
+                                end
                             end
                     
-                    end
-                
-                           end // st_hidden_neurons
-        st_output_neurons: begin
-                    
-                            if(neuron_idx < num_output_neurons)
+                               end // st_hidden_neurons
+            st_output_neurons: begin
+                        
+                        
+                            if(mem_wait_ctr < 3)
                             begin
+                                mem_wait_ctr <= mem_wait_ctr + 1;
                                 neuron_weight_addr <= neuron_weight_addr + 1;
-                                neuron_idx <= neuron_idx + 1;
-                                output_neurons[weight_width*(num_output_neurons-neuron_idx-1)+:weight_width] <= output_neuron;
                             end
+                            else
+                            begin
+                                if(neuron_idx <= num_output_neurons)
+                                begin
+                                    neuron_weight_addr <= neuron_weight_addr + 1;
+                                    neuron_idx <= neuron_idx + 1;
+                                    output_neurons[weight_width*(num_output_neurons-neuron_idx-1)+:weight_width] <= output_neuron;
+                                end
+                            end
+            
+                               end // st_output_neurons
+            endcase
         
-                           end // st_output_neurons
-        endcase
+        end
     end
     
 endmodule
