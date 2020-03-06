@@ -1,1 +1,0 @@
--wto "f70fb3d04a774a4c83032112ff5f034b" --incr --debug "typical" --relax --mt "8" -L "blk_mem_gen_v8_4_4" -L "xil_defaultlib" -L "unisims_ver" -L "unimacro_ver" -L "secureip" -L "xpm" --snapshot "mnist_network_tb_behav" "xil_defaultlib.mnist_network_tb" "xil_defaultlib.glbl" -log "elaborate.log" 
