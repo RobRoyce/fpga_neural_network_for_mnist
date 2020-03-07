@@ -19,16 +19,6 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-//----------------------------------------------------------------------
-// Global Parameters
-`define IMAGE_DATA_HEIGHT = 28
-`define IMAGE_DATA_WIDTH = 28
-`define IMAGE_DEPTH = IMAGE_DATA_HEIGHT * IMAGE_DATA_WIDTH
-`define IMAGE_SCALE_FACTOR = 17
-`define SCREEN_HEIGHT = 480
-`define SCREEN_WIDTH = 640
-
-
 module top(
            input wire         clk,
            input wire         reset, // sw[15]
@@ -47,69 +37,59 @@ module top(
            output wire        Hsync,
            output wire        Vsync
            );
+
+   //----------------------------------------------------------------------
+   // Clocks and Debounced Input
+   wire                       pix_clk;   // 25MHz pixel clock
+   wire                       i_btnC, i_btnU, i_btnD, i_btnL, i_btnR, i_reset;
+
+
    //----------------------------------------------------------------------
    // MNIST Image Storage
-   wire                       btnC_d, btnU_d, btnD_d, btnL_d, btnR_d, reset_d;
-   reg [783:0]                image_data; // TODO: delete
-   wire [783:0]               image_shared_vec; // shared image between NN and display
-   wire [27:0]                mnist_d; // read bus from ROM to image_data
-   reg [7:0]                  mnist_a; // to access various images in ROM
-   reg [2:0]                  mnist_current; // keep track of which image we're on
-   reg [2:0]                  mnist_next;
-   reg                        mnist_trans;
-   wire                       pix_clk;   // 25MHz pixel clock
-   wire                       cycle_clk; // 0.2Hz (5 second) clock to cycle images
-   assign led[2:0] = mnist_current;
-
-   clk_div clk_div(
-                   .i_clk(clk),
-                   .i_reset(reset_d),
-                   .o_pix_clk(pix_clk),
-                   .o_cycle_clk(cycle_clk)
-                   );
+   wire [783:0]               image_rom_data_bus; // shared image between NN and display
+   reg [3:0]                  image_rom_address; // current location in ROM
+   reg [3:0]                  image_rom_current; // current ROM image
+   reg [3:0]                  image_rom_next; // double buffered
+   reg                        image_is_transitioning; // needed for VGA coherence
 
 
    initial
      begin
-        image_data <= 784'd0;
-        mnist_a <= 8'b0;
-        mnist_current <= 3'b0;
-        mnist_next <= 3'b0;
-        mnist_trans <= 1'b0; // goes high right after transition
-     end
-
-   rom_8x784 mnist_dataset(
-                           .a(mnist_ba),
-                           .spo(mnist_bd)
-                           );
-
-   mnist_rom mnist_images(
-                          .a(mnist_a),
-                          .spo(mnist_d)
-                          );
-
-   always @(posedge clk)
-     begin
-        // Populate the image data
-        image_data[(mnist_a*28)+27 -: 28] <= mnist_d[27:0];
+        image_rom_address <= 4'h0;
+        image_rom_current <= 4'h0;
+        image_rom_next <= 4'h0;
+        image_is_transitioning <= 4'h0;
      end
 
    always @(posedge clk)
      begin
-        // If address has reached max, reset it
-        if(mnist_a == 8'd27)
-          mnist_a <= 8'd0;
+        if(i_reset)
+          begin
+             image_rom_address <= 4'h0;
+             image_is_transitioning <= 4'h0;
+          end
         else
-          // otherwise increment
-          mnist_a <= mnist_a + 8'b1;
+             if(i_btnR)
+               image_rom_address <= image_rom_address == 4'hF ? 4'h0 : image_rom_address + 4'h1;
+             else if(i_btnL)
+               image_rom_address <= image_rom_address == 4'h0 ? 4'hF : image_rom_address - 4'h1;
      end
 
+   //----------------------------------------------------------------------
+   // Submodules
+   clk_div clk_div(
+                   .i_clk(clk),
+                   .i_reset(i_reset),
+                   .o_pix_clk(pix_clk)
+                   );
+
+   rom_8x784 mnist_dataset(.a(image_rom_address), .spo(image_rom_data_bus));
 
    gfx_top graphics_top(.i_clk(clk),
                         .i_pix_clk(pix_clk),
-                        .i_reset(reset_d),
+                        .i_reset(i_reset),
                         .i_color_sel(color_sel),
-                        .i_image_data(image_data),
+                        .i_image_data(image_rom_data_bus),
                         .rgb({vgaRed, vgaGreen, vgaBlue}),
                         .Hsync(Hsync),
                         .Vsync(Vsync),
@@ -117,14 +97,15 @@ module top(
                         .an(an)
                         );
 
- 
+
+
    //----------------------------------------------------------------------
    // Debounced inputs
    debouncer btnC_deb(
                       .i_clk(clk),
                       .i_signal(btnC),
                       .o_state(),
-                      .o_trans_dn(btnC_d),
+                      .o_trans_dn(i_btnC),
                       .o_trans_up()
                       );
 
@@ -132,7 +113,7 @@ module top(
                       .i_clk(clk),
                       .i_signal(btnU),
                       .o_state(),
-                      .o_trans_dn(btnU_d),
+                      .o_trans_dn(i_btnU),
                       .o_trans_up()
                       );
 
@@ -140,7 +121,7 @@ module top(
                       .i_clk(clk),
                       .i_signal(btnL),
                       .o_state(),
-                      .o_trans_dn(btnL_d),
+                      .o_trans_dn(i_btnL),
                       .o_trans_up()
                       );
 
@@ -148,7 +129,7 @@ module top(
                       .i_clk(clk),
                       .i_signal(btnR),
                       .o_state(),
-                      .o_trans_dn(btnR_d),
+                      .o_trans_dn(i_btnR),
                       .o_trans_up()
                       );
 
@@ -156,14 +137,14 @@ module top(
                       .i_clk(clk),
                       .i_signal(btnD),
                       .o_state(),
-                      .o_trans_dn(btnD_d),
+                      .o_trans_dn(i_btnD),
                       .o_trans_up()
                       );
 
    debouncer reset_deb(
                        .i_clk(clk),
                        .i_signal(reset),
-                       .o_state(reset_d),
+                       .o_state(i_reset),
                        .o_trans_dn(),
                        .o_trans_up()
                        );
