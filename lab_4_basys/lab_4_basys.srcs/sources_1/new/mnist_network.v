@@ -171,7 +171,8 @@ module mnist_network(clk, image, prediction);
             //TODO see if we can clean up the syntax
             //for the "a" input to the multiplier.
             fp_multiplier fp_hidden_mult(
-                    .a({{weight_width-decimal_place-1{1'b0}}, current_input_neurons[15-i], {decimal_place{1'b0}}}), // Convert each bit in the image into a 16-bit fixed-point representation
+//                    .a({{weight_width-decimal_place-1{1'b0}}, current_input_neurons[15-i], {decimal_place{1'b0}}}), // Convert each bit in the image into a 16-bit fixed-point representation
+                    .a({{weight_width-decimal_place-1{1'b0}}, current_input_neurons[i], {decimal_place{1'b0}}}), // Convert each bit in the image into a 16-bit fixed-point representation
                     .b(current_weights[weight_width*i+:weight_width]),
                     .prod(hidden_neuron_adder_input[weight_width*i+:weight_width])
             );
@@ -207,6 +208,12 @@ module mnist_network(clk, image, prediction);
                     .out(output_neuron)
     );
     
+    comparator_10 output_cmp(
+            .in(output_neurons),
+            .out(),
+            .out_idx(prediction)
+    );
+    
     parameter total_hidden_partial_sums = 49; //Number of partial sums we need to calculate per neuron in the hidden layer.
     reg[5:0] neuron_partial_sum_idx;
     
@@ -238,8 +245,8 @@ module mnist_network(clk, image, prediction);
             st_hidden_neurons: begin
             
                             if(neuron_partial_sum_idx < total_hidden_partial_sums)
-                                //current_input_neurons <= image[16*neuron_partial_sum_idx+:16];
-                                current_input_neurons <= image[16*(total_hidden_partial_sums-neuron_partial_sum_idx-1)+:16];
+                                current_input_neurons <= image[16*neuron_partial_sum_idx+:16];
+//                                current_input_neurons <= image[16*(total_hidden_partial_sums-neuron_partial_sum_idx-1)+:16];
                             
                             if(mem_wait_ctr == 0)
                             begin
@@ -300,7 +307,7 @@ module mnist_network(clk, image, prediction);
                                 begin
                                     neuron_weight_addr <= neuron_weight_addr + 1;
                                     neuron_idx <= neuron_idx + 1;
-                                    output_neurons[weight_width*(num_output_neurons-neuron_idx-1)+:weight_width] <= output_neuron;
+                                    output_neurons[weight_width*neuron_idx+:weight_width] <= output_neuron;
                                 end
                                 else
                                 begin
