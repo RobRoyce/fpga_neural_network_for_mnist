@@ -11,7 +11,7 @@ import numpy as np
 num_images = 16
 
 # Output filename. Unique to the number of images you pull
-coe_filename = "mnist_images_{}x784_test.coe".format(num_images)
+coe_filename = "mnist_images_{}x784.coe".format(num_images)
 
 # Where to start pulling images from x_train or x_test.  Kinda irrelevant
 starting_index = 500
