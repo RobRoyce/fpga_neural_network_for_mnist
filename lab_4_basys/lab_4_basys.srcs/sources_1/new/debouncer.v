@@ -29,7 +29,7 @@ module debouncer(
                  );
    reg                      sync_0;
    reg                      sync_1;
-   reg [15:0]               count;
+   reg [16:0]               count;
    wire                     idle = (o_state == sync_1);
    wire                     finished = &count;
 
@@ -38,7 +38,7 @@ module debouncer(
         sync_0 = 1'b0;
         sync_1 = 1'b0;
         o_state = 1'b0;
-        count = 16'b0;
+        count = 17'b0;
      end
 
    assign o_trans_dn = ~idle & finished & ~o_state;
@@ -55,10 +55,10 @@ module debouncer(
    always @(posedge i_clk)
      begin
         if(idle)
-          count <= 16'b0;
+          count <= 17'b0;
         else
           begin
-             count <= count + 16'b1;
+             count <= count + 17'b1;
              if(finished)
                o_state <= ~o_state;
           end
