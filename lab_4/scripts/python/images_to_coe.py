@@ -11,9 +11,9 @@ import numpy as np
 num_images = 16
 
 # Output filename. Unique to the number of images you pull
-coe_filename = "mnist_images_{}x784.coe".format(num_images)
+coe_filename = "mnist_images_{}x784_test.coe".format(num_images)
 
-#where to start pulling images from x_train or x_test.  Kinda irrelevant
+# Where to start pulling images from x_train or x_test.  Kinda irrelevant
 starting_index = 500
 
 mnist = tf.keras.datasets.mnist
@@ -26,6 +26,9 @@ x_train = np.round(x_train / 255.0)
 images = x_train[starting_index:starting_index+num_images]
 
 images = images.reshape(num_images, 784)
+
+# Flips the bit order.
+images = np.flip(images, 1)
 
 with open(coe_filename, "w+") as f:
 
