@@ -38,8 +38,6 @@ module top(
            input wire         btnL,
            input wire         btnR,
            input wire         btnD,
-           input wire         PS2Clk,
-           input wire         PS2Data,
            output wire [6:0]  seg,
            output wire [3:0]  an,
            output wire [3:0]  vgaRed,
@@ -49,6 +47,19 @@ module top(
            output wire        Hsync,
            output wire        Vsync
            );
+   //----------------------------------------------------------------------
+   // MNIST Image Storage
+   wire                       btnC_d, btnU_d, btnD_d, btnL_d, btnR_d, reset_d;
+   reg [783:0]                image_data; // TODO: delete
+   wire [783:0]               image_shared_vec; // shared image between NN and display
+   wire [27:0]                mnist_d; // read bus from ROM to image_data
+   reg [7:0]                  mnist_a; // to access various images in ROM
+   reg [2:0]                  mnist_current; // keep track of which image we're on
+   reg [2:0]                  mnist_next;
+   reg                        mnist_trans;
+   wire                       pix_clk;   // 25MHz pixel clock
+   wire                       cycle_clk; // 0.2Hz (5 second) clock to cycle images
+   assign led[2:0] = mnist_current;
 
    clk_div clk_div(
                    .i_clk(clk),
@@ -58,46 +69,40 @@ module top(
                    );
 
 
-
-   //----------------------------------------------------------------------
-   // MNIST Image Storage
-   reg [783:0]                image_data; // shared image between NN and display
-   wire [27:0]                mnist_d; // read bus from ROM to image_data
-   reg [7:0]                  mnist_a; // to access various images in ROM
-   reg [2:0]                  mnist_current_image; // keep track of which image we're on
-   wire                       pix_clk;   // 25MHz pixel clock
-   wire                       cycle_clk; // 0.2Hz (5 second) clock to cycle images
-
-   reg                        cycle_led;
-   assign led[0] = cycle_clk;
-
-
-   integer                    i;
-
-
    initial
      begin
-        image_data <= 784'b0;
+        image_data <= 784'd0;
         mnist_a <= 8'b0;
-        mnist_current_image <= 3'b0;
-        cycle_led <= 1'b0;
+        mnist_current <= 3'b0;
+        mnist_next <= 3'b0;
+        mnist_trans <= 1'b0; // goes high right after transition
      end
 
-   mnist_rom mnist_images(.a(mnist_a), .spo(mnist_d));
+   rom_8x784 mnist_dataset(
+                           .a(mnist_ba),
+                           .spo(mnist_bd)
+                           );
 
+   mnist_rom mnist_images(
+                          .a(mnist_a),
+                          .spo(mnist_d)
+                          );
 
-   always @(posedge cycle_clk)
-     begin : cycle
-        for(integer i = 0; i < 28; i = i + 1)
-          begin
-             mnist_a = 1 % 28;
-             image_data[i * 28 +: 28] = mnist_d;
-          end
+   always @(posedge clk)
+     begin
+        // Populate the image data
+        image_data[(mnist_a*28)+27 -: 28] <= mnist_d[27:0];
      end
 
-
-
-
+   always @(posedge clk)
+     begin
+        // If address has reached max, reset it
+        if(mnist_a == 8'd27)
+          mnist_a <= 8'd0;
+        else
+          // otherwise increment
+          mnist_a <= mnist_a + 8'b1;
+     end
 
 
    gfx_top graphics_top(.i_clk(clk),
@@ -112,17 +117,7 @@ module top(
                         .an(an)
                         );
 
-
-
-
-
-
-   
-   //----------------------------------------------------------------------
-   // Buttons and switches (suffix '_d' implies debounced)
-   wire                      btnC_d, btnU_d, btnD_d, btnL_d, btnR_d, // inputs
-                             reset_d; // global reset
-   
+ 
    //----------------------------------------------------------------------
    // Debounced inputs
    debouncer btnC_deb(
