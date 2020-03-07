@@ -30,39 +30,82 @@
 
 
 module top(
-           input wire        clk,
-           input wire        reset, // sw[15]
-           input wire        btnC,
-           input wire        btnU,
-           input wire        btnL,
-           input wire        btnR,
-           input wire        btnD,
-           output wire [6:0] seg,
-           output wire [3:0] an,
-           output wire [3:0] vgaRed,
-           output wire [3:0] vgaGreen,
-           output wire [3:0] vgaBlue,
-           output wire       Hsync,
-           output wire       Vsync
+           input wire         clk,
+           input wire         reset, // sw[15]
+           input wire [2:0]   color_sel, // sw[2:0]
+           input wire         btnC,
+           input wire         btnU,
+           input wire         btnL,
+           input wire         btnR,
+           input wire         btnD,
+           input wire         PS2Clk,
+           input wire         PS2Data,
+           output wire [6:0]  seg,
+           output wire [3:0]  an,
+           output wire [3:0]  vgaRed,
+           output wire [3:0]  vgaGreen,
+           output wire [3:0]  vgaBlue,
+           output wire [15:0] led,
+           output wire        Hsync,
+           output wire        Vsync
            );
-   wire                      image_data; // shared image between NN and display
+
+   clk_div clk_div(
+                   .i_clk(clk),
+                   .i_reset(reset_d),
+                   .o_pix_clk(pix_clk),
+                   .o_cycle_clk(cycle_clk)
+                   );
+
 
 
    //----------------------------------------------------------------------
-   // Buttons and switches (suffix '_d' implies debounced)
-   wire                      btnC_d, btnU_d, btnD_d, btnL_d, btnR_d, // inputs
-                             reset_d, // global reset
+   // MNIST Image Storage
+   reg [783:0]                image_data; // shared image between NN and display
+   wire [27:0]                mnist_d; // read bus from ROM to image_data
+   reg [7:0]                  mnist_a; // to access various images in ROM
+   reg [2:0]                  mnist_current_image; // keep track of which image we're on
+   wire                       pix_clk;   // 25MHz pixel clock
+   wire                       cycle_clk; // 0.2Hz (5 second) clock to cycle images
+
+   reg                        cycle_led;
+   assign led[0] = cycle_clk;
+
+
+   integer                    i;
+
+
+   initial
+     begin
+        image_data <= 784'b0;
+        mnist_a <= 8'b0;
+        mnist_current_image <= 3'b0;
+        cycle_led <= 1'b0;
+     end
+
+   mnist_rom mnist_images(.a(mnist_a), .spo(mnist_d));
+
+
+   always @(posedge cycle_clk)
+     begin : cycle
+        for(integer i = 0; i < 28; i = i + 1)
+          begin
+             mnist_a = 1 % 28;
+             image_data[i * 28 +: 28] = mnist_d;
+          end
+     end
 
 
 
-   clk_div clk_divider(.clk(clk), .reset(reset_d), .pix_clk(pix_clk));
+
+
 
    gfx_top graphics_top(.i_clk(clk),
+                        .i_pix_clk(pix_clk),
                         .i_reset(reset_d),
-                        .o_image_data(image_data),
-                        .vgaRed(vgaRed),
-                        .vgaGreen(vgaGreen),
-                        .vgaBlue(vgaBlue),
+                        .i_color_sel(color_sel),
+                        .i_image_data(image_data),
+                        .rgb({vgaRed, vgaGreen, vgaBlue}),
                         .Hsync(Hsync),
                         .Vsync(Vsync),
                         .seg(seg),
@@ -71,6 +114,15 @@ module top(
 
 
 
+
+
+
+   
+   //----------------------------------------------------------------------
+   // Buttons and switches (suffix '_d' implies debounced)
+   wire                      btnC_d, btnU_d, btnD_d, btnL_d, btnR_d, // inputs
+                             reset_d; // global reset
+   
    //----------------------------------------------------------------------
    // Debounced inputs
    debouncer btnC_deb(
