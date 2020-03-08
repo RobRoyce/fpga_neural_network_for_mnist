@@ -21,34 +21,32 @@
 
 
 module gfx_top(
-               input wire          i_clk,
-               input wire          i_reset,
-               input wire [2:0]    i_color_sel,
-               input wire          i_pix_clk,
-               input wire [783:0]  i_image_data,
-               output wire [6:0]   seg,
-               output wire [3:0]   an,
-               output wire [11:0]  rgb,
-               output wire         Hsync,
-               output wire         Vsync
+               input wire         i_clk,
+               input wire         i_reset,
+               input wire [2:0]   i_color_sel, // sw[2:0]
+               input wire         i_pix_clk,
+               input wire [783:0] i_image_data,
+               output wire [11:0] rgb,
+               output wire        Hsync,
+               output wire        Vsync
                );
 
    //----------------------------------------------------------------------
    // VGA
-   wire                            active;    // high during active pixel drawing
-   wire [9:0]                      x;         // current pixel x coordinate
-   wire [8:0]                      y;         // current pixel y coordinate
+   wire                           active;    // high during active pixel drawing
+   wire [9:0]                     x;         // current pixel x coordinate
+   wire [8:0]                     y;         // current pixel y coordinate
 
    //----------------------------------------------------------------------
    // Bitmap
-   wire [11:0]                     borders_rgb;
-   wire [11:0]                     image_rgb;
-   wire                            borders_on;
-   wire                            image_on;
+   wire [11:0]                    borders_rgb; // border color
+   wire [11:0]                    image_rgb;   // image colro
+   wire                           borders_on;  // border flag
+   wire                           image_on;    // image flag
 
 
-   reg [11:0]                      rgb_reg,   // we're using a double-buffered display scheme
-                                   rgb_next;  // used as 2nd buffer for VGA display
+   reg [11:0]                     rgb_reg,   // we're using a double-buffered display scheme
+                                  rgb_next;  // used as 2nd buffer for VGA display
 
    initial
      begin

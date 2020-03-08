@@ -23,11 +23,8 @@ module top(
            input wire         clk,
            input wire         reset, // sw[15]
            input wire [2:0]   color_sel, // sw[2:0]
-           input wire         btnC,
-           input wire         btnU,
            input wire         btnL,
            input wire         btnR,
-           input wire         btnD,
            output wire [6:0]  seg,
            output wire [3:0]  an,
            output wire [3:0]  vgaRed,
@@ -41,46 +38,36 @@ module top(
    //----------------------------------------------------------------------
    // Clocks and Debounced Input
    wire                       pix_clk;   // 25MHz pixel clock
+   wire                       nn_clk;    // 50MHz nn clock
    wire                       i_btnC, i_btnU, i_btnD, i_btnL, i_btnR, i_reset;
+   wire [3:0]                 nn_output;
 
 
    //----------------------------------------------------------------------
    // MNIST Image Storage
    wire [783:0]               image_rom_data_bus; // shared image between NN and display
    reg [3:0]                  image_rom_address; // current location in ROM
-   reg [3:0]                  image_rom_current; // current ROM image
-   reg [3:0]                  image_rom_next; // double buffered
-   reg                        image_is_transitioning; // needed for VGA coherence
-
+   assign led[3:0] = image_rom_address; // display current image number on LED's
 
    initial
-     begin
         image_rom_address <= 4'h0;
-        image_rom_current <= 4'h0;
-        image_rom_next <= 4'h0;
-        image_is_transitioning <= 4'h0;
-     end
 
    always @(posedge clk)
-     begin
         if(i_reset)
-          begin
              image_rom_address <= 4'h0;
-             image_is_transitioning <= 4'h0;
-          end
         else
              if(i_btnR)
                image_rom_address <= image_rom_address == 4'hF ? 4'h0 : image_rom_address + 4'h1;
              else if(i_btnL)
                image_rom_address <= image_rom_address == 4'h0 ? 4'hF : image_rom_address - 4'h1;
-     end
 
    //----------------------------------------------------------------------
-   // Submodules
+   // Sub modules
    clk_div clk_div(
                    .i_clk(clk),
                    .i_reset(i_reset),
-                   .o_pix_clk(pix_clk)
+                   .o_25MHz_clk(pix_clk),
+                   .o_50MHz_clk(nn_clk)
                    );
 
    rom_8x784 mnist_dataset(.a(image_rom_address), .spo(image_rom_data_bus));
@@ -92,10 +79,18 @@ module top(
                         .i_image_data(image_rom_data_bus),
                         .rgb({vgaRed, vgaGreen, vgaBlue}),
                         .Hsync(Hsync),
-                        .Vsync(Vsync),
-                        .seg(seg),
-                        .an(an)
+                        .Vsync(Vsync)
                         );
+
+   display_7_seg ss_display(
+                            .i_clk(clk),
+                            .i_units(nn_output),
+                            .i_tens(4'b1111),
+                            .i_hundreds(4'b1111),
+                            .i_thousands(4'b1111),
+                            .o_seg(seg),
+                            .o_digit(an)
+                            );
 
 
 
