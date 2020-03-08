@@ -23,19 +23,27 @@
 module clk_div(
                input wire i_clk,
                input wire i_reset,
-               output reg o_pix_clk // 25MHz pixel clock
+               output reg o_50MHz_clk, // 50MHz nn clock
+               output reg o_25MHz_clk // 25MHz pixel clock
                );
    reg [15:0]             pix_cnt;
 
    initial
      begin
         pix_cnt <= 0;
-        o_pix_clk <= 1'b0;
+        o_25MHz_clk <= 1'b0;
+        o_50MHz_clk <= 1'b0;
      end
 
    always @(posedge i_clk)
      if(i_reset)
-       o_pix_clk <= 1'b0;
+       begin
+          o_50MHz_clk <= 1'b0;
+          o_25MHz_clk <= 1'b0;
+       end
      else
-       {o_pix_clk, pix_cnt} <= pix_cnt + 16'h4000; // 25MHz
+       begin
+          {o_25MHz_clk, pix_cnt} <= pix_cnt + 16'h4000; // 25MHz
+          o_50MHz_clk <= ~o_50MHz_clk;
+       end
 endmodule
