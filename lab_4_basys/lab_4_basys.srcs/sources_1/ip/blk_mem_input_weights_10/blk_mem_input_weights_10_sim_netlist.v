@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
-// Date        : Thu Mar  5 23:05:40 2020
-// Host        : IdeapadZ710 running 64-bit unknown
+// Date        : Sat Mar  7 18:13:17 2020
+// Host        : robuntu running 64-bit Ubuntu 18.04.4 LTS
 // Command     : write_verilog -force -mode funcsim
-//               /home/matt/csm152a/lab_4_basys/lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_10/blk_mem_input_weights_10_sim_netlist.v
+//               /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4_basys/lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_10/blk_mem_input_weights_10_sim_netlist.v
 // Design      : blk_mem_input_weights_10
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.

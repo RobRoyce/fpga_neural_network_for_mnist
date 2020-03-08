@@ -1,0 +1,18 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../lab_4_basys.srcs/sources_1/ip/mnist_rom/sim/mnist_rom.v" \
+"../../../../lab_4_basys.srcs/sources_1/new/clk_div.v" \
+"../../../../lab_4_basys.srcs/sources_1/new/debouncer.v" \
+"../../../../lab_4_basys.srcs/sources_1/new/gfx_borders.v" \
+"../../../../lab_4_basys.srcs/sources_1/new/gfx_grid.v" \
+"../../../../lab_4_basys.srcs/sources_1/new/gfx_image.v" \
+"../../../../lab_4_basys.srcs/sources_1/new/gfx_top.v" \
+"../../../../lab_4_basys.srcs/sources_1/new/top.v" \
+"../../../../lab_4_basys.srcs/sources_1/imports/new/vga640x480.v" \
+"../../../../lab_4_basys.srcs/sim_1/new/top_TB.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

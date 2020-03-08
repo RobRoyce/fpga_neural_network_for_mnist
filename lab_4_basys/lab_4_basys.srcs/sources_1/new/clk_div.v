@@ -36,14 +36,8 @@ module clk_div(
      end
 
    always @(posedge i_clk)
-     if(i_reset)
        begin
-          o_50MHz_clk <= 1'b0;
-          o_25MHz_clk <= 1'b0;
-       end
-     else
-       begin
-          {o_25MHz_clk, pix_cnt} <= pix_cnt + 16'h4000; // 25MHz
+          {o_25MHz_clk, pix_cnt} <= pix_cnt + 16'h4000;
           o_50MHz_clk <= ~o_50MHz_clk;
        end
 endmodule

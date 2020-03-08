@@ -39,7 +39,7 @@ module top(
    // Clocks and Debounced Input
    wire                       pix_clk;   // 25MHz pixel clock
    wire                       nn_clk;    // 50MHz nn clock
-   wire                       i_btnC, i_btnU, i_btnD, i_btnL, i_btnR, i_reset;
+   wire                       i_btnL, i_btnR, i_reset;
    wire [3:0]                 nn_output;
 
 
@@ -50,16 +50,16 @@ module top(
    assign led[3:0] = image_rom_address; // display current image number on LED's
 
    initial
-        image_rom_address <= 4'h0;
+     image_rom_address <= 4'h0;
 
    always @(posedge clk)
-        if(i_reset)
-             image_rom_address <= 4'h0;
-        else
-             if(i_btnR)
-               image_rom_address <= image_rom_address == 4'hF ? 4'h0 : image_rom_address + 4'h1;
-             else if(i_btnL)
-               image_rom_address <= image_rom_address == 4'h0 ? 4'hF : image_rom_address - 4'h1;
+     if(i_reset)
+       image_rom_address <= 4'h0;
+     else
+       if(i_btnR)
+         image_rom_address <= image_rom_address == 4'hF ? 4'h0 : image_rom_address + 4'h1;
+       else if(i_btnL)
+         image_rom_address <= image_rom_address == 4'h0 ? 4'hF : image_rom_address - 4'h1;
 
    //----------------------------------------------------------------------
    // Sub modules
@@ -70,7 +70,16 @@ module top(
                    .o_50MHz_clk(nn_clk)
                    );
 
-   rom_8x784 mnist_dataset(.a(image_rom_address), .spo(image_rom_data_bus));
+   rom_16x784 mnist_dataset(
+                           .a(image_rom_address),
+                           .spo(image_rom_data_bus)
+                           );
+
+   mnist_network nn_top(
+                        .clk(nn_clk),
+                        .image(image_rom_data_bus),
+                        .prediction(nn_output)
+                        );
 
    gfx_top graphics_top(.i_clk(clk),
                         .i_pix_clk(pix_clk),
@@ -96,22 +105,6 @@ module top(
 
    //----------------------------------------------------------------------
    // Debounced inputs
-   debouncer btnC_deb(
-                      .i_clk(clk),
-                      .i_signal(btnC),
-                      .o_state(),
-                      .o_trans_dn(i_btnC),
-                      .o_trans_up()
-                      );
-
-   debouncer btnU_deb(
-                      .i_clk(clk),
-                      .i_signal(btnU),
-                      .o_state(),
-                      .o_trans_dn(i_btnU),
-                      .o_trans_up()
-                      );
-
    debouncer btnL_deb(
                       .i_clk(clk),
                       .i_signal(btnL),
@@ -125,14 +118,6 @@ module top(
                       .i_signal(btnR),
                       .o_state(),
                       .o_trans_dn(i_btnR),
-                      .o_trans_up()
-                      );
-
-   debouncer btnD_deb(
-                      .i_clk(clk),
-                      .i_signal(btnD),
-                      .o_state(),
-                      .o_trans_dn(i_btnD),
                       .o_trans_up()
                       );
 
