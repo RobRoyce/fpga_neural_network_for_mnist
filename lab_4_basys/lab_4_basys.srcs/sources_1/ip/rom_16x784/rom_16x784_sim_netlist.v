@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
-// Date        : Tue Mar 10 11:16:02 2020
+// Date        : Tue Mar 10 11:16:01 2020
 // Host        : robuntu running 64-bit Ubuntu 18.04.4 LTS
-// Command     : write_verilog -force -mode funcsim
-//               /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4_basys/lab_4_basys.srcs/sources_1/ip/rom_16x784/rom_16x784_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top rom_16x784 -prefix
+//               rom_16x784_ rom_16x784_sim_netlist.v
 // Design      : rom_16x784
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -88,7 +88,7 @@ endmodule
 (* C_MEM_INIT_FILE = "rom_16x784.mif" *) (* C_MEM_TYPE = "0" *) (* C_PARSER_TYPE = "1" *) 
 (* C_PIPELINE_STAGES = "0" *) (* C_QCE_JOINED = "0" *) (* C_QUALIFY_WE = "0" *) 
 (* C_READ_MIF = "1" *) (* C_REG_A_D_INPUTS = "0" *) (* C_REG_DPRA_INPUT = "0" *) 
-(* C_SYNC_ENABLE = "1" *) (* C_WIDTH = "784" *) (* ORIG_REF_NAME = "dist_mem_gen_v8_0_13" *) 
+(* C_SYNC_ENABLE = "1" *) (* C_WIDTH = "784" *) 
 module rom_16x784_dist_mem_gen_v8_0_13
    (a,
     d,
@@ -3088,7 +3088,6 @@ module rom_16x784_dist_mem_gen_v8_0_13
         .spo({\^spo [286],\^spo [710],\^spo [680],\^spo [686:682],\^spo [659:654],\^spo [652],\^spo [231],\^spo [127],\^spo [148],\^spo [634:633],\^spo [631:623],\^spo [217],\^spo [607:595],\^spo [120],\^spo [95],\^spo [580:566],\^spo [551],\^spo [522],\^spo [549:545],\^spo [517:516],\^spo [542:539],\^spo [93],\^spo [524:523],\^spo [493],\^spo [520:518],\^spo [515:513],\^spo [484],\^spo [511],\^spo [259],\^spo [496:494],\^spo [492:487],\^spo [458],\^spo [232],\^spo [467:459],\^spo [430],\^spo [456],\^spo [439],\^spo [437:432],\^spo [429],\^spo [121],\^spo [412:403],\^spo [374],\^spo [384],\^spo [356],\^spo [354],\^spo [381:376],\^spo [373],\^spo [344],\^spo [355],\^spo [353:346],\^spo [317],\^spo [300],\^spo [272],\^spo [326:319],\^spo [290],\^spo [316],\^spo [273],\^spo [271],\^spo [298:291],\^spo [261],\^spo [270:269],\^spo [240],\^spo [267:265],\^spo [216],\^spo [263],\^spo [245:241],\^spo [239:233],\^spo [175],\^spo [215:203],\^spo [159],\^spo [186:179],\^spo [177:176],\^spo [158:154],\^spo [152:150],\^spo [122],\^spo [129],\^spo [125:123],\^spo [96],\^spo [94]}));
 endmodule
 
-(* ORIG_REF_NAME = "dist_mem_gen_v8_0_13_synth" *) 
 module rom_16x784_dist_mem_gen_v8_0_13_synth
    (spo,
     a);
@@ -3103,7 +3102,6 @@ module rom_16x784_dist_mem_gen_v8_0_13_synth
         .spo(spo));
 endmodule
 
-(* ORIG_REF_NAME = "rom" *) 
 module rom_16x784_rom
    (spo,
     a);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583864131">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583995635">
   <File Type="PA-TCL" Name="top.tcl"/>
   <File Type="REPORTS-TCL" Name="top_reports.tcl"/>
   <File Type="OPT-DCP" Name="top_opt.dcp"/>
@@ -355,7 +355,6 @@
     <Step Id="route_design"/>
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
-    <Step Id="write_device_image"/>
   </Strategy>
   <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_2"/>
   <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_12"/>

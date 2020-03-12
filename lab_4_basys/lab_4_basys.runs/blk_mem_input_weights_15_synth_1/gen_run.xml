@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="blk_mem_input_weights_15_synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583699661">
+<GenRun Id="blk_mem_input_weights_15_synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583974732">
   <File Type="PA-TCL" Name="blk_mem_input_weights_15.tcl"/>
   <File Type="REPORTS-TCL" Name="blk_mem_input_weights_15_reports.tcl"/>
   <File Type="RDS-RDS" Name="blk_mem_input_weights_15.vds"/>

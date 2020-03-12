@@ -25,6 +25,9 @@ module top(
            input wire [2:0]   color_sel, // sw[2:0]
            input wire         btnL,
            input wire         btnR,
+           input wire         btnU,
+           input wire         PS2Clk,
+           input wire         PS2Data,
            output wire [6:0]  seg,
            output wire [3:0]  an,
            output wire [3:0]  vgaRed,
@@ -39,7 +42,7 @@ module top(
    // Clocks and Debounced Input
    wire                       pix_clk;   // 25MHz pixel clock
    wire                       nn_clk;    // 50MHz nn clock
-   wire                       i_btnL, i_btnR, i_reset;
+   wire                       i_btnL, i_btnR, i_btnU, i_reset;
    wire [3:0]                 nn_output;
 
 
@@ -47,6 +50,7 @@ module top(
    // MNIST Image Storage
    wire [783:0]               image_rom_data_bus; // shared image between NN and display
    reg [3:0]                  image_rom_address; // current location in ROM
+
    assign led[3:0] = image_rom_address; // display current image number on LED's
 
    initial
@@ -60,6 +64,16 @@ module top(
          image_rom_address <= image_rom_address == 4'hF ? 4'h0 : image_rom_address + 4'h1;
        else if(i_btnL)
          image_rom_address <= image_rom_address == 4'h0 ? 4'hF : image_rom_address - 4'h1;
+       else if(i_btnU)
+         image_rom_address <= 4'h0;
+
+
+   
+   // always @(negedge PS2Clk)
+   //   begin
+        
+   //   end
+
 
    //----------------------------------------------------------------------
    // Sub modules
@@ -118,6 +132,14 @@ module top(
                       .i_signal(btnR),
                       .o_state(),
                       .o_trans_dn(i_btnR),
+                      .o_trans_up()
+                      );
+
+   debouncer btnU_deb(
+                      .i_clk(clk),
+                      .i_signal(btnU),
+                      .o_state(),
+                      .o_trans_dn(i_btnU),
                       .o_trans_up()
                       );
 

@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
 -- Date        : Tue Mar 10 11:16:02 2020
 -- Host        : robuntu running 64-bit Ubuntu 18.04.4 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4_basys/lab_4_basys.srcs/sources_1/ip/rom_16x784/rom_16x784_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top rom_16x784 -prefix
+--               rom_16x784_ rom_16x784_sim_netlist.vhdl
 -- Design      : rom_16x784
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -19,8 +19,6 @@ entity rom_16x784_rom is
     spo : out STD_LOGIC_VECTOR ( 231 downto 0 );
     a : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of rom_16x784_rom : entity is "rom";
 end rom_16x784_rom;
 
 architecture STRUCTURE of rom_16x784_rom is
@@ -2813,8 +2811,6 @@ entity rom_16x784_dist_mem_gen_v8_0_13_synth is
     spo : out STD_LOGIC_VECTOR ( 231 downto 0 );
     a : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of rom_16x784_dist_mem_gen_v8_0_13_synth : entity is "dist_mem_gen_v8_0_13_synth";
 end rom_16x784_dist_mem_gen_v8_0_13_synth;
 
 architecture STRUCTURE of rom_16x784_dist_mem_gen_v8_0_13_synth is
@@ -2913,8 +2909,6 @@ entity rom_16x784_dist_mem_gen_v8_0_13 is
   attribute C_SYNC_ENABLE of rom_16x784_dist_mem_gen_v8_0_13 : entity is 1;
   attribute C_WIDTH : integer;
   attribute C_WIDTH of rom_16x784_dist_mem_gen_v8_0_13 : entity is 784;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of rom_16x784_dist_mem_gen_v8_0_13 : entity is "dist_mem_gen_v8_0_13";
 end rom_16x784_dist_mem_gen_v8_0_13;
 
 architecture STRUCTURE of rom_16x784_dist_mem_gen_v8_0_13 is
