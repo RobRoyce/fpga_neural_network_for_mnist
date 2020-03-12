@@ -1,10 +1,10 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
--- Date        : Sat Mar  7 18:13:18 2020
+-- Date        : Sat Mar  7 18:13:17 2020
 -- Host        : robuntu running 64-bit Ubuntu 18.04.4 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4_basys/lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_4/blk_mem_input_weights_4_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top blk_mem_input_weights_4 -prefix
+--               blk_mem_input_weights_4_ blk_mem_input_weights_4_sim_netlist.vhdl
 -- Design      : blk_mem_input_weights_4
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -20,8 +20,6 @@ entity blk_mem_input_weights_4_blk_mem_gen_prim_wrapper_init is
     clka : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of blk_mem_input_weights_4_blk_mem_gen_prim_wrapper_init : entity is "blk_mem_gen_prim_wrapper_init";
 end blk_mem_input_weights_4_blk_mem_gen_prim_wrapper_init;
 
 architecture STRUCTURE of blk_mem_input_weights_4_blk_mem_gen_prim_wrapper_init is
@@ -171,8 +169,6 @@ entity blk_mem_input_weights_4_blk_mem_gen_prim_width is
     clka : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of blk_mem_input_weights_4_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end blk_mem_input_weights_4_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of blk_mem_input_weights_4_blk_mem_gen_prim_width is
@@ -194,8 +190,6 @@ entity blk_mem_input_weights_4_blk_mem_gen_generic_cstr is
     clka : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of blk_mem_input_weights_4_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end blk_mem_input_weights_4_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of blk_mem_input_weights_4_blk_mem_gen_generic_cstr is
@@ -217,8 +211,6 @@ entity blk_mem_input_weights_4_blk_mem_gen_top is
     clka : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of blk_mem_input_weights_4_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end blk_mem_input_weights_4_blk_mem_gen_top;
 
 architecture STRUCTURE of blk_mem_input_weights_4_blk_mem_gen_top is
@@ -240,8 +232,6 @@ entity blk_mem_input_weights_4_blk_mem_gen_v8_4_4_synth is
     clka : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of blk_mem_input_weights_4_blk_mem_gen_v8_4_4_synth : entity is "blk_mem_gen_v8_4_4_synth";
 end blk_mem_input_weights_4_blk_mem_gen_v8_4_4_synth;
 
 architecture STRUCTURE of blk_mem_input_weights_4_blk_mem_gen_v8_4_4_synth is
@@ -473,8 +463,6 @@ entity blk_mem_input_weights_4_blk_mem_gen_v8_4_4 is
   attribute C_WRITE_WIDTH_B of blk_mem_input_weights_4_blk_mem_gen_v8_4_4 : entity is 16;
   attribute C_XDEVICEFAMILY : string;
   attribute C_XDEVICEFAMILY of blk_mem_input_weights_4_blk_mem_gen_v8_4_4 : entity is "artix7";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of blk_mem_input_weights_4_blk_mem_gen_v8_4_4 : entity is "blk_mem_gen_v8_4_4";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of blk_mem_input_weights_4_blk_mem_gen_v8_4_4 : entity is "yes";
 end blk_mem_input_weights_4_blk_mem_gen_v8_4_4;

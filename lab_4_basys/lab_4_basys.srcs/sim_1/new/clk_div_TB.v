@@ -35,7 +35,7 @@ module clk_div_TB();
 
    initial
      begin
-        #1 reset <= 1'b0;
+        reset <= 1'b0;
 
         forever
           #1 clk <= ~clk;

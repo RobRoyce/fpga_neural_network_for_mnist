@@ -20,10 +20,10 @@ mnist = tf.keras.datasets.mnist
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-x_train = np.round(x_train / 255.0)
-#x_test  = np.round(x_test / 255.0)
+#x_train = np.round(x_train / 255.0)
+x_test  = np.round(x_test / 255.0)
 
-images = x_train[starting_index:starting_index+num_images]
+images = x_test[starting_index:starting_index+num_images]
 
 images = images.reshape(num_images, 784)
 

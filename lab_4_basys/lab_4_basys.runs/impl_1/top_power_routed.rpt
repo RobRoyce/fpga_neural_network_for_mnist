@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
-| Date             : Sat Mar  7 19:03:04 2020
+| Date             : Tue Mar 10 11:18:33 2020
 | Host             : robuntu running 64-bit Ubuntu 18.04.4 LTS
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.103        |
+| Total On-Chip Power (W)  | 0.104        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.031        |
+| Dynamic (W)              | 0.032        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.5         |
@@ -52,20 +52,20 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.001 |        3 |       --- |             --- |
-| Slice Logic    |     0.005 |     2859 |       --- |             --- |
-|   LUT as Logic |     0.004 |     1536 |     20800 |            7.38 |
+| Clocks         |     0.002 |        3 |       --- |             --- |
+| Slice Logic    |     0.005 |     2858 |       --- |             --- |
+|   LUT as Logic |     0.004 |     1532 |     20800 |            7.37 |
 |   CARRY4       |    <0.001 |      154 |      8150 |            1.89 |
 |   Register     |    <0.001 |      385 |     41600 |            0.93 |
 |   BUFG         |    <0.001 |        1 |        32 |            3.13 |
-|   F7/F8 Muxes  |    <0.001 |      198 |     32600 |            0.61 |
+|   F7/F8 Muxes  |    <0.001 |      201 |     32600 |            0.62 |
 |   Others       |     0.000 |      220 |       --- |             --- |
-| Signals        |     0.010 |     2751 |       --- |             --- |
+| Signals        |     0.010 |     2748 |       --- |             --- |
 | Block RAM      |     0.007 |        8 |        50 |           16.00 |
-| DSPs           |     0.006 |       32 |        90 |           35.56 |
+| DSPs           |     0.007 |       32 |        90 |           35.56 |
 | I/O            |     0.001 |       48 |       106 |           45.28 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.103 |          |           |                 |
+| Total          |     0.104 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.039 |       0.030 |      0.010 |
+| Vccint    |       1.000 |     0.040 |       0.030 |      0.010 |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -144,8 +144,8 @@ Table of Contents
 +-------------------------------+-----------+
 | Name                          | Power (W) |
 +-------------------------------+-----------+
-| top                           |     0.031 |
-|   nn_top                      |     0.027 |
+| top                           |     0.032 |
+|   nn_top                      |     0.028 |
 |     hidden_pa_16              |     0.002 |
 |       generate_adders[3].pa_4 |     0.001 |
 |     output_pa_16              |     0.003 |

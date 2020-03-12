@@ -1,10 +1,10 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
--- Date        : Sat Mar  7 18:09:36 2020
+-- Date        : Sat Mar  7 18:09:35 2020
 -- Host        : robuntu running 64-bit Ubuntu 18.04.4 LTS
--- Command     : write_vhdl -force -mode synth_stub
---               /media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_4_basys/lab_4_basys.srcs/sources_1/ip/blk_mem_input_weights_14/blk_mem_input_weights_14_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top blk_mem_input_weights_14 -prefix
+--               blk_mem_input_weights_14_ blk_mem_input_weights_14_stub.vhdl
 -- Design      : blk_mem_input_weights_14
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a35tcpg236-1
