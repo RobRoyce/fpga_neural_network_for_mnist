@@ -33,6 +33,9 @@ module mnist_network(clk, image, prediction);
    wire [weight_width*16-1:0]    hidden_neuron_adder_input;
 
    reg [9:0]                     neuron_weight_addr;
+   
+   reg [15:0] biases_input[0:15];
+   reg [15:0] biases_hidden[0:9];
 
    reg [num_hidden_neurons*weight_width-1:0] hidden_neurons;
 
@@ -59,6 +62,34 @@ module mnist_network(clk, image, prediction);
      begin
 
         neuron_weight_addr <= 10'b00000_00000;
+
+        biases_input[0] <= 16'b0000000000101100;
+        biases_input[1] <= 16'b1111111111011000;
+        biases_input[2] <= 16'b0000000000000010;
+        biases_input[3] <= 16'b1111111110111000;
+        biases_input[4] <= 16'b0000000000110001;
+        biases_input[5] <= 16'b0000000010110100;
+        biases_input[6] <= 16'b0000000001000111;
+        biases_input[7] <= 16'b1111111110010010;
+        biases_input[8] <= 16'b1111111111100101;
+        biases_input[9] <= 16'b1111111111010010;
+        biases_input[10] <= 16'b0000000001010111;
+        biases_input[11] <= 16'b0000000000110100;
+        biases_input[12] <= 16'b1111111111100001;
+        biases_input[13] <= 16'b1111111110100001;
+        biases_input[14] <= 16'b1111111110000011;
+        biases_input[15] <= 16'b1111111111111111;
+        
+        biases_hidden[0] <= 16'b1111111111100010;
+        biases_hidden[1] <= 16'b0000000001010100;
+        biases_hidden[2] <= 16'b0000000000001010;
+        biases_hidden[3] <= 16'b1111111101110100;
+        biases_hidden[4] <= 16'b0000000001001011;
+        biases_hidden[5] <= 16'b0000000001111111;
+        biases_hidden[6] <= 16'b0000000000011101;
+        biases_hidden[7] <= 16'b0000000001011110;
+        biases_hidden[8] <= 16'b1111111101001111;
+        biases_hidden[9] <= 16'b1111111111110000;
 
      end
 
@@ -193,7 +224,7 @@ module mnist_network(clk, image, prediction);
                                   );
 
    relu hidden_relu(
-                    .in(hidden_neuron_acc[weight_width-1:0]),
+                    .in(hidden_neuron_acc[weight_width-1:0] + biases_input[neuron_idx]),
                     .out(hidden_neuron)
                     );
 
@@ -204,7 +235,7 @@ module mnist_network(clk, image, prediction);
                                   );
 
    relu output_relu(
-                    .in(output_neuron_acc[weight_width-1:0]),
+                    .in(output_neuron_acc[weight_width-1:0] + biases_hidden[neuron_idx]),
                     .out(output_neuron)
                     );
 
