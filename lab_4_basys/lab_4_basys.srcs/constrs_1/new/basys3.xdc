@@ -15,6 +15,8 @@ set_property PACKAGE_PIN V16 [get_ports {color_sel[1]}]
   set_property IOSTANDARD LVCMOS33 [get_ports {color_sel[1]}]
 set_property PACKAGE_PIN W16 [get_ports {color_sel[2]}]
   set_property IOSTANDARD LVCMOS33 [get_ports {color_sel[2]}]
+ #set_property PACKAGE_PIN T1 [get_ports mode]
+	#set_property IOSTANDARD LVCMOS33 [get_ports mode]
 set_property PACKAGE_PIN R2 [get_ports reset]
   set_property IOSTANDARD LVCMOS33 [get_ports reset]
 

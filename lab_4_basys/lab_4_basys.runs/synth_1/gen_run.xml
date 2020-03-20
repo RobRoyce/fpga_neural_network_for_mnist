@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1583995634">
-  <File Type="PA-TCL" Name="top.tcl"/>
-  <File Type="REPORTS-TCL" Name="top_reports.tcl"/>
-  <File Type="RDS-RDS" Name="top.vds"/>
-  <File Type="RDS-UTIL" Name="top_utilization_synth.rpt"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1584667596">
+  <File Type="VDS-TIMINGSUMMARY" Name="top_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="top.dcp"/>
   <File Type="RDS-UTIL-PB" Name="top_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="top_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="top_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="top.vds"/>
+  <File Type="REPORTS-TCL" Name="top_reports.tcl"/>
+  <File Type="VDS-TIMING-PB" Name="top_timing_summary_synth.pb"/>
+  <File Type="PA-TCL" Name="top.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/clk_div.v">
@@ -95,6 +98,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/mouse.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/imports/lab_4/parallel_adder_16.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -116,6 +126,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/user_input.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/imports/new/vga640x480.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -125,6 +142,14 @@
     </File>
     <File Path="$PSRCDIR/sources_1/new/top.v">
       <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/blk_mem_gen_0_1/blk_mem_gen_0.xci">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -214,14 +239,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/ip/blk_mem_gen_0_1/blk_mem_gen_0.xci">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/weights_data_9.coe">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -298,21 +315,21 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_12"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_14"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_1"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_11"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_9"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_8"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_7"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_6"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_10"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_15"/>
   <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_5"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_6"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_7"/>
   <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_3"/>
   <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_4"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_10"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_15"/>
   <BlockFileSet Type="BlockSrcs" Name="rom_16x784"/>
   <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_13"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_8"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_9"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_11"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_14"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_12"/>
+  <BlockFileSet Type="BlockSrcs" Name="blk_mem_input_weights_2"/>
 </GenRun>

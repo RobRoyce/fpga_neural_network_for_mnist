@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/parallels/ucla/csm152a/labs/csm152a/lab0/counter.ncd
+OUTFILE=/home/parallels/ucla/csm152a/labs/csm152a/lab0/counter.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=/home/parallels/ucla/csm152a/labs/csm152a/lab0
+LICENSE=WebPack
+USER_INFO=211861903_0_0_658

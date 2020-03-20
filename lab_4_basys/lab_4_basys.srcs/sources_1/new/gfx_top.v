@@ -21,14 +21,16 @@
 
 
 module gfx_top(
-               input wire         i_clk,
-               input wire         i_reset,
-               input wire [2:0]   i_color_sel, // sw[2:0]
-               input wire         i_pix_clk,
-               input wire [783:0] i_image_data,
-               output wire [11:0] rgb,
-               output wire        Hsync,
-               output wire        Vsync
+               input wire          i_clk,
+               input wire          i_reset,
+               input wire [2:0]    i_color_sel, // sw[2:0]
+               input wire          i_pix_clk,
+               input wire [783:0]  i_image_data,
+               input wire [4:0]    x_pos,
+               input wire [4:0]    y_pos,
+               output wire [11:0]  rgb,
+               output wire         Hsync,
+               output wire         Vsync
                );
 
    //----------------------------------------------------------------------
@@ -86,10 +88,11 @@ module gfx_top(
                            .i_image_data(i_image_data),
                            .i_x(x),
                            .i_y(y),
+                           .x(x_pos),
+                           .y(y_pos),
                            .o_rgb(image_rgb),
                            .o_image_on(image_on)
                            );
-
 
    always @(*)
      begin

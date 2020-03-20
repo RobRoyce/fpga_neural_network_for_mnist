@@ -21,14 +21,14 @@
 
 
 module gfx_image(
-                 input wire          i_clk,
-                 input wire          i_reset,
-                 input wire          i_active,
-                 input wire [783:0]  i_image_data,
-                 input wire [9:0]    i_x, // current pixel x
-                 input wire [8:0]    i_y, // current pixel y
-                 output reg [11:0]   o_rgb, // pixel color
-                 output reg          o_image_on // signal to draw
+                 input wire         i_clk,
+                 input wire         i_reset,
+                 input wire         i_active,
+                 input wire [783:0] i_image_data,
+                 input wire [9:0]   i_x, // current pixel x
+                 input wire [8:0]   i_y, // current pixel y
+                 output reg [11:0]  o_rgb, // pixel color
+                 output reg         o_image_on // signal to draw
                  );
 
    localparam SHIFT = 4; // We shift the image pixels to make them 16 pixels wide/high
@@ -38,10 +38,10 @@ module gfx_image(
    localparam Y_BTM = 464; // bottom border boundary
 
 
-   reg [11:0]                        color_reg;
+   reg [11:0]                       color_reg;
 
-   reg [9:0]                         x_trans;
-   reg [8:0]                         y_trans;
+   reg [9:0]                        x_trans;
+   reg [8:0]                        y_trans;
 
    initial
      begin

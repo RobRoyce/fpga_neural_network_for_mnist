@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/media/psf/iCloud/UCLA/Courses/csm152a/csm152a/lab_3/lab_3/stopwatch_TB_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="stopwatch_TB" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="24" />
+   <wvobject fp_name="divider7" type="divider">
+      <obj_property name="label">Clocks</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">128 128 255</obj_property>
+      <obj_property name="TextColor">230 230 230</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/clk_1hz" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_1hz</obj_property>
+      <obj_property name="ObjectShortName">clk_1hz</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/clk_2hz" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_2hz</obj_property>
+      <obj_property name="ObjectShortName">clk_2hz</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider12" type="divider">
+      <obj_property name="label">Inputs</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">128 128 255</obj_property>
+      <obj_property name="TextColor">230 230 230</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/pause" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">pause</obj_property>
+      <obj_property name="ObjectShortName">pause</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/sw" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sw[1:0]</obj_property>
+      <obj_property name="ObjectShortName">sw[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider13" type="divider">
+      <obj_property name="label">Outputs</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">128 128 255</obj_property>
+      <obj_property name="TextColor">230 230 230</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/seg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">seg[6:0]</obj_property>
+      <obj_property name="ObjectShortName">seg[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/digit" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">digit[3:0]</obj_property>
+      <obj_property name="ObjectShortName">digit[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider14" type="divider">
+      <obj_property name="label">Seconds Ones Counter</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">128 128 255</obj_property>
+      <obj_property name="TextColor">230 230 230</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/sec_ones_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sec_ones_reg[2:0]</obj_property>
+      <obj_property name="ObjectShortName">sec_ones_reg[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/sec_ones_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sec_ones_en</obj_property>
+      <obj_property name="ObjectShortName">sec_ones_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="vbus17" type="vbus" db_ref_id="1">
+      <obj_property name="label">Sec Ones State</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/stopwatch_TB/uut/timer_seq/time_[2]" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">time_[2]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/stopwatch_TB/uut/timer_seq/time_[1]" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">time_[1]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/stopwatch_TB/uut/timer_seq/time_[0]" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">time_[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/sec_ones_counter/state" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/sec_ones_counter/i_clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_clk</obj_property>
+      <obj_property name="ObjectShortName">i_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/sec_ones_counter/i_rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_rst</obj_property>
+      <obj_property name="ObjectShortName">i_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/timer_seq/sec_ones_counter/o_transition" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_transition</obj_property>
+      <obj_property name="ObjectShortName">o_transition</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider33" type="divider">
+      <obj_property name="label">Display</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">128 128 255</obj_property>
+      <obj_property name="TextColor">230 230 230</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/display/units" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">units[3:0]</obj_property>
+      <obj_property name="ObjectShortName">units[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/display/tens" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">tens[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tens[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/display/hundreds" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">hundreds[3:0]</obj_property>
+      <obj_property name="ObjectShortName">hundreds[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/stopwatch_TB/uut/display/thousands" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">thousands[3:0]</obj_property>
+      <obj_property name="ObjectShortName">thousands[3:0]</obj_property>
+   </wvobject>
+</wave_config>
