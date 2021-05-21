@@ -1,4 +1,0 @@
-* Tasks
-** TODO Complete the workshops
-   [2020-02-04 Tue]
-   [[file:~/Library/Mobile Documents/com~apple~CloudDocs/UCLA/Courses/csm152a/csm152A/lab_2/uart.v::// Documented Verilog UART]]
