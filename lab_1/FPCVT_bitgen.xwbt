@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=/home/parallels/ucla/m152acs/labs/csm152a/lab_1/FPCVT.ncd
-OUTFILE=/home/parallels/ucla/m152acs/labs/csm152a/lab_1/FPCVT.bit
-FAMILY=Spartan6
-PART=xc6slx16-3csg324
-WORKINGDIR=/home/parallels/ucla/m152acs/labs/csm152a/lab_1
-LICENSE=WebPack
-USER_INFO=211861903_0_0_331
